@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>103 不動産投資の基礎 — 理解ポイント整理</title>
+<style>
+:root{
+  --paper:#E7E8E2; --card:#FCFCFA; --ink:#1B1E24; --ink2:#5C6371; --ink3:#8A9099;
+  --rule:#C7C9C1; --rule2:#DEDFD8; --ai:#2A4A7B; --shu:#B23A2F;
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","MS PMincho",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--gothic);
+  font-size:15px;line-height:1.85;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 72px}
+
+header.mast{border-bottom:1px solid var(--rule);padding:26px 0 16px;margin-bottom:22px}
+.mast h1{font-size:21px;font-weight:600;margin:0;letter-spacing:.01em;line-height:1.5}
+.mast p{margin:6px 0 0;font-size:12.5px;color:var(--ink2)}
+
+h2{font-size:17px;font-weight:600;margin:44px 0 14px;padding-bottom:7px;
+  border-bottom:2px solid var(--ink);letter-spacing:.01em}
+h2 .n{color:var(--ink3);font-variant-numeric:tabular-nums;margin-right:9px;font-weight:400}
+h3{font-size:15px;font-weight:600;margin:28px 0 9px;padding-left:10px;border-left:3px solid var(--ai)}
+h4{font-size:13.5px;font-weight:600;margin:20px 0 6px;color:var(--ink2)}
+p{margin:0 0 13px}
+strong{font-weight:600}
+em{font-style:normal;background:linear-gradient(transparent 62%, rgba(42,74,123,.18) 62%)}
+
+nav.toc{background:var(--card);border:1px solid var(--rule);padding:14px 16px;margin-bottom:30px}
+nav.toc h2{all:unset;display:block;font-size:12px;color:var(--ink3);margin-bottom:8px}
+nav.toc ol{margin:0;padding-left:20px;font-size:13.5px;line-height:1.9}
+nav.toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+nav.toc a:hover{border-bottom-color:var(--ink)}
+
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 16px}
+table{border-collapse:collapse;width:100%;font-size:13px;background:var(--card);min-width:420px}
+th,td{border:1px solid var(--rule2);padding:7px 10px;text-align:left;vertical-align:top;line-height:1.65}
+th{background:#EFEFEA;font-weight:600;white-space:nowrap}
+td.c,th.c{text-align:center}
+tbody tr:nth-child(even) td{background:#F7F7F4}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.formula{font-family:var(--mincho);font-size:16px;text-align:center;background:var(--card);
+  border:1px solid var(--rule2);padding:14px 12px;margin:14px 0;line-height:2.1}
+.frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 4px}
+.frac .num{display:block;padding:0 6px 2px;border-bottom:1px solid currentColor}
+.frac .den{display:block;padding:2px 6px 0}
+.calc{font-family:var(--mincho);font-size:14.5px;margin:0 0 13px;line-height:2}
+
+ul,ol{margin:0 0 15px;padding-left:22px}
+li{margin-bottom:6px}
+li>ul{margin-top:6px}
+
+.note{border-left:3px solid var(--shu);background:rgba(178,58,47,.05);
+  padding:11px 14px;margin:16px 0;font-size:13.5px;line-height:1.8}
+.note b{color:var(--shu)}
+.key{border:1px solid var(--ai);background:rgba(42,74,123,.05);
+  padding:12px 15px;margin:16px 0;font-size:13.5px;line-height:1.85}
+.ng{color:var(--shu);font-weight:600}
+.ok{color:var(--ai);font-weight:600}
+
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--rule);
+  font-size:11px;color:var(--ink3);line-height:1.8}
+@media (min-width:720px){ body{font-size:15.5px} }
+@media print{
+  body{background:#fff} nav.toc{display:none}
+  h2{page-break-after:avoid} table{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <h1>103 不動産投資の基礎 — 理解ポイント整理</h1>
+  <p>2024・2025年度の103（各24問・177枝）を主軸に、範囲がほぼ重なる2021〜2023年度の旧102「不動産投資の実務」（75問・273枝）も突き合わせて構造化</p>
+</header>
+
+<nav class="toc">
+  <h2>目次</h2>
+  <ol>
+    <li><a href="#s0">まず構造をつかむ</a></li>
+    <li><a href="#s1">計算2問の型（優先度：最高）</a></li>
+    <li><a href="#s2">投資の基礎とリスク軽減（問4・5）</a></li>
+    <li><a href="#s3">アセットマネジメント業務（問6〜8）</a></li>
+    <li><a href="#s4">マーケットと指標（問9〜12）</a></li>
+    <li><a href="#s5">デューデリジェンスと鑑定評価（問13〜15）</a></li>
+    <li><a href="#s6">エンジニアリングレポート（問18〜20）</a></li>
+    <li><a href="#s7">プロパティマネジメント（問21〜25）</a></li>
+    <li><a href="#s8">ESGと環境認証（問26・27）</a></li>
+    <li><a href="#s9">引っかけパターンの類型</a></li>
+    <li><a href="#s10">学習の進め方</a></li>
+  </ol>
+</nav>
+
+<!-- ============ 0 ============ -->
+<h2 id="s0"><span class="n">0</span>まず構造をつかむ</h2>
+
+<p>103は<strong>問4から問27までの24問</strong>。105と同じく、<strong>問題番号とテーマがほぼ固定</strong>されている。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th class="c">問</th><th>2024年度</th><th>2025年度</th><th>ブロック</th></tr></thead>
+<tbody>
+<tr><td class="c">4</td><td>不動産投資の基礎（1）</td><td>不動産投資の基礎</td><td rowspan="2">投資の基礎</td></tr>
+<tr><td class="c">5</td><td>不動産投資の基礎（2）</td><td>リスク軽減の方法</td></tr>
+<tr><td class="c">6</td><td>アセットマネジャーの業務</td><td>アセットマネジャーの役割</td><td rowspan="3">AM業務</td></tr>
+<tr><td class="c">7</td><td>ファイナンスアレンジ</td><td>期中運用業務</td></tr>
+<tr><td class="c">8</td><td>期中運用業務</td><td>売却業務の注意点</td></tr>
+<tr><td class="c">9</td><td>各種アセットの需要動向</td><td>不動産の価格情報の注意点</td><td rowspan="4">マーケット・指標</td></tr>
+<tr><td class="c">10</td><td>オフィス市場の指標</td><td>オフィス市場の空室率</td></tr>
+<tr><td class="c">11</td><td>公的な地価（空欄）</td><td>地価の公的指標</td></tr>
+<tr><td class="c">12</td><td>不動産に関する指標等</td><td>商業施設に関する指標等</td></tr>
+<tr><td class="c">13</td><td>デューデリジェンス（1）</td><td>法的調査</td><td rowspan="3">DD・鑑定</td></tr>
+<tr><td class="c">14</td><td>デューデリジェンス（2）</td><td>デューデリジェンス</td></tr>
+<tr><td class="c">15</td><td>収益還元法</td><td>オペレーショナルアセット</td></tr>
+<tr><td class="c">16</td><td><strong>直接還元法の計算</strong></td><td><strong>直接還元法の計算</strong></td><td rowspan="2">計算</td></tr>
+<tr><td class="c">17</td><td><strong>DCF法の計算</strong></td><td><strong>DCF法の計算</strong></td></tr>
+<tr><td class="c">18</td><td>再調達価格</td><td>建物環境リスク評価</td><td rowspan="3">ER</td></tr>
+<tr><td class="c">19</td><td>土壌汚染リスク評価</td><td>中・長期修繕更新費用</td></tr>
+<tr><td class="c">20</td><td>ERの目的</td><td>現地調査</td></tr>
+<tr><td class="c">21</td><td>プロパティマネジメントとは</td><td>プロパティマネジメント</td><td rowspan="5">PM</td></tr>
+<tr><td class="c">22</td><td>建物の管理運営の企画</td><td>建物の運営業務の企画</td></tr>
+<tr><td class="c">23</td><td>テナントの誘致・運営</td><td>テナントの誘致</td></tr>
+<tr><td class="c">24</td><td>建物管理業務</td><td>運営業務</td></tr>
+<tr><td class="c">25</td><td>管理運営上の関連法規</td><td>建物管理業務</td></tr>
+<tr><td class="c">26</td><td>ESGフレームワーク</td><td>サステナビリティと不動産投資</td><td rowspan="2">ESG</td></tr>
+<tr><td class="c">27</td><td>グリーンビルディング認証</td><td>サステナビリティと不動産投資</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>105との違い</h3>
+
+<div class="key">
+105は20問中8問が計算だったが、<strong>103の計算は問16・問17の2問だけ</strong>。残り22問は知識問題で、しかも範囲が「投資判断 → 調査 → 評価 → 運営」という<strong>実務の流れに沿って並んでいる</strong>。理論を積み上げる105と違い、<strong>実務の手順を頭から順にたどれば全体が入る</strong>科目といえる。
+</div>
+
+<h3>旧102との関係</h3>
+
+<p>2021〜2023年度の102「不動産投資の実務」は、名称こそ違うが範囲がほぼ同じ。<strong>直接還元法とDCF法の計算が問38・問39の定位置</strong>にあり、AM業務・地価・オフィス市場・デューデリジェンス・ER・PM・環境不動産という並びも共通している。</p>
+
+<p>したがって<strong>旧102の75問も実質的に103の過去問として使える</strong>。とくに計算2問は5年連続で同じ型なので、5回分の反復ができる。</p>
+
+<!-- ============ 1 ============ -->
+<h2 id="s1"><span class="n">1</span>計算2問の型（優先度：最高）</h2>
+
+<p>問16の直接還元法と問17のDCF法は、<strong>5年連続で数値だけ差し替えた同型問題</strong>。手順を覚えれば確実に2問取れる。</p>
+
+<h3>1-1. 直接還元法（問16）</h3>
+
+<div class="formula">
+収益価格 ＝ <span class="frac"><span class="num">純収益</span><span class="den">還元利回り</span></span>
+</div>
+
+<p>手順は前提条件を上から順に処理するだけ。<strong>順序を飛ばさないことが唯一のコツ</strong>。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th class="c">順</th><th>項目</th><th>計算方法</th><th>2024年度</th><th>2025年度</th></tr></thead>
+<tbody>
+<tr><td class="c">①</td><td>賃貸可能面積</td><td>延床 × 掛率</td><td class="num">7,500×80% = 6,000㎡</td><td class="num">7,000×75% = 5,250㎡</td></tr>
+<tr><td class="c">②</td><td>貸室賃料収入</td><td>賃貸可能面積 × 月額単価 × 12</td><td class="num">504,000,000</td><td class="num">504,000,000</td></tr>
+<tr><td class="c">③</td><td>共益費収入</td><td>賃貸可能面積 × 共益費単価 × 12</td><td class="num">72,000,000</td><td class="num">63,000,000</td></tr>
+<tr><td class="c">④</td><td>共益費込み貸室賃料収入</td><td>② ＋ ③</td><td class="num">576,000,000</td><td class="num">567,000,000</td></tr>
+<tr><td class="c">⑤</td><td>空室等損失</td><td>④ × 空室率</td><td class="num">28,800,000</td><td class="num">22,680,000</td></tr>
+<tr><td class="c">⑥</td><td>運営収益</td><td>④ − ⑤</td><td class="num">547,200,000</td><td class="num">544,320,000</td></tr>
+<tr><td class="c">⑦</td><td>運営費用</td><td><strong>⑥ × 費用率</strong></td><td class="num">109,440,000</td><td class="num">136,080,000</td></tr>
+<tr><td class="c">⑧</td><td>運営純収益</td><td>⑥ − ⑦</td><td class="num">437,760,000</td><td class="num">408,240,000</td></tr>
+<tr><td class="c">⑨</td><td>敷金の運用益</td><td>月額貸室賃料 × ヶ月数 × 運用利回り</td><td class="num">2,520,000</td><td class="num">5,040,000</td></tr>
+<tr><td class="c">⑩</td><td>資本的支出</td><td>建物再調達原価 × 率</td><td class="num">18,750,000</td><td class="num">21,000,000</td></tr>
+<tr><td class="c">⑪</td><td><strong>純収益</strong></td><td>⑧ ＋ ⑨ − ⑩</td><td class="num">421,530,000</td><td class="num">392,280,000</td></tr>
+<tr><td class="c">⑫</td><td><strong>収益価格</strong></td><td>⑪ ÷ 還元利回り</td><td class="num">8,430,000,000</td><td class="num">9,810,000,000</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>落としやすい3点</h4>
+
+<div class="note">
+<b>①</b>　<strong>運営費用の母数は「運営収益」であって「共益費込み貸室賃料収入」ではない。</strong>空室等損失を引いた後の金額に率を掛ける。<br>
+<b>②</b>　<strong>敷金残高の母数は「貸室月額賃料」だけ。</strong>共益費は含めない。2024年は6ヶ月分、2025年は12ヶ月分と月数も動く。<br>
+<b>③</b>　<strong>建物再調達原価の母数は「延床面積」。</strong>賃貸可能面積ではない。②③と母数が違う点に注意。
+</div>
+
+<p>敷金の運用益は<strong>足す</strong>、資本的支出は<strong>引く</strong>。符号を逆にすると選択肢に近い数字が出てしまうので、ここも注意が要る。</p>
+
+<h3>1-2. DCF法（問17）</h3>
+
+<div class="formula">
+収益価格 ＝ 各年純収益の現在価値の合計 ＋ 復帰価格の現在価値
+</div>
+
+<p>処理の順序は次のとおり。</p>
+
+<ol>
+<li><strong>複利現価率（ア）を求める</strong>　1 ÷ (1+割引率)<sup>n</sup>、小数点第3位を四捨五入</li>
+<li><strong>各年の純収益の現在価値</strong>　純収益 × 複利現価率　→　1〜5年目を合計</li>
+<li><strong>保有期間満了時の売却価格</strong>　<em>6年目</em>の純収益 ÷ 最終還元利回り</li>
+<li><strong>売却費用</strong>　売却価格 × 率</li>
+<li><strong>復帰価格</strong>　売却価格 − 売却費用</li>
+<li><strong>復帰価格の現在価値</strong>　復帰価格 × <em>5年目</em>の複利現価率</li>
+<li><strong>収益価格</strong>　②の合計 ＋ ⑥、上3桁未満を四捨五入</li>
+</ol>
+
+<div class="scroll">
+<table>
+<thead><tr><th>項目</th><th>2024年度</th><th>2025年度</th></tr></thead>
+<tbody>
+<tr><th>複利現価率（ア）</th><td class="num">1/1.045 = 0.956… → <strong>0.96</strong>（n=1、Y=4.5%）</td><td class="num">1/1.05<sup>2</sup> = 0.907… → <strong>0.91</strong>（n=2、Y=5.0%）</td></tr>
+<tr><th>純収益の現在価値合計</th><td class="num">140,940,000</td><td class="num">216,000,000</td></tr>
+<tr><th>売却価格</th><td class="num">33,000,000 ÷ 5.0% = 660,000,000</td><td class="num">50,000,000 ÷ 5.5% = 909,000,000</td></tr>
+<tr><th>売却費用（2.0%）</th><td class="num">13,200,000</td><td class="num">18,180,000</td></tr>
+<tr><th>復帰価格</th><td class="num">646,800,000</td><td class="num">890,820,000</td></tr>
+<tr><th>復帰価格の現在価値</th><td class="num">× 0.80 = 517,440,000</td><td class="num">× 0.78 = 694,839,600</td></tr>
+<tr><th><strong>収益価格</strong></th><td class="num"><strong>658,000,000</strong></td><td class="num"><strong>911,000,000</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>売却価格の分子は6年目の純収益</strong>。5年目ではない。保有期間終了「後」の収益を還元するという理屈を押さえておくと間違えない。<br>
+また<strong>復帰価格に掛けるのは5年目の複利現価率</strong>。6年目の率ではない。
+</div>
+
+<p>複利現価率（ア）の空欄位置は年度で動く（2024年は1年目、2025年は2年目）。<strong>n が何年目を指すかを問題文で必ず確認する</strong>こと。</p>
+
+<!-- ============ 2 ============ -->
+<h2 id="s2"><span class="n">2</span>投資の基礎とリスク軽減（問4・5）</h2>
+
+<h3>2-1. 押さえる定義</h3>
+
+<ul>
+<li><strong>不動産投資</strong>＝不動産を購入し、賃貸または売却によって利益を得る方法</li>
+<li><strong>インカムゲイン</strong>＝賃貸による継続的な賃料収入、<strong>キャピタルゲイン</strong>＝売却時の差益</li>
+<li>リターンは<strong>投資リスクの高低によって概ね決まる</strong>。物件の規模や金額の大きさで決まるのではない</li>
+<li>リスクの大小は <strong>社債 ＜ 不動産 ＜ 株式</strong></li>
+<li>リーマンショック後は<strong>インカムゲイン重視</strong>へ移行した（キャピタル重視ではない）</li>
+</ul>
+
+<h3>2-2. 投資スタイルの4分類</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>スタイル</th><th>リターンの源泉</th><th>適合する投資家</th></tr></thead>
+<tbody>
+<tr><th>コア</th><td>賃貸によるインカムリターン中心</td><td><strong>安定的な利益配当を志向</strong></td></tr>
+<tr><th>コアプラス</th><td>インカム中心＋一定の改善</td><td>やや高い利回りを求める</td></tr>
+<tr><th>バリューアッド</th><td>インカム<strong>＋</strong>割安取得物件の収益性改善によるキャピタル</td><td>中リスク中リターン</td></tr>
+<tr><th>オポチュニスティック</th><td>キャピタル中心</td><td>高リスク高リターン</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　安定配当志向に適合するのは<strong>コア・コアプラス・REIT</strong>。オポチュニスティックを当てはめる枝が誤りとして出る。またバリューアッドを「インカムのみ」と説明する枝も誤り。
+</div>
+
+<h3>2-3. リスク軽減策</h3>
+
+<p>次はいずれも正しい記述として出題されている。<strong>「なぜリスクが減るのか」を一言で言えるかが判断基準</strong>になる。</p>
+
+<ul>
+<li><strong>アセットタイプを限定する</strong> → 専門性を集中させリスクを管理できる</li>
+<li><strong>商業施設で固定賃料または固定＋歩合にする</strong> → 100%歩合だとテナント売上の変動がそのまま賃料変動になる</li>
+<li><strong>適正な管理仕様を維持する</strong> → テナント満足度の向上と事故発生の軽減</li>
+<li><strong>法改正・リコール情報を定期収集する</strong> → 法令違反や事故による突発的損失を予防</li>
+<li><strong>計画的な修繕</strong>が欠かせない（<span class="ng">×</span> 不具合の都度の事後修繕）</li>
+</ul>
+
+<p>機関投資家の定義も出る。<strong>年金基金と一般機関投資家（銀行・生損保など）</strong>を指し、<span class="ng">海外の個人投資家は含まない</span>。</p>
+
+<!-- ============ 3 ============ -->
+<h2 id="s3"><span class="n">3</span>アセットマネジメント業務（問6〜8）</h2>
+
+<h3>3-1. AMの役割</h3>
+
+<ul>
+<li>使命は<strong>投資家の利益の最大化</strong>。不動産を所有するヴィークルを<strong>経営</strong>する立場</li>
+<li>業務は<strong>入口戦略（取得）・期中戦略（リーシング／修繕）・出口戦略（売却）</strong>の3つ</li>
+<li>AM会社は一般に<strong>金商法上の金融商品取引業者としての登録が必要</strong></li>
+<li>準拠法はスキームで異なる。<strong>GK-TK → 金商法、TMK → 資産流動化法</strong></li>
+<li>デューデリジェンスの各調査は<strong>各分野の専門家に委託するのが一般的</strong>（<span class="ng">×</span> AM内で完結）</li>
+</ul>
+
+<p>AMとPMの役割分担は繰り返し問われる。<strong>AMが「経営者」、PMが「執行者」</strong>。テナント管理はPMの領域だが、<em>キャッシュフローに重大な影響がある場合はAMも関与する</em>。</p>
+
+<h3>3-2. GK-TKの口座階層 — 最頻出</h3>
+
+<p>3階層の役割分担が毎年出る。<strong>どの支払いがどの口座から出るか</strong>を整理しておく。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th>口座</th><th>主な入出金</th></tr></thead>
+<tbody>
+<tr><th>信託口座</th><td>物件運営に関わる入出金。<strong>固定資産税</strong>など物件関連の公租公課</td></tr>
+<tr><th>メイン口座</th><td>レンダーへの元利金支払い、会計事務委託報酬、鑑定評価書取得費用などストラクチャー維持費用とそのリザーブ。<strong>法人税・消費税の納付</strong></td></tr>
+<tr><th>リリース口座</th><td><strong>AM報酬</strong>、投資家への配当</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>AM報酬は信託口座ではなくリリース口座から支払う。</strong>また<strong>公租公課がすべて信託口座から出るわけではない</strong>（法人税・消費税はメイン口座）。両方向の誤り枝が出ている。
+</div>
+
+<h3>3-3. コベナンツと事由</h3>
+
+<ul>
+<li><strong>配当停止事由</strong>　資金移動が制限される。GK-TKでは<strong>メイン口座からリリース口座への移動が禁止</strong>される（<span class="ng">×</span> 信託口座からメイン口座）</li>
+<li><strong>強制期限前弁済事由</strong>　貸付人が口座に留保された金銭を返済に充当できる事由。GK-TKでは<strong>メイン口座</strong>の資金を充当</li>
+<li><strong>DSCRテスト</strong>　返済の余裕度。基準値を何度か下回ると配当停止や強制期限前弁済に抵触</li>
+<li><strong>LTVテスト</strong>　鑑定評価額に対するローン元本の割合。基準値を何度か上回ると<strong>物件の強制売却</strong>に至る場合がある</li>
+</ul>
+
+<p>レバレッジの向きも出る。<strong>ハイレバレッジ（深めのLTV）にすると配当利回りが高まる</strong>。ローレバレッジで配当利回りが高まるとする枝は誤り。</p>
+
+<h3>3-4. 期中・売却の実務</h3>
+
+<ul>
+<li>予算超過工事は<strong>レンダーの承諾が必要な場合がある</strong>ので、発注前にローン契約を確認する</li>
+<li>高額工事が集中するとDSCR抵触や未払配当を招くため、<strong>修繕積立金の増額や実施時期の分散</strong>で平準化する</li>
+<li>売却方針はビジネスプランの達成状況に加え、<strong>金融情勢と不動産マーケットの状況</strong>を考慮して策定</li>
+<li>最高価格でも<strong>決済の確実性に疑義があれば次点者に優先交渉権</strong>を与えてよい</li>
+<li>質疑応答は<strong>質問者以外の候補者にも共有する</strong>（公平性の確保）</li>
+<li>信託受益権の売却では<strong>レンダーだけでなく信託受託者にも告知・承諾が必要</strong></li>
+</ul>
+
+<!-- ============ 4 ============ -->
+<h2 id="s4"><span class="n">4</span>マーケットと指標（問9〜12）</h2>
+
+<h3>4-1. 価格情報の限界 — 出題の中心</h3>
+
+<p>この分野の設問は、ほぼすべて<strong>「その指標を鵜呑みにするな」</strong>という一点に収束する。「常に正確」「乖離がない」「必ず」といった断定表現が出たら誤りを疑ってよい。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th>指標</th><th>限界</th></tr></thead>
+<tbody>
+<tr><th>募集賃料</th><td>成約賃料との乖離、サンプリングバイアス。満室で募集を止めたビルが対象から外れる。ただし長期の時系列が揃うためトレンド把握には有用</td></tr>
+<tr><th>成約賃料</th><td>関連会社間取引や長いフリーレントなど個別事情が絡み、市場価格と異なる場合がある</td></tr>
+<tr><th>成約売買事例</th><td>同上。なお<strong>成約価格が公になることが「全くない」わけではない</strong>（J-REITや上場企業のIR情報）</td></tr>
+<tr><th>鑑定価格</th><td>市場の大きな変化への<strong>遅れ</strong>が指摘されている</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>4-2. 空室率</h3>
+
+<div class="formula">
+空室率 ＝ <span class="frac"><span class="num">空室面積</span><span class="den">貸室総面積</span></span>
+</div>
+
+<div class="note">
+<b>頻出</b>　分子を<strong>稼働面積</strong>とする枝が誤りとして出る。空室面積が分子。
+</div>
+
+<ul>
+<li>算出基準は<strong>公表機関ごとに異なる</strong>。エリア・規模・グレードの対象基準だけでなく、竣工前物件を含むか、退去決定済みで未退去の面積を含むかといった<strong>空室面積の算出基準自体も違う</strong></li>
+<li><strong>空室率が同じでも、ストックが拡大すれば空室面積の総量は増える</strong></li>
+<li>新築ビル空室率は母数が小さく変動が大きい。竣工後12ヶ月を超えると対象から外れる。ただし<em>特性を理解すれば指標として有用</em>であり、「用いられない」は誤り</li>
+<li>東京23区のオフィスは棟数ベースで<strong>延床5,000坪以上が1割以下</strong></li>
+<li>フリーレントは付与率や月数だけでは需給動向を捉えきれない</li>
+</ul>
+
+<h3>4-3. 公的な地価 — 4指標の整理</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>指標</th><th>実施主体</th><th>基準日</th><th>水準・特徴</th></tr></thead>
+<tbody>
+<tr><th>地価公示</th><td>国土交通省<strong>土地鑑定委員会</strong></td><td><strong>1月1日</strong></td><td>標準的な土地の正常な価格</td></tr>
+<tr><th>都道府県地価調査<br>（基準地価）</th><td><strong>都道府県知事</strong></td><td><strong>7月1日</strong></td><td>公示地価の対象外である<strong>林地・リゾート地</strong>も含む</td></tr>
+<tr><th>相続税路線価</th><td><strong>国税庁</strong></td><td>1月1日</td><td>公示地価の<strong>8割</strong>程度</td></tr>
+<tr><th>固定資産税評価</th><td>市町村</td><td>1月1日</td><td>公示地価の<strong>7割</strong>程度、<strong>3年ごと</strong>に見直し</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>固定資産税評価は「毎年見直し」ではなく3年ごと。</strong>この1点を突く枝が出る。8割と7割の入れ替えも定番。
+</div>
+
+<h3>4-4. アセットタイプ別の論点</h3>
+
+<h4>商業施設</h4>
+<ul>
+<li>固定賃料だけでなく<strong>売上歩合賃料</strong>が導入されることがあり、<strong>運営の巧拙に賃料収入が左右される</strong></li>
+<li>売上歩合賃料は所有者にとって<strong>収入が不安定になる要素</strong></li>
+<li>マスターリースや催事があり空室部分を特定しにくいため、<strong>オフィスほど全国的な空室率データは整備されていない</strong></li>
+<li>小売事業者が新規出店によるシェア拡大を最優先していたのは<strong>2000年代初頭まで</strong></li>
+</ul>
+
+<h4>その他</h4>
+<ul>
+<li><strong>ホテル</strong>　訪日外客数は2023年に大きく増えたが、<strong>3,000万人を超えた2019年の水準には達していない</strong></li>
+<li><strong>物流施設</strong>　EC化率は上昇を続け、BtoC-EC市場は2022年度に約23兆円</li>
+<li><strong>住宅</strong>　東京23区は2021年に転出超過、2022年に転入超過へ回帰、2023年はさらに増加</li>
+<li><strong>オフィス</strong>　在籍1人当たり面積は、コロナ禍前に増加傾向にあったわけでも、コロナ後に減少したわけでもない</li>
+</ul>
+
+<p>投資家属性の読み方も出る。<strong>J-REIT・生保・年金は中長期保有型</strong>なので、彼らの取得が多くても短期の売却圧力にはつながらない。</p>
+
+<!-- ============ 5 ============ -->
+<h2 id="s5"><span class="n">5</span>デューデリジェンスと鑑定評価（問13〜15）</h2>
+
+<h3>5-1. 法的調査</h3>
+
+<p>法的調査は<strong>私法関係調査と公法関係調査</strong>に大別され、<em>双方とも投資リターンに影響しうる</em>。片方だけとする枝は誤り。</p>
+
+<h4>不動産登記簿</h4>
+<ul>
+<li><strong>甲区</strong>＝所有権に関する事項（所有者、取得時期、取得原因）</li>
+<li><strong>乙区</strong>＝所有権以外の権利（抵当権、根抵当権、地上権など）</li>
+<li><strong>根抵当権の極度額と実際の借入残高は一致しない</strong>ため、別途残債務額の確認が必要</li>
+<li>登記簿謄本は<strong>誰でも取得でき、所有者の承諾や委任状は不要</strong></li>
+</ul>
+
+<h4>借地権</h4>
+<ul>
+<li>借地権には物権である<strong>地上権</strong>と債権である<strong>賃借権</strong>がある</li>
+<li>地上権は乙区で確認できるが、<strong>賃借権は賃貸人に登記に応じる義務がなく、登記されていない場合が多い</strong></li>
+<li>両者は権利の安定性、売買時の手続きやコストが異なり、<strong>価格への影響も同等ではない</strong></li>
+</ul>
+
+<p>長期入居テナントについては、<strong>契約始期の契約書に加えて変更契約書や覚書まで遡り</strong>、条件変更の経緯を確認する。</p>
+
+<h3>5-2. 経済的調査</h3>
+
+<ul>
+<li><strong>一般的要因</strong>（マクロ要因）の分析は抽象的で軽視されがちだが、価格形成の基礎として十分な調査が必要</li>
+<li><strong>感度分析</strong>＝単一の要素の変化がCFに与える影響を見る／<strong>シナリオ分析</strong>＝複数の異なる条件設定で分析する</li>
+<li>過去の収支実績は<strong>直近1年だけでなく可能な限り遡って</strong>分析する</li>
+<li>複数物件を一括契約している場合、<strong>対象不動産単独の費用</strong>を把握する必要がある（スケールメリットで見かけ上安くなっている）</li>
+<li>実施済み修繕とER記載の修繕項目を照合し、計画が実行されているか確認する</li>
+<li>テナントの平均入居期間や退去後の平均空室期間は、<strong>市場全体の安定性を示す重要な指標</strong>であり調査対象外ではない</li>
+<li>テナント構成は<strong>分散している方が将来CFは安定的</strong></li>
+</ul>
+
+<h3>5-3. 収益還元法</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th></th><th>直接還元法</th><th>DCF法</th></tr></thead>
+<tbody>
+<tr><th>考え方</th><td>一期間の純収益を還元利回りで還元</td><td>一定期間の将来予測を明示的に行う</td></tr>
+<tr><th>長所</th><td><strong>適用が簡単、理論的にも分かりやすい</strong></td><td><strong>時間の概念を組み入れ、詳細なシナリオを設定できる</strong></td></tr>
+<tr><th>短所</th><td>時間的な変動を織り込みにくい</td><td>予測の内容・精度が価格の信頼性を左右する</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>「時間の概念を組み入れられる」のはDCF法。</strong>これを直接還元法の長所とする枝が誤りとして出る。
+</div>
+
+<p>どちらを適用するか、併用時にどちらを重視するかは、<strong>対象不動産の種類・収集可能な資料の質と範囲・評価目的</strong>に即して選択する。</p>
+
+<p><strong>最終還元利回りは還元利回りより高くなるのが一般的。</strong>将来時点の予測は不確実性が高く、建物の老朽化・陳腐化も進むため。</p>
+
+<h3>5-4. オペレーショナルアセット</h3>
+
+<ul>
+<li>賃貸用不動産に限らず、<strong>収益性が事業の経営動向に強く影響される不動産</strong>。ホテル、ゴルフ場、医療施設が典型</li>
+<li>ホテルの個別的要因では、<strong>賃借人やホテルマネジメント会社のブランド・ホスピタリティ・知名度・固定客の有無</strong>が収益性を大きく左右するため重視される</li>
+<li>現に賃貸借に供されていても、<strong>現行賃料と事業採算性から見た適正賃料水準との乖離</strong>を分析する</li>
+<li><strong>所有直営方式</strong>はオーナーが全リスクを負うためハイリスク・ハイリターンで、<strong>経営の自由度が最も高い</strong></li>
+</ul>
+
+<!-- ============ 6 ============ -->
+<h2 id="s6"><span class="n">6</span>エンジニアリングレポート（問18〜20）</h2>
+
+<h3>6-1. ERの位置づけと現地調査</h3>
+
+<ul>
+<li>ERは<strong>技術的見地から第三者の立場で</strong>機能・性能を客観評価し、収益性に影響するリスクを<strong>定量化</strong>する</li>
+<li><strong>原則として現地調査なしのレポートはあり得ない</strong>。書類が揃っていても机上調査だけでは不可</li>
+<li>現地調査は<strong>目視調査とヒアリング調査が基本</strong>。試験運転を行うのが一般的ではない</li>
+<li>立ち入れる範囲での<strong>サンプリング調査</strong>であり全数調査ではない</li>
+<li>設備に詳しい<strong>施設管理者の立会い</strong>を求めるのは適切</li>
+<li>建築時に適法で検査済証があっても、<strong>竣工後の増改築で不適合になっている場合がある</strong></li>
+</ul>
+
+<h3>6-2. 再調達価格</h3>
+
+<ul>
+<li><strong>現状の仕様に従い、調査時点で再度新築する場合の費用</strong>。新築時の実際の工事費ではない</li>
+<li><strong>含まない</strong>もの：解体撤去費用、設計料、移転引越費用、営業補償費</li>
+<li>竣工後の<strong>耐震補強工事のコストは反映される</strong></li>
+<li>算出方式は2通り。①竣工時の工事代金内訳書を物価変動で補正、②主要部位の概算積算</li>
+</ul>
+
+<h3>6-3. 修繕更新費用の3区分</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>区分</th><th>内容</th></tr></thead>
+<tbody>
+<tr><th>緊急を要する</th><td>建築基準法・消防法等の法令違反や指摘事項で、<strong>人命・安全に関わる事項</strong>。消防用設備等の点検指摘は該当することが多い</td></tr>
+<tr><th>短期</th><td>テナント誘致などマーケティング上、重大なマイナス要因となるもの</td></tr>
+<tr><th>中・長期</th><td>経年劣化に対する機能維持のための費用。<strong>緊急・短期は含まない</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　中・長期修繕更新費用は<strong>建築時点および現状の性能を維持する前提</strong>で作成し、<strong>機能や性能の向上（グレードアップ）は考慮しない</strong>。また<strong>一般的な工法を前提</strong>とするため、夜間工事などの特殊性は織り込まない。「金額は安い方がよい」と希望額を指定するのも誤り。
+</div>
+
+<h3>6-4. 建物環境リスク評価</h3>
+
+<ul>
+<li>主な調査対象は<strong>アスベスト含有建材とPCB</strong>。<strong>鉛含有塗料やラドンガス</strong>は委託者の要請による「留意項目」</li>
+<li>アスベストは現在<strong>6種類</strong>。法改正前の<strong>3種類のみの調査報告では含有なしと言い切れない</strong></li>
+<li><strong>低濃度PCB廃棄物の処理期限は2027年3月31日</strong></li>
+<li><strong>フェーズⅡ調査（サンプリング・成分分析）はオプション</strong>であり、問題点が指摘されても「必ず」行うわけではない</li>
+</ul>
+
+<h3>6-5. 土壌汚染リスク評価</h3>
+
+<ul>
+<li>過去に調査を受けていても<strong>法改正がありうるため、常に最新の法令・基準による調査が必要</strong></li>
+<li>一般の商業地でも、<strong>印刷会社やクリーニング店</strong>の立地履歴があれば汚染の可能性は否定できない</li>
+<li>土壌汚染対策法の区域区分は<strong>要措置区域・形質変更時要届出区域</strong>に加え、<strong>自然由来特例区域</strong>の指定もある</li>
+<li>過去の所有者・使用者と事業内容の特定が重要。<strong>年数の経過だけでリスクが低いとは言えない</strong></li>
+</ul>
+
+<!-- ============ 7 ============ -->
+<h2 id="s7"><span class="n">7</span>プロパティマネジメント（問21〜25）</h2>
+
+<h3>7-1. PMの役割と業務の4区分</h3>
+
+<p>PMは<strong>ビルオーナーを代行して建物管理とテナント管理を一括して行い、収益と資産価値の最大化を図る</strong>業務。実際の業務範囲は契約で決まる。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th>業務</th><th>内容</th><th>性質</th></tr></thead>
+<tbody>
+<tr><th>建物の管理運営の企画</th><td>管理運営計画、修繕計画の立案</td><td>企画</td></tr>
+<tr><th>テナント誘致業務</th><td>リーシング、契約管理</td><td>—</td></tr>
+<tr><th><strong>運営業務</strong></th><td>品質管理、テナント窓口対応、賃料の入出金管理、レポーティング</td><td><strong>ソフト面</strong></td></tr>
+<tr><th><strong>建物管理業務</strong></th><td>建物・設備の保全、清掃、警備</td><td><strong>ハード面</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>運営業務＝ソフト、建物管理業務＝ハード。</strong>この2つを入れ替えた枝が両年度で出ている。<br>
+また<strong>「投資家収益の最大化」「ポートフォリオとしての運用」はAMの役割</strong>。PMの説明として出たら誤り。
+</div>
+
+<p>不動産の築年数・用途・立地は<strong>常に変化する要因</strong>であり、PMには刻々と変化するリスクをコントロールすることが求められる。「不変で固定的」は誤り。</p>
+
+<h3>7-2. 建物の管理運営の企画</h3>
+
+<ul>
+<li>管理運営計画の主目的の一つは<strong>テナント・利用者への快適性と安全性の提供</strong></li>
+<li><strong>修繕・更新</strong>は機能や性能が低下した機器を竣工時と同等まで回復させる行為で、主に<strong>物理的劣化</strong>への対処（社会的劣化ではない）</li>
+<li><strong>事後保全は常に避けるべきものではない。</strong>故障時のリスクが限定的なら意図的に選択されうる</li>
+<li><strong>改修計画</strong>はビルに新しい価値を生む<strong>非定常業務</strong></li>
+<li><strong>コンバージョンは用途変更</strong>。既存用途のまま内装をリニューアルすることではない</li>
+<li>年間維持管理計画は月次点検などを含む定期的な点検計画</li>
+</ul>
+
+<h3>7-3. テナント誘致・賃貸借契約</h3>
+
+<ul>
+<li><strong>入居申込書</strong>は条件交渉に先立って提出されるが、<strong>一般的に法的拘束力を持たない</strong></li>
+<li>契約締結時には<strong>館内規則や貸方基準</strong>などの付随書類も同時に交付される</li>
+<li><strong>貸方基準</strong>＝標準仕様・工事区分・各種法規制・建築設備の規則を明示したもの（<span class="ng">×</span> 館内規則）</li>
+<li><strong>PMバジェット</strong>＝収支予測や修繕計画をまとめた年度予算（<span class="ng">×</span> PMレポート）</li>
+<li><strong>PMレポート</strong>＝CFや入出金状況を含む経営状況の報告書。オーナーの意思決定資料</li>
+<li>環境配慮を掲げる企業は<strong>環境認証の有無</strong>をビル選定基準にすることがある</li>
+</ul>
+
+<h4>定期建物賃貸借契約</h4>
+
+<div class="note">
+<b>頻出</b>　更新の意思や正当事由に関わらず期間満了で終了できるのは<strong>定期</strong>建物賃貸借。ただし<strong>契約期間が1年以上の場合は、期間満了の1年前から6ヶ月前までの間に終了通知が必要</strong>で、通知義務がないわけではない。<br>
+2023年度は、この「1年以上」の解釈をめぐって<strong>協会が正答を2つに訂正</strong>する事態も起きている。
+</div>
+
+<h4>工事区分</h4>
+
+<div class="scroll">
+<table>
+<thead><tr><th>区分</th><th>発注者</th><th>施工者</th><th>費用負担</th></tr></thead>
+<tbody>
+<tr><th>A工事</th><td>賃貸人</td><td>賃貸人が指定</td><td>賃貸人</td></tr>
+<tr><th>B工事</th><td>賃借人</td><td><strong>賃貸人が指定</strong></td><td>賃借人</td></tr>
+<tr><th>C工事</th><td>賃借人</td><td>賃借人が選定</td><td>賃借人</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>7-4. 建物管理業務</h3>
+
+<ul>
+<li><strong>設備管理</strong>は日常運転監視業務と定期整備業務。方式は<strong>常駐設備管理方式と巡回設備管理方式</strong></li>
+<li>定期整備業務は専門業者への委託だけでなく<strong>設備管理員が行う場合もある</strong></li>
+<li><strong>清掃</strong>　日常清掃／<strong>定期清掃</strong>（専用の薬品・機材で床面やガラス面などの汚れを除去）／<strong>特別清掃</strong>（照明器具やブラインドなど細部が対象）</li>
+<li><strong>警備</strong>　<strong>機械警備</strong>は異常検知から30分以内（都内などは25分以内）の到着が<strong>警備業法で定められている</strong>。巡回警備ではない</li>
+<li><strong>コンストラクションマネジメント</strong>　修繕・改修工事の企画提案から工事管理を通じ、品質・工期・コストの最適化を図る</li>
+<li><strong>コスト管理</strong>は単なる支出削減ではなく、賃料や入居率に影響する品質を維持しつつ効率化を図ること</li>
+<li>法定定期点検は<strong>自治体により周期や内容が異なるものもある</strong>（全国で統一されていない）</li>
+</ul>
+
+<h3>7-5. 管理運営上の関連法規</h3>
+
+<ul>
+<li><strong>建築物衛生法</strong>　「<strong>特定</strong>建築物」の維持管理権原者が建築物環境衛生管理技術者を選任する（特殊建築物ではない）</li>
+<li><strong>消防法</strong>　自衛消防組織の設置義務は<strong>防災管理が義務付けられている防火対象物に限定</strong>される（全ての防火対象物ではない）</li>
+<li><strong>電気事業法</strong>　電気主任技術者の外部委託＝自社選任に代えて外部の保安管理業者へ委託する制度</li>
+<li><strong>建築基準法</strong>　建築確認申請が必要なのは新築工事に限られない（増築・改築・移転、大規模修繕・模様替、用途変更なども対象）</li>
+</ul>
+
+<!-- ============ 8 ============ -->
+<h2 id="s8"><span class="n">8</span>ESGと環境認証（問26・27）</h2>
+
+<h3>8-1. リスクとスクリーニングの用語</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>用語</th><th>意味</th></tr></thead>
+<tbody>
+<tr><th>物理リスク</th><td>気象災害など、気候変動そのものが物理的に資産に及ぼすリスク</td></tr>
+<tr><th><strong>移行リスク</strong></th><td>脱炭素社会への移行に伴うリスク。<strong>ESG評価の低スコアによる投資資金の引き上げ</strong>もここ</td></tr>
+<tr><th>ネガティブスクリーニング</th><td>特定の業種などを投資対象から<strong>除外</strong>する手法</td></tr>
+<tr><th><strong>ポジティブスクリーニング</strong></th><td>環境や社会で<strong>高い評価</strong>を得ている企業を選別する手法</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>8-2. フレームワークの区別 — 混同を狙う設問</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>名称</th><th>正しい内容</th></tr></thead>
+<tbody>
+<tr><th>PRI</th><td>投資に<strong>ESGの視点を組み入れる投資原則</strong></td></tr>
+<tr><th>GRIスタンダード</th><td><strong>サステナビリティ報告（非財務情報）</strong>作成の国際基準。財務・会計基準ではない</td></tr>
+<tr><th>TCFD</th><td>気候変動のリスクと機会が財務に及ぼす影響を整理して開示することを推奨</td></tr>
+<tr><th>GRESB</th><td>2009年創設。<strong>会社・ファンド単位</strong>でESGの取り組みと実績を評価（物件単位ではない）。ただし<strong>評価項目には保有物件の環境認証取得状況が含まれる</strong></td></tr>
+<tr><th>CRREM</th><td>パリ協定の目標に整合させる脱炭素の道筋を定義。管理するのは<strong>移行リスク</strong>（物理リスクではない）</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>PRIとGRIスタンダードの入れ替え</strong>、<strong>GRESBの「物件単位」</strong>、<strong>CRREMの「物理リスク」</strong>。この3つが誤り枝として繰り返し出ている。
+</div>
+
+<h3>8-3. 環境認証</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>認証</th><th>性格</th></tr></thead>
+<tbody>
+<tr><th>LEED</th><td>米国発。エネルギー効率だけでなく<strong>敷地選定、水利用、立地と交通、材料、室内環境</strong>など複数カテゴリーで総合評価</td></tr>
+<tr><th>CASBEE</th><td>室内環境、サービスの質、屋外環境、エネルギー、資源・素材、敷地外環境などを<strong>多面的に総合評価</strong></td></tr>
+<tr><th><strong>BELS</strong></th><td>建築物省エネルギー性能表示制度。<strong>省エネ性能に特化</strong>した国内制度で、総合評価ではない</td></tr>
+<tr><th>EnergyStar</th><td>米国EPAが運営。<strong>国際的な基準</strong>で対象も多岐にわたる（日本国内限定ではない）</td></tr>
+</tbody>
+</table>
+</div>
+
+<ul>
+<li><strong>BEI</strong>は<strong>1.0より低いほど省エネ性能が高い</strong>。0.5は0.6より高性能</li>
+<li><strong>エンボディドカーボン</strong>は運用時だけでなく<strong>施工・資材調達・解体</strong>も含む</li>
+<li>日本でも認証取得が価値に与える影響（<strong>グリーン・プレミアム</strong>）を示す実証研究が複数出ている</li>
+</ul>
+
+<!-- ============ 9 ============ -->
+<h2 id="s9"><span class="n">9</span>引っかけパターンの類型</h2>
+
+<p>103の誤り枝には4つの型がある。<strong>105の類型（分子分母の反転・方向の逆転・語句のすり替え・数値のすり替え）と重なるが、103では「役割の入れ替え」が突出して多い。</strong></p>
+
+<h3>型1：役割・区分の入れ替え</h3>
+<ul>
+<li>AMの説明をPMの説明として出す（またはその逆）</li>
+<li>運営業務（ソフト）と建物管理業務（ハード）</li>
+<li>インカムゲインとキャピタルゲイン</li>
+<li>館内規則と貸方基準／PMレポートとPMバジェット</li>
+<li>定期清掃と特別清掃／機械警備と巡回警備</li>
+<li>直接還元法とDCF法の長所</li>
+<li>PRIとGRIスタンダード／物理リスクと移行リスク／ネガティブとポジティブスクリーニング</li>
+<li>普通建物賃貸借と定期建物賃貸借</li>
+</ul>
+
+<h3>型2：数値・周期のすり替え</h3>
+<ul>
+<li>固定資産税評価の見直し（3年ごと → 毎年）</li>
+<li>公示地価の8割（相続税路線価）と7割（固定資産税評価）</li>
+<li>アスベストの種類（6種類 → 3種類）</li>
+<li>訪日外客数（2019年水準に未達 → 過去最高）</li>
+<li>BEIの向き（低いほど高性能）</li>
+</ul>
+
+<h3>型3：断定表現による誇張</h3>
+<p>「常に」「必ず」「全く〜ない」「〜のみ」が入ったら疑う。</p>
+<ul>
+<li>成約賃料で「常にマーケットプライスを正確に把握できる」</li>
+<li>鑑定価格が「遅れることなく迅速に」変動を捉える</li>
+<li>成約価格が「公になることは全くない」</li>
+<li>フェーズⅡ調査を「必ず」行う</li>
+<li>定期整備を「すべて」専門業者に委託</li>
+<li>建築確認申請は新築工事に「限られる」</li>
+<li>全ての防火対象物に自衛消防組織を設置</li>
+</ul>
+
+<h3>型4：口座・支払いの取り違え</h3>
+<ul>
+<li>AM報酬の支払口座（リリース → 信託）</li>
+<li>公租公課の支払口座（法人税・消費税はメイン → 全て信託）</li>
+<li>配当停止時に禁止される資金移動（メイン→リリース を 信託→メイン とする）</li>
+</ul>
+
+<!-- ============ 10 ============ -->
+<h2 id="s10"><span class="n">10</span>学習の進め方</h2>
+
+<h3>第1段階　計算2問を固める</h3>
+<p>直接還元法とDCF法。<strong>5年連続で同型</strong>なので、旧102の問38・39も含めて5回分回せる。直接還元法は運営費用・敷金・建物再調達原価の<strong>母数の違い</strong>、DCF法は<strong>6年目の純収益と5年目の複利現価率</strong>だけ間違えなければ取れる。</p>
+
+<h3>第2段階　役割と区分の対応表を作る</h3>
+<p>103の誤り枝は「型1：役割・区分の入れ替え」が最多。AMとPM、運営業務と建物管理業務、各種フレームワークといった<strong>対になる概念を紙の上で左右に並べて書けるレベル</strong>にする。ここが固まると正答率が跳ね上がる。</p>
+
+<h3>第3段階　実務の流れで通す</h3>
+<p>問4から問27は「投資判断 → AM業務 → 市場調査 → デューデリジェンス → 鑑定評価 → ER → PM → ESG」という<strong>実務の順序</strong>で並んでいる。個別の暗記ではなく、案件を1件動かす流れとして通しで読むと定着しやすい。</p>
+
+<h3>第4段階　旧102で量をこなす</h3>
+<p>2021〜2023年度の102は75問・273枝あり、範囲がほぼ同じ。<strong>103だけだと2年分48問しかないが、旧102を足せば123問</strong>になる。カリキュラム改定でテキストのページ番号は変わっているが、問われている内容の骨格は変わっていない。</p>
+
+<footer>
+出典：一般社団法人不動産証券化協会「2021〜2025年度 Course1 修了試験・再認定試験 問題・解説」。個人の学習用に整理したもの。本文中の解釈・補足は公式解説を離れた部分を含むため、テキストで確認すること。数値や制度は出題年度時点のもの。
+</footer>
+
+</div>
+</body>
+</html>

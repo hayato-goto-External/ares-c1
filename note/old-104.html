@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>旧104 ファイナンス理論と投資分析 — 理解ポイント整理</title>
+<style>
+:root{
+  --paper:#E7E8E2; --card:#FCFCFA; --ink:#1B1E24; --ink2:#5C6371; --ink3:#8A9099;
+  --rule:#C7C9C1; --rule2:#DEDFD8; --ai:#2A4A7B; --shu:#B23A2F;
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","MS PMincho",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--gothic);
+  font-size:15px;line-height:1.85;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 72px}
+
+header.mast{border-bottom:1px solid var(--rule);padding:26px 0 16px;margin-bottom:22px}
+.mast h1{font-size:21px;font-weight:600;margin:0;letter-spacing:.01em;line-height:1.5}
+.mast p{margin:6px 0 0;font-size:12.5px;color:var(--ink2)}
+
+h2{font-size:17px;font-weight:600;margin:44px 0 14px;padding-bottom:7px;
+  border-bottom:2px solid var(--ink);letter-spacing:.01em}
+h2 .n{color:var(--ink3);font-variant-numeric:tabular-nums;margin-right:9px;font-weight:400}
+h3{font-size:15px;font-weight:600;margin:28px 0 9px;padding-left:10px;border-left:3px solid var(--ai)}
+h4{font-size:13.5px;font-weight:600;margin:20px 0 6px;color:var(--ink2)}
+p{margin:0 0 13px}
+strong{font-weight:600}
+em{font-style:normal;background:linear-gradient(transparent 62%, rgba(42,74,123,.18) 62%)}
+
+nav.toc{background:var(--card);border:1px solid var(--rule);padding:14px 16px;margin-bottom:30px}
+nav.toc h2{all:unset;display:block;font-size:12px;color:var(--ink3);margin-bottom:8px}
+nav.toc ol{margin:0;padding-left:20px;font-size:13.5px;line-height:1.9}
+nav.toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+nav.toc a:hover{border-bottom-color:var(--ink)}
+
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 16px}
+table{border-collapse:collapse;width:100%;font-size:13px;background:var(--card);min-width:420px}
+th,td{border:1px solid var(--rule2);padding:7px 10px;text-align:left;vertical-align:top;line-height:1.65}
+th{background:#EFEFEA;font-weight:600;white-space:nowrap}
+td.c,th.c{text-align:center}
+tbody tr:nth-child(even) td{background:#F7F7F4}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.formula{font-family:var(--mincho);font-size:16px;text-align:center;background:var(--card);
+  border:1px solid var(--rule2);padding:14px 12px;margin:14px 0;line-height:2.1}
+.frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 4px}
+.frac .num{display:block;padding:0 6px 2px;border-bottom:1px solid currentColor}
+.frac .den{display:block;padding:2px 6px 0}
+.calc{font-family:var(--mincho);font-size:14.5px;margin:0 0 13px;line-height:2}
+
+ul,ol{margin:0 0 15px;padding-left:22px}
+li{margin-bottom:6px}
+li>ul{margin-top:6px}
+
+.note{border-left:3px solid var(--shu);background:rgba(178,58,47,.05);
+  padding:11px 14px;margin:16px 0;font-size:13.5px;line-height:1.8}
+.note b{color:var(--shu)}
+.key{border:1px solid var(--ai);background:rgba(42,74,123,.05);
+  padding:12px 15px;margin:16px 0;font-size:13.5px;line-height:1.85}
+.ng{color:var(--shu);font-weight:600}
+.ok{color:var(--ai);font-weight:600}
+
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--rule);
+  font-size:11px;color:var(--ink3);line-height:1.8}
+@media (min-width:720px){ body{font-size:15.5px} }
+@media print{
+  body{background:#fff} nav.toc{display:none}
+  h2{page-break-after:avoid} table{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <h1>旧104 ファイナンス理論と投資分析 — 理解ポイント整理</h1>
+  <p>2021〜2023年度の104（各15問・150枝）を突き合わせて構造化。<strong>2023年度以前の旧カリキュラムの科目</strong>で、現行では105「不動産ファイナンスの基礎」に相当する</p>
+</header>
+
+<nav class="toc">
+  <h2>目次</h2>
+  <ol>
+    <li><a href="#s0">まず構造をつかむ</a></li>
+    <li><a href="#s1">期待効用と確実性等価（問36）</a></li>
+    <li><a href="#s2">正規分布（問37）</a></li>
+    <li><a href="#s3">ポートフォリオ理論（問38・39）</a></li>
+    <li><a href="#s4">CAPM（問40・48）</a></li>
+    <li><a href="#s5">パフォーマンス評価（問41）</a></li>
+    <li><a href="#s6">債券とデュレーション（問42・43）</a></li>
+    <li><a href="#s7">デリバティブ（問44・45）</a></li>
+    <li><a href="#s8">企業信用リスクとMM理論（問46）</a></li>
+    <li><a href="#s9">インデックスとバリュエーション（問47・49・50）</a></li>
+    <li><a href="#s10">引っかけパターンの類型</a></li>
+    <li><a href="#s11">現行105との対応</a></li>
+  </ol>
+</nav>
+
+<h2 id="s0"><span class="n">0</span>まず構造をつかむ</h2>
+
+<p>旧104は<strong>問36から問50までの15問</strong>。3年分で45問。<strong>テーマの並びが3年間ほぼ完全に固定</strong>されており、5科目のなかで最も予測しやすい。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th class="c">問</th><th>テーマ</th><th>2021</th><th>2022</th><th>2023</th></tr></thead>
+<tbody>
+<tr><td class="c">36</td><td><strong>期待効用と確実性等価</strong></td><td>計算</td><td>知識</td><td>知識</td></tr>
+<tr><td class="c">37</td><td><strong>正規分布</strong></td><td>図</td><td>知識</td><td>図</td></tr>
+<tr><td class="c">38</td><td>現代ポートフォリオ理論（1）</td><td>知識</td><td>計算</td><td>計算</td></tr>
+<tr><td class="c">39</td><td>現代ポートフォリオ理論（2）</td><td>知識</td><td>知識</td><td>知識</td></tr>
+<tr><td class="c">40</td><td><strong>CAPM</strong></td><td>計算</td><td>計算</td><td>計算</td></tr>
+<tr><td class="c">41</td><td><strong>パフォーマンス評価</strong></td><td>計算</td><td>計算</td><td>知識</td></tr>
+<tr><td class="c">42</td><td>債券／スポットレート</td><td>知識</td><td>知識</td><td>知識</td></tr>
+<tr><td class="c">43</td><td><strong>デュレーション</strong></td><td>知識</td><td>知識</td><td>知識</td></tr>
+<tr><td class="c">44</td><td>先物取引と先渡し契約</td><td>知識</td><td>知識</td><td>知識</td></tr>
+<tr><td class="c">45</td><td>オプション取引</td><td>計算</td><td>知識</td><td>知識</td></tr>
+<tr><td class="c">46</td><td>企業信用リスク／MM理論</td><td>信用</td><td>信用</td><td><strong>MM理論</strong></td></tr>
+<tr><td class="c">47</td><td><strong>投資インデックス</strong></td><td>知識</td><td>知識</td><td>知識</td></tr>
+<tr><td class="c">48</td><td>個別銘柄リスクと市場リスク</td><td>知識</td><td>知識</td><td>知識</td></tr>
+<tr><td class="c">49</td><td><strong>バリュエーション計算</strong></td><td>DDM</td><td>CAPM</td><td>キャップレート</td></tr>
+<tr><td class="c">50</td><td>NAV倍率／ESG</td><td>NAV</td><td>ESG</td><td>ESG</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="key">
+<strong>15問中6問前後が計算</strong>（問36・38・40・41・45・49）で、現行105と同じく<strong>計算比率が高い科目</strong>。<br>
+一方で<strong>問39（ポートフォリオ理論）、問43（デュレーション）、問44（先物・先渡し）、問45（オプション）、問48（リスクの2分割）は3年とも枝の内容がほぼ同一</strong>。ここは丸暗記で毎年取れる。
+</div>
+
+<h2 id="s1"><span class="n">1</span>期待効用と確実性等価（問36）</h2>
+
+<p>3年とも同じ設定。<strong>効用関数が与えられ、期待効用・確実性等価・リスクプレミアムを求める</strong>。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th>年度</th><th>効用関数</th><th>投資機会</th></tr></thead>
+<tbody>
+<tr><td>2021</td><td>—（図で提示）</td><td>0.5で1,600円、0.5で2,500円</td></tr>
+<tr><td>2022</td><td><strong>U = √W</strong></td><td>0.5で0円、0.5で10,000円</td></tr>
+<tr><td>2023</td><td><strong>U = √(W/3)</strong></td><td>0.5で0円、0.5で30,000円</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>1-1. 解き方（2023年度の例）</h3>
+
+<div class="calc">
+① <strong>期待効用</strong>　0.5 × √(0/3) ＋ 0.5 × √(30,000/3) ＝ 0.5 × 100 ＝ <strong>50</strong><br>
+② <strong>確実性等価</strong>　50 = √(W/3) より W ＝ 50<sup>2</sup> × 3 ＝ <strong>7,500円</strong><br>
+③ <strong>期待値</strong>　0.5 × 0 ＋ 0.5 × 30,000 ＝ <strong>15,000円</strong><br>
+④ <strong>リスクプレミアム</strong>　15,000 − 7,500 ＝ <strong>7,500円</strong>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>効用関数が上に凸 → リスク回避的な投資家</strong>。「下に凸」とする枝が2022年度に出ている。<br>
+また<strong>確実性等価を求める際に2乗を忘れる</strong>誤答が選択肢に置かれる。2022年度は2,500円が正解のところ2,000円、2023年度は7,500円のところ7,000円という枝が用意されていた。
+</div>
+
+<h3>1-2. 比較問題の解き方</h3>
+
+<p>「確実に○円を得られる投資機会Bと比べる」という枝は、<strong>Bの効用を計算して期待効用と比べる</strong>だけ。</p>
+
+<ul>
+<li>2022年度　U = √5,000 ≈ 70.71 ＞ 50 → <strong>Bの方が効用が大きい</strong></li>
+<li>2023年度　U = √(15,000/3) = √5,000 ≈ 70.71 ＞ 50 → <strong>Bの方が効用が大きい</strong></li>
+</ul>
+
+<h2 id="s2"><span class="n">2</span>正規分布（問37）</h2>
+
+<h3>2-1. 基本性質</h3>
+
+<div class="key">
+正規分布は<strong>平均と標準偏差の2つのパラメータ</strong>で定まる<strong>左右対称の釣鐘型</strong>の確率分布。<br>
+<strong>標準正規分布は期待値0、標準偏差1</strong>（逆にした枝が2022年度に出題）。
+</div>
+
+<h3>2-2. 3年で問われる論点</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>論点</th><th>正しい理解</th></tr></thead>
+<tbody>
+<tr><th>裾の広さ</th><td><strong>標準偏差</strong>が大きいほど裾が広い。<span class="ng">期待値ではない</span></td></tr>
+<tr><th>期待値を上回る確率</th><td>左右対称なので<strong>常に50%</strong>。標準偏差の大小に関係なく<strong>どの資産でも同じ</strong></td></tr>
+<tr><th>リスク回避的な投資家の選択</th><td><strong>期待値が同じ</strong>なら標準偏差が低い方／<strong>リスクが同じ</strong>なら期待値が高い方</td></tr>
+<tr><th>特定区間に入る確率</th><td>±1σ ≒ 68%、±2σ ≒ 95%。<strong>標準偏差が同じなら同じレンジ幅の確率は同じ</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>2021年度は期待値5%・標準偏差5%と10%の2資産を比べ、「−5%から15%に入る確率は異なる」（Aは±2σで95%、Bは±1σで68%）が正しいとされた。2023年度は期待値が違い標準偏差が同じ2資産で、「同じレンジ幅の確率は同じ」が正しいとされた。<strong>期待値のズレは確率に影響せず、標準偏差だけが効く</strong>。</p>
+
+<h2 id="s3"><span class="n">3</span>ポートフォリオ理論（問38・39）</h2>
+
+<h3>3-1. 期待リターンとリスクの違い</h3>
+
+<div class="formula">
+ポートフォリオの期待リターン ＝ 各資産の期待リターンの<strong>構成比による加重平均</strong>
+</div>
+
+<div class="key">
+<strong>期待リターンは加重平均だけで求まるが、リスク（標準偏差）の算出には相関係数または共分散の情報が必要。</strong><br>
+2022年度・2023年度で「与えられた情報から相関係数が分かる」とする枝が誤りとして出ている。
+</div>
+
+<h3>3-2. 相関係数と分散効果 — 3年連続の頻出</h3>
+
+<ul>
+<li>相関係数は <strong>−1 から 1</strong> の間の値を取る（「必ず正の値」は誤り）</li>
+<li><strong>相関係数が小さくなるほど、ポートフォリオのリスクは小さくなる</strong></li>
+<li><strong>正の完全相関（ρ = 1）では分散効果は得られない</strong></li>
+</ul>
+
+<p>2021年度は「相関係数が大きくなるほどリスクが小さくなる」、2023年度は「相関係数が小さくなるほどリスクが大きくなる」と、<strong>向きを逆にした枝が繰り返し</strong>出ている。</p>
+
+<h3>3-3. 用語の定義 — 3年とも同じ枝</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>用語</th><th>定義</th></tr></thead>
+<tbody>
+<tr><th>効率的フロンティア</th><td>同じリスクで最も高い期待リターンを持つ（＝同じ期待リターンで最もリスクが低い）ポートフォリオの集合</td></tr>
+<tr><th>最小分散ポートフォリオ</th><td>効率的フロンティア上で<strong>標準偏差が最も低い</strong>ポートフォリオ</td></tr>
+<tr><th>無差別曲線</th><td><strong>同じ効用水準</strong>が得られるリスクとリターンの組合せを結んだ曲線</td></tr>
+<tr><th>最適ポートフォリオ</th><td>無差別曲線と効率的フロンティアの接点</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>リスク回避度が異なる2人の投資家は、同一の効率的フロンティアを想定していても最適ポートフォリオは一致しない。</strong>2021・2023年度で連続して出題。</p>
+
+<h3>3-4. トービンの分離定理 — 2つの向きで問われる</h3>
+
+<div class="key">
+安全資産が存在する場合、<br>
+<strong>接点ポートフォリオ（リスク資産同士の組合せ）は、投資家のリスク回避度と「無関係」に決まる。</strong><br>
+<strong>安全資産と接点ポートフォリオの組合せ比率は、投資家のリスク回避度に「よって」決まる。</strong>
+</div>
+
+<div class="note">
+<b>頻出</b>　この2つを取り違えた枝が3年すべてで出ている。<strong>「何を組み合わせるか」は共通、「どれだけ混ぜるか」は人による</strong>と覚える。<br>
+なお<strong>安全資産はリスク・リターン平面（縦軸リターン・横軸リスク）上では縦軸上に位置する</strong>（リスクがゼロなので横軸上ではない）。
+</div>
+
+<h2 id="s4"><span class="n">4</span>CAPM（問40・48）</h2>
+
+<h3>4-1. 基本式</h3>
+
+<div class="formula">
+E(r<sub>i</sub>) ＝ r<sub>f</sub> ＋ β<sub>i</sub> × ( E(r<sub>M</sub>) − r<sub>f</sub> )
+</div>
+
+<p>「リスクフリーレート ＋ エクイティリスクプレミアム <strong>×</strong> ベータ」。2023年度では<strong>「÷ ベータ」</strong>とした枝が誤りとして出ている。</p>
+
+<h3>4-2. βの定義と計算</h3>
+
+<div class="formula">
+β ＝ <span class="frac"><span class="num">Cov(当銘柄, 市場)</span><span class="den">Var(市場)</span></span> ＝ <span class="frac"><span class="num">σ<sub>i</sub> × σ<sub>M</sub> × ρ<sub>iM</sub></span><span class="den">σ<sub>M</sub><sup>2</sup></span></span>
+</div>
+
+<p>2022年度の計算問題では、σ<sub>i</sub>=7.2%、σ<sub>M</sub>=3%、ρ=0.5 から β ＝ (7.2% × 3% × 0.5) ÷ (3%)<sup>2</sup> ＝ <strong>1.2</strong>、期待リターン ＝ 1% + 1.2 × (3%−1%) ＝ <strong>3.4%</strong>。</p>
+
+<div class="note">
+<b>最頻出</b>　<strong>分子と分母を入れ替えた枝が旧104・現行105を通じて繰り返し出ている。</strong>共分散が分子、市場の分散が分母。<br>
+標準偏差から求める場合は<strong>相関係数を掛ける</strong>のを忘れない。
+</div>
+
+<h3>4-3. βに関する論点</h3>
+
+<ul>
+<li><strong>β = 0 のときに限り</strong>、期待リターンは安全資産のリターンと等しくなる</li>
+<li><strong>β = 0 でもアン・システマティックリスクはゼロとは限らない</strong>ため、総リスクはゼロにならない</li>
+<li>市場ポートフォリオの期待リターンが正なら、<strong>期待リターンの順番はβの順番に等しい</strong></li>
+</ul>
+
+<h3>4-4. リスクの2分割（問48）— 3年連続で同じ論点</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th></th><th>分散投資で</th><th>要因</th></tr></thead>
+<tbody>
+<tr><th><strong>市場リスク</strong><br>（システマティックリスク）</th><td><strong>低減できない</strong></td><td><strong>景気変動や金利など経済全体</strong>に関連した要因</td></tr>
+<tr><th><strong>個別銘柄特有のリスク</strong><br>（アン・システマティックリスク）</th><td><strong>低減できる</strong></td><td>その企業もしくは<strong>その企業が属する業界特有</strong>の要因</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>2021年度は「市場リスクは分散投資で低減でき、個別銘柄リスクは低減できない」と<strong>丸ごと入れ替えた枝</strong>、2023年度は市場リスクの要因に「個別企業や業界特有の要因」を混ぜた枝が出ている。</p>
+
+<p>また、個々の銘柄が市場リスクに影響を受ける度合いを表す指標は<strong>ベータ</strong>であり、<strong>標準偏差ではない</strong>（2021年度の誤り枝）。</p>
+
+<h2 id="s5"><span class="n">5</span>パフォーマンス評価（問41）</h2>
+
+<h3>5-1. 3つの測度</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>指標</th><th>計算式</th><th>分母のリスク</th></tr></thead>
+<tbody>
+<tr><th><strong>シャープ・レシオ</strong></th><td>(ファンドのリターン − 安全資産のリターン) ÷ <strong>標準偏差</strong></td><td><strong>トータル・リスク</strong></td></tr>
+<tr><th><strong>トレーナーの測度</strong></th><td>(ファンドのリターン − 安全資産のリターン) ÷ <strong>ベータ値</strong></td><td><strong>システマティックリスク</strong></td></tr>
+<tr><th><strong>ジェンセンのアルファ</strong></th><td>実際のリターン − CAPMによる理論リターン</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="key">
+どちらも<strong>「安全資産のリターンに対する超過リターン」を、リスク1単位あたりで見る</strong>指標。分母が標準偏差かベータかだけが違う。<br>
+2021年度で<strong>トレーナーの測度の説明にシャープ・レシオの定義を当てた枝</strong>、2023年度で<strong>シャープ・レシオの基準を「市場ポートフォリオの期待リターンに対する超過リターン」とした枝</strong>が誤りとして出ている。基準は<strong>安全資産</strong>。
+</div>
+
+<h3>5-2. 計算例（2022年度）</h3>
+
+<div class="calc">
+ファンドAの収益率7%、標準偏差10%、ベータ値1.2、安全資産1%<br>
+トレーナーの測度 ＝ (7% − 1%) ÷ 1.2 ＝ <strong>5.0%</strong>
+</div>
+
+<p>2021年度は2ファンドの比較で、シャープ・レシオは A:(4%−2%)/5% = 0.4 のように計算し、<strong>シャープ・レシオとトレーナーの測度で順位が逆転しうる</strong>ことが問われた。</p>
+
+<h3>5-3. 2023年度の踏み込んだ論点</h3>
+
+<ul>
+<li><strong>シャープ・レシオが等しくてもトレーナーの測度は異なりうる</strong>（標準偏差とβの関係は一定ではない）</li>
+<li>リターンが<strong>証券市場線（SML）上</strong>にあれば<strong>ジェンセンのアルファはゼロ</strong></li>
+<li>トレーナーの測度は、<strong>横軸β・縦軸リターンの平面で、安全資産の利子率を切片とする直線の傾き</strong>。測度が等しい2ファンドは同一直線上に位置する</li>
+</ul>
+
+<h2 id="s6"><span class="n">6</span>債券とデュレーション（問42・43）</h2>
+
+<h3>6-1. 現在価値と将来価値</h3>
+
+<ul>
+<li>現在価値100円を利子率3%で運用した1年後の103円が<strong>将来価値</strong></li>
+<li>2年後に100円を受け取る割引債の現在価格（割引率2%）＝ 100 ÷ 1.02 ÷ 1.02 ≒ <strong>96.12円</strong></li>
+<li><strong>最終利回り</strong>　すべてのCFを共通の割引率で現在価値に直し、それが市場価格と等しくなる利回り（＝内部収益率）</li>
+</ul>
+
+<h3>6-2. スポットレート</h3>
+
+<div class="key">
+<strong>満期n年の割引債の割引率のことを、n年のスポットレートと呼ぶ。</strong>
+</div>
+
+<p>2022・2023年度は「n年物スポットレートを表すもの」を選ぶ問題。選択肢には「n年物固定利付債の投資収益率」「n年物固定利付債の最終利回り」「n年物割引債の残存年数」などの誤答が並ぶ。<strong>「割引債の割引率」が正解</strong>。</p>
+
+<p>また、<strong>満期10年の割引債の割引率が3%なら10年のスポットレートも3%</strong>（「3%より大きい」は誤り）。</p>
+
+<h3>6-3. デュレーション — 3年とも同じ4論点</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>論点</th><th>正しい理解</th></tr></thead>
+<tbody>
+<tr><th>定義</th><td>CFを受け取るまでの期間を現在価値で<strong>加重平均</strong>したもの。<strong>債券の実質平均残存期間</strong>を意味する。<span class="ng">単純平均ではない</span></td></tr>
+<tr><th>金利感応度</th><td>利回り変化が同一なら、<strong>デュレーションが長い債券の方が価格変動は大きい</strong></td></tr>
+<tr><th>割引債</th><td>CFが満期の1回だけなので、<strong>デュレーション = 残存期間</strong></td></tr>
+<tr><th>クーポン</th><td>同一満期なら、<strong>クーポンが大きい債券の方がデュレーションは短い</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>2022年度は4枝すべてが正しいという構成だった。<strong>この4つを覚えれば毎年確実に取れる</strong>。</p>
+
+<h2 id="s7"><span class="n">7</span>デリバティブ（問44・45）</h2>
+
+<h3>7-1. 先物と先渡しの区別 — 3年連続</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th></th><th>先物取引</th><th>先渡し契約</th></tr></thead>
+<tbody>
+<tr><th>標準化</th><td><strong>あり</strong>（取引所取引）</td><td>なし（相対で個別設計）</td></tr>
+<tr><th>値洗い・追証</th><td><strong>あり</strong></td><td>なし</td></tr>
+<tr><th>経済的効果</th><td colspan="2"><strong>将来時点の取引を現時点で約定する</strong>点で同じ</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　3年すべてで<strong>「先渡し契約とは、満期日に特定の価格で売るもしくは買う権利の売買契約」</strong>という枝が出ている。これは<strong>ヨーロピアン・オプション</strong>の説明。<strong>先渡しは「義務」、オプションは「権利」</strong>。<br>
+また<strong>値洗いと追証はオプション取引ではなく先物取引</strong>のもの（2022・2023年度）。<br>
+2023年度は「<strong>現時点</strong>の取引を<strong>将来時点</strong>で約定する」と前後を入れ替えた枝も出ている。
+</div>
+
+<p>先物取引は標準化により多様な参加者を集め<strong>流動性の向上</strong>につながる。先物の理論価格は<strong>現物価格をもとに</strong>裁定取引を通じて決まり、次の関係がある。</p>
+
+<div class="formula">
+先物の理論価格 ＝ 現物価格 ＋ 現物価格 × (金利 − 現物の配当やクーポン)
+</div>
+
+<h3>7-2. オプションの戦略 — 名称と組合せ</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>戦略</th><th>ポジション</th><th>ねらい</th></tr></thead>
+<tbody>
+<tr><th><strong>プロテクティブ・プット</strong></th><td>原資産の保有 ＋ <strong>プットの買い</strong></td><td>下落時の損失を限定</td></tr>
+<tr><th><strong>カバード・コール</strong></th><td>原資産の保有 ＋ <strong>コールの売り</strong></td><td>プレミアム収入。上昇益は放棄</td></tr>
+<tr><th><strong>ロング・ストラドル</strong></th><td>同一行使価格の<strong>コールとプットをともに買い</strong></td><td>方向を問わず大きく動けば利益</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>買いと売りを入れ替えた枝</strong>が2022・2023年度で連続して出ている。<strong>プロテクティブ・プットは「買い」、カバード・コールは「売り」</strong>。</p>
+
+<p>オプションの価値は<strong>本源的価値</strong>（今すぐ行使した場合の価値）と<strong>時間価値</strong>（満期までの変動可能性の価値）に分けられる。</p>
+
+<h3>7-3. プロテクティブ・プットの損益計算（2021年度）</h3>
+
+<div class="calc">
+株価1,000円の株式を保有＋行使価格1,000円・オプション価格100円のプットを購入。3ヶ月後に株価800円。<br><br>
+株式の損益　800 − 1,000 ＝ <strong>−200円</strong><br>
+オプションの損益　権利行使して1,000円で売却 → (1,000 − 800) − 100 ＝ <strong>+100円</strong><br>
+<strong>正味損益　−200 ＋ 100 ＝ −100円</strong>
+</div>
+
+<h2 id="s8"><span class="n">8</span>企業信用リスクとMM理論（問46）</h2>
+
+<h3>8-1. 企業信用リスク（2021・2022年度）</h3>
+
+<ul>
+<li><strong>格付け</strong>　利息の支払いや<strong>元本の償還</strong>を約定どおり行えるかの確実性を符号でランキングしたもの</li>
+<li><strong>回収リスクの扱いには2つの考え方がある</strong>。①デフォルト懸念が大きい場合に加味する、②デフォルト・リスクと回収リスクの双方を総合的に判断する。<strong>「格付け会社に共通する基本的な考え」と断定する枝は誤り</strong>（2021・2022年度で両方向から出題）</li>
+<li><strong>期待損失</strong>　回収不能額（貸付金 × 未回収率）× 発生確率</li>
+<li><strong>借手の立場でも回収リスクへの目配りは重要</strong>。発行利回りを決める2要因はデフォルト確率と損失の程度</li>
+<li><strong>負債比率が高い＝デフォルト・リスクが高い、とは限らない</strong>。<strong>資本構成と資産内容の双方</strong>を総合的に見る必要がある</li>
+<li>SPCへの出資は、プロジェクトファイナンスを使っていても<strong>出資者の企業信用リスクに影響しうる</strong>（出資持分の価値が毀損するため）</li>
+</ul>
+
+<h3>8-2. MM理論とトレードオフ理論（2023年度）</h3>
+
+<ol>
+<li><strong>法人税なし</strong>　企業価値は資本構成から独立</li>
+<li><strong>法人税あり</strong>　負債に節税効果</li>
+<li><strong>＋倒産コスト</strong>　節税効果の増加を倒産コスト期待値の増加が上回る点で企業価値は減少に転じる</li>
+</ol>
+
+<div class="key">
+<strong>最適資本構成 ＝ 倒産コストの期待値の限界的増加が、節税効果の限界的増加と拮抗する点。</strong><br>
+節税効果と倒産コストの関係は<strong>トレードオフ</strong>であって<strong>シナジーではない</strong>（2023年度の誤り枝）。
+</div>
+
+<div class="note">
+<b>重要</b>　<strong>J-REITの資本構成はトレードオフ理論では説明できない。</strong>導管性要件を満たすことで法人税の大部分を損金にできるため、<strong>負債の節税効果がほとんど存在しない</strong>から。旧104固有の踏み込んだ論点。
+</div>
+
+<h2 id="s9"><span class="n">9</span>インデックスとバリュエーション（問47・49・50）</h2>
+
+<h3>9-1. 株価インデックス</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>インデックス</th><th>算出方式</th></tr></thead>
+<tbody>
+<tr><th>TOPIX</th><td><strong>時価総額加重型</strong></td></tr>
+<tr><th>日経平均株価（日経225）</th><td><strong>株価平均型</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<ul>
+<li>算出方式が違うため、<strong>日経平均が上昇（下落）してもTOPIXが下落（上昇）することがある</strong></li>
+<li>日経225は上場廃止が出た場合、<strong>補充銘柄が決まるまで225銘柄未満で構成されることもある</strong></li>
+<li><strong>東証REIT指数には配当込み指数と配当なし指数の両方が存在する</strong>。「配当込みだけ」「配当込みがない」はいずれも誤り</li>
+</ul>
+
+<h3>9-2. 不動産投資インデックス</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>指数</th><th>レバレッジ効果</th><th>対象</th></tr></thead>
+<tbody>
+<tr><th><strong>AJPI</strong><br>(ARES Japan Property Index)</th><td><strong>反映しない</strong>（アンレバード）</td><td><strong>実物不動産</strong></td></tr>
+<tr><th><strong>AJFI</strong><br>(ARES Japan Fund Index)</th><td><strong>反映する</strong></td><td>不動産ファンド</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>AJPIはJ-REITの保有物件などを対象とし、<strong>計算期間中に売買された不動産は原則として除外される</strong>。「実際に売買された不動産を基礎として算出」は誤り。</p>
+
+<h3>9-3. バリュエーションの計算式</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>年度</th><th>モデル</th><th>計算</th></tr></thead>
+<tbody>
+<tr><td>2021</td><td><strong>定率成長配当割引モデル</strong><br>P ＝ D ÷ (r − g)</td><td class="num">g ＝ r − D÷P ＝ 4.0% − 10.0÷200.0 ＝ <strong>−1.0%</strong></td></tr>
+<tr><td>2022</td><td><strong>CAPM</strong></td><td class="num">6.0% ＝ 0.5% ＋ 5.0% × β → β ＝ <strong>1.1</strong></td></tr>
+<tr><td>2023</td><td><strong>インプライド・キャップレート</strong><br>年間NOI ÷ (ネットデット＋時価総額)</td><td class="num">10 ÷ (100＋150) ＝ <strong>4.0%</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>注意</b>　2023年度のインプライド・キャップレートの問題では、<strong>前提にリスクフリーレートとエクイティリスクプレミアムが与えられているが計算には使わない</strong>。<strong>使わない数値をわざと混ぜる</strong>形式なので、公式を正確に覚えていないと引っかかる。
+</div>
+
+<p>定率成長配当割引モデルの3つの前提は、<strong>①配当は永久に支払われる、②1株当たり配当の成長率gは永久に一定、③期待リターンr ＞ 成長率g</strong>。</p>
+
+<h3>9-4. NAV倍率（2021年度問50）</h3>
+
+<div class="formula">
+NAV倍率 ＝ <span class="frac"><span class="num">投資口価格</span><span class="den">1口当たり純資産（保有不動産を時価換算）</span></span>
+</div>
+
+<ul>
+<li>時価は<strong>決算期末時点の鑑定評価額</strong>を使う（<span class="ng">帳簿価格ではない</span>）</li>
+<li>J-REIT市場では<strong>0.6倍まで下落した時期も1.6倍を超えた時期もある</strong>。「常に0.8〜1.2倍」は誤り</li>
+<li>難点として<strong>マネジメントのクオリティが反映されない</strong>点が挙げられる</li>
+</ul>
+
+<h3>9-5. ESG（2022・2023年度問50）</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>項目</th><th>正しい内容</th></tr></thead>
+<tbody>
+<tr><th>GRESB</th><td>PRIを主導した欧州の年金基金が中心となり<strong>2009年</strong>に創設（2019年は誤り）。参加者は<strong>グローバル・日本ともに年々増加</strong></td></tr>
+<tr><th>グリーンウォッシング</th><td>「気候変動対策に熱心なフリをする」問題（<strong>ブルーウォッシング</strong>ではない）</td></tr>
+<tr><th>J-REIT初のグリーンボンド</th><td><strong>2018年5月</strong>、日本リテールファンド（現・日本都市ファンド）が発行</td></tr>
+<tr><th>ESG債の発行比率</th><td>2022年のESG債（グリーン・ソーシャル・サステナビリティの総称）は投資法人債発行額全体の<strong>80%近く</strong></td></tr>
+<tr><th>J-REITのガバナンス</th><td>核心は<strong>投資主利益の最大化</strong>。欠如時に表面化しやすいのが<strong>スポンサーとの利益相反</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="s10"><span class="n">10</span>引っかけパターンの類型</h2>
+
+<h3>型1：分子と分母の反転</h3>
+<ul>
+<li>β（共分散 ÷ 分散を逆に）← <strong>最頻出</strong></li>
+<li>シャープ・レシオとトレーナーの測度（標準偏差とβ）</li>
+<li>CAPMの式（× ベータを ÷ ベータに）</li>
+</ul>
+
+<h3>型2：向きの逆転</h3>
+<ul>
+<li>相関係数と分散効果（小さいほどリスクが減る）← <strong>3年連続</strong></li>
+<li>デュレーションと価格変動（長いほど大きい）</li>
+<li>正規分布の裾（標準偏差が大きいほど広い）</li>
+<li>標準正規分布のパラメータ（期待値0・標準偏差1）</li>
+<li>プロテクティブ・プット（買い）とカバード・コール（売り）</li>
+<li>市場リスクと個別銘柄リスクの分散可能性</li>
+</ul>
+
+<h3>型3：定義の入れ替え</h3>
+<ul>
+<li>先渡し契約とヨーロピアン・オプション ← <strong>3年連続</strong></li>
+<li>先物取引とオプション取引（値洗い・追証）</li>
+<li>シャープ・レシオとトレーナーの測度</li>
+<li>接点ポートフォリオと組合せ比率（トービンの分離定理）</li>
+<li>日経225とTOPIX（株価平均型と時価総額加重型）</li>
+<li>AJPIとAJFI（レバレッジ効果の反映）</li>
+<li>グリーンウォッシングとブルーウォッシング</li>
+</ul>
+
+<h3>型4：断定による誇張</h3>
+<ul>
+<li>相関係数は「必ず」正の値</li>
+<li>リスク回避度が違っても最適ポートフォリオは「必ず」同じ</li>
+<li>回収リスクの扱いは「格付け会社に共通する」考え方</li>
+<li>負債比率が高いほど「したがって」企業信用リスクも高い</li>
+<li>NAV倍率は「常に」0.8〜1.2倍</li>
+<li>正の完全相関でも分散効果が「得られる」</li>
+</ul>
+
+<h3>型5：計算上の落とし穴</h3>
+<ul>
+<li>確実性等価で2乗を忘れる</li>
+<li>βを標準偏差から求める際に相関係数を掛け忘れる</li>
+<li>使わない数値が前提に混ざっている（インプライド・キャップレート）</li>
+<li>期待リターンの加重平均を単純平均と取り違える</li>
+</ul>
+
+<h2 id="s11"><span class="n">11</span>現行105との対応</h2>
+
+<p>2024年度の改定で、旧104の内容は<strong>現行105「不動産ファイナンスの基礎」へ移行</strong>した。ただし現行105は20問と5問増えており、<strong>証券化のストラクチャー・デット/エクイティファイナンスの実務が加わっている</strong>。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th>旧104の問</th><th>テーマ</th><th>現行105での位置</th></tr></thead>
+<tbody>
+<tr><td class="c">36</td><td>期待効用と確実性等価</td><td><strong>問39</strong>（形式まで同一）</td></tr>
+<tr><td class="c">37</td><td>正規分布</td><td><strong>問42・44</strong></td></tr>
+<tr><td class="c">38・39</td><td>ポートフォリオ理論</td><td><strong>問43・44</strong></td></tr>
+<tr><td class="c">40・48</td><td>CAPM・リスクの2分割</td><td><strong>問34・45</strong></td></tr>
+<tr><td class="c">41</td><td><strong>パフォーマンス評価</strong></td><td><strong>現行では独立した設問が消えた</strong></td></tr>
+<tr><td class="c">42・43</td><td>スポットレート・デュレーション</td><td><strong>問46・47</strong></td></tr>
+<tr><td class="c">44・45</td><td><strong>先物・先渡し・オプション</strong></td><td><strong>現行では独立した設問が消えた</strong></td></tr>
+<tr><td class="c">46</td><td>企業信用リスク・MM理論</td><td><strong>問37・38</strong>（格付・トレードオフ理論）</td></tr>
+<tr><td class="c">47</td><td>投資インデックス</td><td><strong>問37・38</strong></td></tr>
+<tr><td class="c">49</td><td>DDM・CAPM計算</td><td><strong>問35・40・41・42</strong></td></tr>
+<tr><td class="c">50</td><td>NAV倍率・ESG</td><td><strong>問36</strong>（ESG）</td></tr>
+<tr><td class="c">—</td><td>—</td><td><strong>問28〜33が新設</strong>（不動産ファイナンス総論、証券化市場、償還方法、デット/エクイティファイナンス）</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>学習上の使い分け</h3>
+
+<div class="key">
+現行105の対策として旧104を解く場合、<strong>問36〜43・46〜50の13問が直接の演習対象</strong>になる。3年分で39問あり、現行105の40問と合わせて<strong>79問</strong>の演習量が確保できる。<br>
+とくに<strong>期待効用（問36）とデュレーション（問43）は形式・枝の内容とも現行とほぼ同一</strong>で、そのまま使える。
+</div>
+
+<h3>現行にない論点の扱い</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>論点</th><th>扱い</th></tr></thead>
+<tbody>
+<tr><th><strong>パフォーマンス評価（問41）</strong></th><td>シャープ・レシオ、トレーナーの測度、ジェンセンのアルファ。現行105では独立した設問がない。<strong>優先度は下げてよい</strong>が、CAPMの理解を深める素材にはなる</td></tr>
+<tr><th><strong>先物・先渡し・オプション（問44・45）</strong></th><td>現行105では設問が消えたが、<strong>現行102の問7（金融市場と金利）でオプションの基本が問われる</strong>。プット／コールの区別は引き続き必要</td></tr>
+<tr><th><strong>NAV倍率（問50）</strong></th><td>現行では独立した設問がない</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>逆に旧年度で代替できない論点</h3>
+
+<p>現行105の<strong>問28〜33（不動産ファイナンス総論、証券化市場の概観、ストラクチャードファイナンス、償還方法、デットファイナンス、エクイティファイナンス）</strong>は、旧104にほぼ存在しない。これらは旧カリキュラムでは<strong>101の問23〜25</strong>あたりに散在していた内容が再編・拡充されたもの。<strong>2024・2025年度の12問で対策する必要がある</strong>。</p>
+
+<footer>
+出典：一般社団法人不動産証券化協会「2021〜2023年度 Course1 修了試験・再認定試験 問題・解説」。個人の学習用に整理したもの。本文中の解釈・補足は公式解説を離れた部分を含むため、テキストで確認すること。数値や制度は出題年度時点のものであり、現行カリキュラムのテキストとはページ番号・記載内容が異なる場合がある。
+</footer>
+
+
+</div>
+</body>
+</html>

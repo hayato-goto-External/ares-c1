@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>102 不動産証券化の概要 — 理解ポイント整理</title>
+<style>
+:root{
+  --paper:#E7E8E2; --card:#FCFCFA; --ink:#1B1E24; --ink2:#5C6371; --ink3:#8A9099;
+  --rule:#C7C9C1; --rule2:#DEDFD8; --ai:#2A4A7B; --shu:#B23A2F;
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","MS PMincho",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--gothic);
+  font-size:15px;line-height:1.85;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 72px}
+
+header.mast{border-bottom:1px solid var(--rule);padding:26px 0 16px;margin-bottom:22px}
+.mast h1{font-size:21px;font-weight:600;margin:0;letter-spacing:.01em;line-height:1.5}
+.mast p{margin:6px 0 0;font-size:12.5px;color:var(--ink2)}
+
+h2{font-size:17px;font-weight:600;margin:44px 0 14px;padding-bottom:7px;
+  border-bottom:2px solid var(--ink);letter-spacing:.01em}
+h2 .n{color:var(--ink3);font-variant-numeric:tabular-nums;margin-right:9px;font-weight:400}
+h3{font-size:15px;font-weight:600;margin:28px 0 9px;padding-left:10px;border-left:3px solid var(--ai)}
+h4{font-size:13.5px;font-weight:600;margin:20px 0 6px;color:var(--ink2)}
+p{margin:0 0 13px}
+strong{font-weight:600}
+em{font-style:normal;background:linear-gradient(transparent 62%, rgba(42,74,123,.18) 62%)}
+
+nav.toc{background:var(--card);border:1px solid var(--rule);padding:14px 16px;margin-bottom:30px}
+nav.toc h2{all:unset;display:block;font-size:12px;color:var(--ink3);margin-bottom:8px}
+nav.toc ol{margin:0;padding-left:20px;font-size:13.5px;line-height:1.9}
+nav.toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+nav.toc a:hover{border-bottom-color:var(--ink)}
+
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 16px}
+table{border-collapse:collapse;width:100%;font-size:13px;background:var(--card);min-width:420px}
+th,td{border:1px solid var(--rule2);padding:7px 10px;text-align:left;vertical-align:top;line-height:1.65}
+th{background:#EFEFEA;font-weight:600;white-space:nowrap}
+td.c,th.c{text-align:center}
+tbody tr:nth-child(even) td{background:#F7F7F4}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.formula{font-family:var(--mincho);font-size:16px;text-align:center;background:var(--card);
+  border:1px solid var(--rule2);padding:14px 12px;margin:14px 0;line-height:2.1}
+.frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 4px}
+.frac .num{display:block;padding:0 6px 2px;border-bottom:1px solid currentColor}
+.frac .den{display:block;padding:2px 6px 0}
+.calc{font-family:var(--mincho);font-size:14.5px;margin:0 0 13px;line-height:2}
+
+ul,ol{margin:0 0 15px;padding-left:22px}
+li{margin-bottom:6px}
+li>ul{margin-top:6px}
+
+.note{border-left:3px solid var(--shu);background:rgba(178,58,47,.05);
+  padding:11px 14px;margin:16px 0;font-size:13.5px;line-height:1.8}
+.note b{color:var(--shu)}
+.key{border:1px solid var(--ai);background:rgba(42,74,123,.05);
+  padding:12px 15px;margin:16px 0;font-size:13.5px;line-height:1.85}
+.ng{color:var(--shu);font-weight:600}
+.ok{color:var(--ai);font-weight:600}
+
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--rule);
+  font-size:11px;color:var(--ink3);line-height:1.8}
+@media (min-width:720px){ body{font-size:15.5px} }
+@media print{
+  body{background:#fff} nav.toc{display:none}
+  h2{page-break-after:avoid} table{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <h1>102 不動産証券化の概要 — 理解ポイント整理</h1>
+  <p>2024・2025年度の102（各15問・111枝）を主軸に、範囲が重なる2021〜2023年度の旧101「不動産証券化の概論」（60問・209枝）も突き合わせて構造化</p>
+</header>
+
+<nav class="toc">
+  <h2>目次</h2>
+  <ol>
+    <li><a href="#s0">まず構造をつかむ</a></li>
+    <li><a href="#s1">最終利回りの計算（問9）</a></li>
+    <li><a href="#s2">証券化の総論と仕組み（問1〜4）</a></li>
+    <li><a href="#s3">不動産に関する法令（問5・6）</a></li>
+    <li><a href="#s4">金融市場・証券市場（問7・8）</a></li>
+    <li><a href="#s5">銀行・信託・プロジェクトファイナンス（問10・11）</a></li>
+    <li><a href="#s6">機関投資家（問12・13）</a></li>
+    <li><a href="#s7">年金と受託者責任（問14・15）</a></li>
+    <li><a href="#s8">引っかけパターンの類型</a></li>
+    <li><a href="#s9">学習の進め方</a></li>
+  </ol>
+</nav>
+
+<h2 id="s0"><span class="n">0</span>まず構造をつかむ</h2>
+
+<p>102は<strong>問1から問15までの15問</strong>。テーマの並びは両年度でほぼ完全に一致している。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th class="c">問</th><th>2024年度</th><th>2025年度</th><th>ブロック</th></tr></thead>
+<tbody>
+<tr><td class="c">1</td><td>不動産証券化総論（1）</td><td>証券化に関連する基礎知識</td><td rowspan="4">総論・仕組み</td></tr>
+<tr><td class="c">2</td><td>不動産証券化の仕組み</td><td>不動産証券化の仕組み</td></tr>
+<tr><td class="c">3</td><td>不動産証券化商品</td><td>不動産証券化商品</td></tr>
+<tr><td class="c">4</td><td>不動産証券化総論（2）</td><td>不動産証券化</td></tr>
+<tr><td class="c">5</td><td>不動産取引に係る法令</td><td>不動産取引と法</td><td rowspan="2">法令</td></tr>
+<tr><td class="c">6</td><td>宅建業・管理に係る法令</td><td>不動産と業規制</td></tr>
+<tr><td class="c">7</td><td>金融市場と金利</td><td>金融市場と金利</td><td rowspan="2">金融・証券</td></tr>
+<tr><td class="c">8</td><td>株式の基礎知識</td><td>証券市場と証券業務</td></tr>
+<tr><td class="c">9</td><td><strong>債券の利回り</strong></td><td><strong>利回りの計算</strong></td><td>計算</td></tr>
+<tr><td class="c">10</td><td>銀行業務</td><td>銀行業務</td><td rowspan="2">銀行・PF</td></tr>
+<tr><td class="c">11</td><td>プロジェクトファイナンス（空欄）</td><td>PF・ノンリコースローン・PFI</td></tr>
+<tr><td class="c">12</td><td>国内機関投資家</td><td>国内機関投資家</td><td rowspan="2">機関投資家</td></tr>
+<tr><td class="c">13</td><td>海外機関投資家</td><td>海外機関投資家</td></tr>
+<tr><td class="c">14</td><td>公的年金の不動産投資</td><td>年金制度に関する基礎知識</td><td rowspan="2">年金</td></tr>
+<tr><td class="c">15</td><td>企業年金の不動産投資</td><td>企業年金の受託者責任</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="key">
+102は<strong>「証券化の外側にある世界」を広く浅く問う科目</strong>。民法・宅建業法から金融市場、銀行、年金制度まで守備範囲が広い。計算は問9の1問だけで、<strong>残り14問は知識問題</strong>。<br>
+その代わり、<strong>細かい数値や最新データを問う枝が多い</strong>のが特徴で、105や103より「覚えるしかない」割合が高い。
+</div>
+
+<h3>旧101との関係</h3>
+
+<p>2021〜2023年度の101「不動産証券化の概論」が現行102に相当する。<strong>旧101は問6〜25の20問</strong>あり、金融市場・銀行業務・証券市場・機関投資家・年金という並びは共通している。</p>
+
+<p>ただし旧101には<strong>組合・信託・倒産隔離・証券化商品の信用補完</strong>といった、現行では104に移った論点も含まれている。旧101を解くときは、<strong>後半（問23〜25あたり）が104寄りの内容</strong>だと意識しておくとよい。</p>
+
+<h2 id="s1"><span class="n">1</span>最終利回りの計算（問9）</h2>
+
+<p>102で唯一の計算問題。<strong>単利の最終利回り（償還利回り）</strong>を1本の式で求めるだけで、2年連続で同じ形式である。</p>
+
+<div class="formula">
+償還利回り(%) ＝ <span class="frac"><span class="num">年間クーポン収入 ＋ (償還価格 − 購入価格) ÷ 残存年数</span><span class="den">購入価格</span></span> × 100
+</div>
+
+<div class="scroll">
+<table>
+<thead><tr><th>年度</th><th>条件</th><th>計算</th><th class="c">答</th></tr></thead>
+<tbody>
+<tr><td>2024</td><td>額面100円・クーポン1.0%・購入95円・5年</td><td class="num">[1 ＋ (100−95)÷5] ÷ 95 × 100 ＝ [1＋1]÷95×100</td><td class="c"><strong>2.11%</strong></td></tr>
+<tr><td>2025</td><td>額面100円・クーポン2.0%・購入95円・5年</td><td class="num">[2 ＋ (100−95)÷5] ÷ 95 × 100 ＝ [2＋1]÷95×100</td><td class="c"><strong>3.16%</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>注意</b>　<strong>分母は「購入価格」であって額面ではない。</strong>また年間クーポンは<em>額面</em>に対して計算する（100円 × 2.0% ＝ 2円）。分母と分子で基準が違う点が唯一の引っかけどころ。
+</div>
+
+<p>旧101でも問15が同じ「債券の利回り」の定位置だった。<strong>2021年度は額面100円・クーポン1.5%・購入95円・5年で1.58%</strong>、2023年度は<strong>クーポン0.5%で1.58%</strong>。数値を変えただけの同型問題が5年続いている。</p>
+
+<h2 id="s2"><span class="n">2</span>証券化の総論と仕組み（問1〜4）</h2>
+
+<h3>2-1. コーポレートファイナンスとアセットファイナンス</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th></th><th>返済原資</th><th>例</th></tr></thead>
+<tbody>
+<tr><th>コーポレートファイナンス</th><td>企業自身の信用力・バランスシート</td><td><strong>不動産を担保に入れた借入も含む</strong></td></tr>
+<tr><th>アセットファイナンス</th><td>特定の資産のキャッシュフロー</td><td>証券化</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>「不動産を担保として提供して調達するのがアセットファイナンス」は誤り。</strong>担保があっても返済原資が企業の信用力なら、それはコーポレートファイナンスである。
+</div>
+
+<h3>2-2. 証券化商品の略称</h3>
+
+<ul>
+<li><strong>CMBS</strong>（Commercial Mortgage Backed Securities）＝ <strong>商業用</strong>不動産向けノンリコースローンが裏付け。賃貸オフィスビルや賃貸マンション</li>
+<li><strong>RMBS</strong>（Residential Mortgage Backed Securities）＝ <strong>住宅ローン</strong>債権が裏付け</li>
+</ul>
+
+<p><strong>CMBSとRMBSを入れ替える枝が両年度で出ている。</strong>CMBSはシングルアセット型とマルチアセット型の2つの発行形態があり、優先劣後構造により高格付から無格付まで多様な商品に変換される。</p>
+
+<h3>2-3. 資産流動化型とファンド型</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th></th><th>特徴</th></tr></thead>
+<tbody>
+<tr><th>資産流動化型</th><td>最初に不動産を特定し、組成時の目論見どおりに維持管理する<strong>静的な仕組み</strong>。「<strong>モノありき</strong>」と表現される</td></tr>
+<tr><th>ファンド型</th><td>不動産の売却・入替え・買増しをAMが判断して<strong>機動的に行う</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>2-4. 私募REIT — 数値が問われる</h3>
+
+<ul>
+<li>非上場の<strong>オープンエンド型</strong>不動産投資法人</li>
+<li><strong>運用期間の定めがない</strong>（「定めがある」は誤り）</li>
+<li>一定条件下で<strong>出資金の払戻し</strong>を認めて流動性を確保</li>
+<li>不動産価格を基準に投資口価格が評価されるため<strong>元本変動リスクは小さい</strong>が、上場していないので<strong>J-REITと比べて流動性は劣後する</strong></li>
+</ul>
+
+<div class="note">
+<b>頻出</b>　「元本変動リスクが少なく、J-REITと比べて流動性も高い」は誤り。<strong>安定性と流動性はトレードオフ</strong>。<br>
+市場規模の数値も問われる。<strong>2024年12月末で運用投資法人58銘柄、運用資産額6.8兆円</strong>。「11銘柄・1.2兆円」といった小さい数値に置き換えた枝が出ている。
+</div>
+
+<h3>2-5. 市場規模と市場型間接金融</h3>
+
+<ul>
+<li>2023年6月時点で、運用資産額ベースで<strong>J-REITは約22兆円、私募ファンド（私募REIT含む）は約33兆円</strong></li>
+<li>「法人企業統計」2023年度で、企業の総資産に占める<strong>有形固定資産は約25%、土地は約10%</strong></li>
+<li><strong>市場型間接金融</strong>の意義は、①様々なリスク・リターンの金融商品が提供されること、②<strong>銀行部門に集中するリスク量の増大を抑制する</strong>こと</li>
+</ul>
+
+<h3>2-6. 倒産隔離・真正売買・信用補完</h3>
+
+<ul>
+<li><strong>倒産隔離</strong>　SPVに証券化以外の行為を禁止し、SPVの社員や株主が<em>投資家に不利な</em>議決権（倒産申立てなど）を行使できないようにする<br>
+<span class="ng">「オリジネーターに不利な議決権」とする枝は誤り</span>。守る相手は投資家</li>
+<li><strong>真正売買</strong>　適正価格での譲渡が条件の一つ。適正価格は<strong>収益還元法</strong>で求めた時価（<span class="ng">×</span> 積算法）</li>
+<li><strong>信用補完措置</strong>　余剰金積立（キャッシュリザーブ）、第三者による保証、コミットメントラインなど</li>
+<li><strong>利益相反</strong>　忠実義務を負う者が自己や第三者の利益を図り、投資家の利益を損なうこと</li>
+</ul>
+
+<h3>2-7. デットとエクイティの区別</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>区分</th><th>該当するもの</th></tr></thead>
+<tbody>
+<tr><th>エクイティ</th><td>TMKの<strong>優先出資証券</strong>、J-REITの<strong>投資口</strong>、GK-TKの<strong>匿名組合出資</strong></td></tr>
+<tr><th>デット</th><td>ノンリコースローン、<strong>投資法人債</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>投資法人債をエクイティに含める枝が誤り</strong>として出ている。「投資法人」と付いていても債券である。</p>
+
+<h3>2-8. その他の頻出項目</h3>
+
+<ul>
+<li><strong>ESG</strong>　E は Environment（環境）。<span class="ng">Economy（経済性）ではない</span></li>
+<li><strong>レバレッジ効果</strong>　借入比率が高いほど、またイールド・ギャップが大きいほどエクイティ利回りは上昇する</li>
+<li><strong>ノンリコースローン</strong>　求償権が担保不動産にしか及ばない。ただし<strong>J-REITの借入れは通常コーポレートローン</strong></li>
+<li><strong>二重課税の回避</strong>　パススルー（信託・組合など元々非課税）とペイスルー（TMK・投資法人など配当を損金算入）</li>
+<li><strong>バリューアップ</strong>　キャッシュフローの改善とリスクプレミアムの圧縮が基本</li>
+<li><strong>開発型証券化</strong>　導入されるのは<strong>コンストラクションマネジメント</strong>（<span class="ng">×</span> ファシリティマネジメント）</li>
+<li><strong>米国REIT</strong>　オフィス比率は<strong>約5%と小さい</strong>。通信基地局・レンタル倉庫・森林などJ-REITにないセクターを含む</li>
+<li><strong>AJPI</strong>　現実のCFや契約実績に基づくが、<strong>不動産マーケット全体をカバーしたものではない</strong></li>
+</ul>
+
+<h2 id="s3"><span class="n">3</span>不動産に関する法令（問5・6）</h2>
+
+<h3>3-1. 民法の基本</h3>
+
+<ul>
+<li><strong>登記に公信力はない</strong>。登記を信じて取引しても真の権利者でなければ原則として権利を取得できない</li>
+<li>所有権移転登記は<strong>第三者対抗要件</strong>。<span class="ng">売主に対して所有権を対抗するのに登記は不要</span>（売主は第三者ではない）</li>
+<li><strong>未成年者も権利能力を有する</strong>ので、法定代理人の同意または代理があれば宅地や建物の所有者になれる</li>
+<li>民法にも<strong>相隣関係</strong>の規定があり、建物の築造に関する定めも存在する</li>
+<li><strong>袋地通行権</strong>は認められるが、判例は<em>建築基準法上の接道義務を満たす土地利用を当然に請求できるとまでは認めていない</em></li>
+</ul>
+
+<h3>3-2. 宅地建物取引業法</h3>
+
+<ul>
+<li>売買を<strong>業として行う場合は、買主になる場合でも免許が必要</strong></li>
+<li><strong>専任媒介・専属専任媒介</strong>は指定流通機構への登録が<strong>義務</strong>。<strong>一般媒介は義務ではない</strong></li>
+<li>誇大広告の禁止（32条）は、国土交通省の見解により<strong>おとり広告にも適用される</strong></li>
+<li>重要事項説明において<strong>アスベスト調査や建物状況調査は実施が義務化されているわけではない</strong>。<em>実施している場合にその結果を説明する</em></li>
+<li>「人の死の告知に関するガイドライン」（2021年10月）の対象は<strong>居住用不動産</strong>（<span class="ng">×</span> 商業用不動産）</li>
+</ul>
+
+<h3>3-3. 業規制の整理</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>制度</th><th>ポイント</th></tr></thead>
+<tbody>
+<tr><th>不動産投資顧問業<br>登録規程</th><td><strong>任意</strong>の登録制度。総合／一般とも登録は強制されない。<strong>総合</strong>不動産投資顧問業者は<strong>投資一任業務と投資助言業務の双方</strong>を行える</td></tr>
+<tr><th>賃貸住宅管理業法</th><td>登録義務は<strong>200戸以上</strong>が基準。<strong>200戸未満でも要件を満たせば任意で登録できる</strong></td></tr>
+<tr><th>都市計画法</th><td><strong>市街化調整区域は原則として常に開発許可が必要</strong>。「1,000㎡以上に限り」は誤り</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="s4"><span class="n">4</span>金融市場・証券市場（問7・8）</h2>
+
+<h3>4-1. 金融の3分類 — 最頻出</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>区分</th><th>内容</th></tr></thead>
+<tbody>
+<tr><th><strong>間接金融</strong></th><td>銀行等の金融機関を介した金融</td></tr>
+<tr><th><strong>直接金融</strong></th><td>証券市場で株式・社債・CP等を発行して資金調達</td></tr>
+<tr><th><strong>市場型間接金融</strong></th><td>投資信託や証券化等の<strong>集団投資スキーム</strong>を通じた資金調達</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>直接金融と間接金融を入れ替える枝</strong>、<strong>株式・社債・CPによる調達を「市場型間接金融」とする枝</strong>が両年度で出ている。集団投資スキームを経由するかどうかが分かれ目。
+</div>
+
+<h3>4-2. 金融市場の区分</h3>
+
+<ul>
+<li>期間による区分　<strong>短期金融市場</strong>（1年以内）と<strong>長期金融市場</strong>（1年超）</li>
+<li>短期金融市場はさらに<strong>インターバンク市場</strong>（金融機関のみ）と<strong>オープン市場</strong>（一般企業も参加可）に分かれる</li>
+<li>取引所を通さず市場参加者の間で相対で取引されるのは<strong>店頭市場</strong></li>
+</ul>
+
+<div class="note">
+<b>頻出</b>　相対取引の場を「<strong>コール市場</strong>」「<strong>オープン市場</strong>」と言い換えた枝が両年度で出ている。正解は<strong>店頭市場</strong>。コール市場はインターバンク市場の一種、オープン市場は短期金融市場の一種であり、いずれも相対取引の場を指す語ではない。
+</div>
+
+<h3>4-3. 金利とデリバティブ</h3>
+
+<ul>
+<li><strong>イールドカーブ</strong>　通常は順イールド。金利の先安観が強まるとフラット化し、さらに逆イールドへ</li>
+<li><strong>TIBOR</strong>　東京の銀行間市場で<strong>資金の出し手</strong>が提示する金利。国内取引の基準金利</li>
+<li><strong>オプション取引</strong>　将来の一定期日までに、あらかじめ定める権利行使価格で売り付ける権利が<strong>プット</strong>、買い付ける権利が<strong>コール</strong></li>
+</ul>
+
+<h3>4-4. 証券市場と証券業務</h3>
+
+<ul>
+<li>金商法により、<strong>信託受益権や集団投資スキーム持分も有価証券とみなされて規制対象</strong>となった</li>
+<li>金融商品取引業は<strong>第一種・第二種・投資運用業・投資助言代理業</strong>の4区分。<strong>横断的に登録制</strong>としつつ業務内容に応じて規制に差を設ける</li>
+<li><strong>発行（プライマリー）市場</strong>と<strong>流通（セカンダリー）市場</strong></li>
+<li>セカンダリーでの証券会社の業務　<strong>ブローカレッジ</strong>（媒介・取次ぎ・代理）と<strong>ディーリング</strong>（自己の計算とリスクで売買）</li>
+<li><strong>IPO</strong>＝上場＝株式公開。市場への最初の株式供給</li>
+<li>上場審査は<strong>形式基準への適合だけでは足りず</strong>、企業内容の開示を適切に行える状況にあるかなど<strong>実質的な審査</strong>も行われる</li>
+<li>上場廃止　流通量不足で公正な価格形成が困難になった場合や、会社が破綻状態となった場合</li>
+<li><strong>信用取引</strong>　委託保証金を預けて資金や証券を借りて売買。制度信用取引と一般信用取引の2種類。<span class="ng">「貸借取引」ではない</span></li>
+</ul>
+
+<h2 id="s5"><span class="n">5</span>銀行・信託・プロジェクトファイナンス（問10・11）</h2>
+
+<h3>5-1. 銀行業務</h3>
+
+<ul>
+<li>銀行業を営むには<strong>内閣総理大臣の免許</strong>が必要（<span class="ng">×</span> 金融庁長官）</li>
+<li><strong>信用創造</strong>　新たに創り出された預金を<strong>派生的預金</strong>という。<strong>支払準備率が低いほど派生的預金は大きくなる</strong></li>
+<li><strong>貸出スプレッド</strong>　基準金利への上乗せ金利。銀行が引き受ける信用リスクとコストに見合うリターン</li>
+</ul>
+
+<div class="note">
+<b>頻出</b>　派生的預金の向きを逆にした枝が両年度で出ている。<strong>準備率が低い＝手元に残す割合が小さい＝再び貸し出せる額が大きい</strong>と考えれば向きを間違えない。
+</div>
+
+<h3>5-2. バーゼル規制</h3>
+
+<p>自己資本比率の算出において定量化の対象となるのは、<strong>信用リスクだけではない</strong>。<strong>市場リスクとオペレーショナルリスク</strong>も対象に含まれ、<strong>システム障害による損失リスク</strong>もオペレーショナルリスクとして含まれる。</p>
+
+<h3>5-3. 信託</h3>
+
+<ul>
+<li><strong>信託銀行</strong>は「金融機関ノ信託ノ兼営等ニ関スル法律」に基づき信託業務を兼営する銀行。<strong>預金業務や貸金業務も行っている</strong></li>
+<li><strong>狭義の不動産信託</strong>　管理を主目的とする<strong>管理信託</strong>と、処分および代金回収を目的とする<strong>処分信託</strong></li>
+</ul>
+
+<h3>5-4. プロジェクトファイナンスとPFI</h3>
+
+<ul>
+<li><strong>ノンリコースローン</strong>　特定の事業・資産のCFのみを返済原資とし、スポンサーへの求償権が付かない<strong>非遡及型</strong>ローン。<span class="ng">コーポレートファイナンスの一つではない</span></li>
+<li><strong>コンストラクションローン</strong>　建設中の物件を対象とするノンリコースローン。<strong>竣工後はパーマネントローンへ切り換えられるケースが多い</strong></li>
+<li><strong>PFI</strong>　PPPの代表的手法の一つ。公共事業に民間のノウハウと資金を活用する</li>
+<li><strong>VFM</strong>（Value For Money）　支払いに対して最も価値の高いサービスを供給するという考え方</li>
+<li><strong>コンセッション方式</strong>　2011年の改正PFI法で導入。長期にわたり公共施設の運営権を民間に付与</li>
+</ul>
+
+<p>2024年度の問11は空欄補充。<strong>銀行団は「プロジェクトファイナンス」の手法で事業主体の「SPV」宛に資金を提供する</strong>、公共部門と銀行団の間で<strong>直接契約</strong>を結んでおくことが多い、という骨格を押さえる。</p>
+
+<h2 id="s6"><span class="n">6</span>機関投資家（問12・13）</h2>
+
+<h3>6-1. 国内機関投資家</h3>
+
+<ul>
+<li><strong>ALM</strong>　顧客への支払義務の特性に基づき総合的に資産管理を行うリスク管理手法。機関投資家の運用方針の出発点</li>
+<li>機関投資家は<strong>一部の例外を除き自ら不動産経営を行わず</strong>、AMやPMなど第三者に委託するのが普及している</li>
+<li><strong>国内銀行</strong>　不動産会社やSPCへの貸出で市場を支えつつ、私募REITなどにも投資</li>
+<li><strong>GPIF</strong>　世界有数の資産規模だが、<strong>不動産の運用資産規模は海外基金と比べて小さい</strong></li>
+</ul>
+
+<h4>数値で問われる項目</h4>
+
+<div class="scroll">
+<table>
+<thead><tr><th>項目</th><th>数値</th></tr></thead>
+<tbody>
+<tr><td>国内生保の国内確定利付資産（国債・地方債・社債）</td><td>2023年3月末で<strong>49.7%</strong>（総資産の48.4%）</td></tr>
+<tr><td>国内年金基金の上場J-REIT「投資済」回答</td><td>2022年調査で<strong>10%</strong></td></tr>
+<tr><td>運用資産に占める国債の割合</td><td>生保<strong>39.6%</strong> ＞ 損保<strong>13.1%</strong>（2024年）</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>「40%を下回る」「投資実績を持つ基金が多い」「損保の方が国債配分が高い」といった<strong>向きを変えた枝</strong>が出ている。</p>
+
+<h3>6-2. 海外機関投資家</h3>
+
+<ul>
+<li>不動産運用資産額で上位を占めるのは<strong>年金基金・保険会社・SWF</strong>。<span class="ng">投資銀行は含まれない</span></li>
+<li>グローバルに投資する海外の大型年金基金は、<strong>基礎年金や社会保障年金でないものも多い</strong>（職域年金等）</li>
+<li><strong>SWF</strong>　給付債務を持たないため利回り設定の柔軟性が高く、優良物件に長期・強気で投資する。<strong>日本でも大型取引の実績がある</strong>（GICのパシフィックセンチュリープレイス取得、CICの目黒雅叙園取得など）</li>
+<li>SWFの原資は<strong>資源収入型と外貨準備金型の2種類</strong>。<span class="ng">中東に限られない</span>。アジアのSWFには外貨準備金を原資とするものもある</li>
+<li>海外投資家は1990年代後半や金融危機後の回復期に資金供給者として影響力を発揮し、<strong>先進的物流施設の普及やホテル・リゾートの運営ノウハウ提供</strong>にも寄与した</li>
+</ul>
+
+<h2 id="s7"><span class="n">7</span>年金と受託者責任（問14・15）</h2>
+
+<h3>7-1. 日本の年金制度の体系 — 2025年度で細かく問われた</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>対象者</th><th>加入する制度</th></tr></thead>
+<tbody>
+<tr><td>警視庁の常勤職員</td><td>警察共済組合を通じて<strong>地方公務員共済制度</strong>（<span class="ng">×</span> 国家公務員共済組合連合会）</td></tr>
+<tr><td>公立大学の常勤教員</td><td>公立学校共済を経由して<strong>地方公務員共済制度</strong>（<span class="ng">×</span> 私学共済）</td></tr>
+<tr><td>国家公務員</td><td><strong>iDeCoに加入できる</strong>（職務専念義務を理由に禁止されてはいない）</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>また<strong>厚生年金は二階部分、国民年金が共通の一階部分</strong>という構造も問われる。厚生年金加入者も受給開始後は国民年金による老齢給付を受けられる。</p>
+
+<h3>7-2. 年金の不動産投資</h3>
+
+<ul>
+<li><strong>確定給付企業年金（DB）</strong>　主として私募REITや私募ファンド。一部にCMBSを組み入れる例も</li>
+<li><strong>確定拠出年金・iDeCo</strong>　商品ラインナップが投資信託に限られるため、<strong>上場REITを組み入れた公募投信</strong>を設定する必要がある</li>
+<li>不動産投資の最大の目的は<strong>収益の獲得</strong>もしくは<strong>伝統的資産との低相関</strong>。低流動性資産への投資による時価変動の抑制は<em>副次的な目的にすぎない</em></li>
+<li>受託者責任の観点から、不動産を投資対象とするなら<strong>「運用の基本方針」に明記</strong>しておく必要がある</li>
+<li><strong>GPIF</strong>の海外不動産投資先は<strong>米国が最大</strong>（<span class="ng">×</span> 欧州）</li>
+<li><strong>地共連</strong>　GPIFより後発で不動産投資を開始したため日本比率が高い。用途別ではオフィスへの配分が最大ではなく、<em>設立時期の分散を図りながら淡々と投資</em>している</li>
+<li><strong>産業・物流施設</strong>　コロナ禍のリモート勤務とEC拡大により投資が大きく拡大したセクター</li>
+</ul>
+
+<h3>7-3. 受託者責任</h3>
+
+<ul>
+<li>中核は<strong>注意義務と忠実義務</strong>の2つ</li>
+<li><strong>2023年11月20日成立の改正法</strong>により、年金積立金の管理運用業者や年金基金にも<strong>顧客に対する最善利益義務</strong>を含む誠実義務が課された</li>
+<li><strong>アセットオーナー・プリンシプル</strong>　2024年8月に内閣府が制定・公表。<em>すべての企業年金が受け入れを表明しているわけではない</em>（2025年4月末時点で135にとどまる）</li>
+<li><strong>ゲートキーパーの選定</strong>　不動産の専門知識、ストラクチャリングの専門知識、実績とトラックレコード、組織・人材、コンプライアンス体制を確認する</li>
+</ul>
+
+<h2 id="s8"><span class="n">8</span>引っかけパターンの類型</h2>
+
+<h3>型1：対になる概念の入れ替え</h3>
+<ul>
+<li>直接金融と間接金融</li>
+<li>CMBSとRMBS</li>
+<li>コーポレートファイナンスとアセットファイナンス</li>
+<li>コンストラクションマネジメントとファシリティマネジメント</li>
+<li>信用取引と貸借取引</li>
+<li>デットとエクイティ（投資法人債の分類）</li>
+<li>収益還元法と積算法</li>
+</ul>
+
+<h3>型2：向きの逆転</h3>
+<ul>
+<li>支払準備率と派生的預金（低い→大きい）</li>
+<li>私募REITの流動性（J-REITより劣後する）</li>
+<li>生保と損保の国債配分（生保の方が高い）</li>
+<li>GPIFの海外投資先（米国が最大）</li>
+</ul>
+
+<h3>型3：範囲の限定・拡大</h3>
+<ul>
+<li>バーゼル規制の対象リスクから市場リスク・オペレーショナルリスクを除外</li>
+<li>市街化調整区域の開発許可を「1,000㎡以上に限り」と限定</li>
+<li>SWFを中東に限定</li>
+<li>ガイドラインの対象を商業用不動産に限定（正しくは居住用）</li>
+<li>信託銀行が預金・貸金業務を「行っていない」</li>
+<li>一般媒介にも登録義務があるとする（義務ではない）</li>
+</ul>
+
+<h3>型4：数値のすり替え</h3>
+<ul>
+<li>私募REITの銘柄数・運用資産額（58銘柄・6.8兆円）</li>
+<li>米国REITのオフィス比率（約5%）</li>
+<li>国内生保の確定利付資産比率（49.7%）</li>
+<li>アセットオーナー・プリンシプルの受入表明数（135）</li>
+</ul>
+
+<h3>型5：所属・主体の取り違え</h3>
+<ul>
+<li>銀行免許の付与者（内閣総理大臣）</li>
+<li>警察職員や公立大学教員が加入する共済制度</li>
+<li>倒産隔離で守る相手（オリジネーターではなく投資家）</li>
+</ul>
+
+<h2 id="s9"><span class="n">9</span>学習の進め方</h2>
+
+<h3>第1段階　問9の計算を確実にする</h3>
+<p>単利の最終利回りの式1本。5年連続で同型なので、旧101の問15も含めて5回分回せる。<strong>分母が購入価格、クーポンの基準が額面</strong>という点だけ押さえる。</p>
+
+<h3>第2段階　対になる概念を書き出す</h3>
+<p>102の誤り枝は「型1：対になる概念の入れ替え」が最多。<strong>直接／間接金融、CMBS／RMBS、コーポレート／アセットファイナンス、デット／エクイティ</strong>を紙に左右で並べて書けるようにする。</p>
+
+<h3>第3段階　数値を割り切って覚える</h3>
+<p>102は他科目より<strong>数値を直接問う枝が多い</strong>。私募REITの規模、J-REITと私募ファンドの市場規模、生保の資産配分など、上の表に挙げたものだけでも覚えておく価値がある。ただし<strong>数値は毎年更新される</strong>ので、最新年度の値を優先する。</p>
+
+<h3>第4段階　旧101で量をこなす</h3>
+<p>2021〜2023年度の101は60問あり、金融市場・銀行・証券市場・機関投資家・年金の並びが共通している。<strong>102だけなら30問だが、旧101を足せば90問</strong>になる。ただし旧101の後半には現行104に移った論点（組合・信託・倒産隔離）が混ざるので、そこは104の学習として扱う。</p>
+
+<footer>
+出典：一般社団法人不動産証券化協会「2021〜2025年度 Course1 修了試験・再認定試験 問題・解説」。個人の学習用に整理したもの。本文中の解釈・補足は公式解説を離れた部分を含むため、テキストで確認すること。数値や制度は出題年度時点のもの。
+</footer>
+
+
+</div>
+</body>
+</html>

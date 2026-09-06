@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>101 企業と不動産 — 理解ポイント整理</title>
+<style>
+:root{
+  --paper:#E7E8E2; --card:#FCFCFA; --ink:#1B1E24; --ink2:#5C6371; --ink3:#8A9099;
+  --rule:#C7C9C1; --rule2:#DEDFD8; --ai:#2A4A7B; --shu:#B23A2F;
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","MS PMincho",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--gothic);
+  font-size:15px;line-height:1.85;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 72px}
+
+header.mast{border-bottom:1px solid var(--rule);padding:26px 0 16px;margin-bottom:22px}
+.mast h1{font-size:21px;font-weight:600;margin:0;letter-spacing:.01em;line-height:1.5}
+.mast p{margin:6px 0 0;font-size:12.5px;color:var(--ink2)}
+
+h2{font-size:17px;font-weight:600;margin:44px 0 14px;padding-bottom:7px;
+  border-bottom:2px solid var(--ink);letter-spacing:.01em}
+h2 .n{color:var(--ink3);font-variant-numeric:tabular-nums;margin-right:9px;font-weight:400}
+h3{font-size:15px;font-weight:600;margin:28px 0 9px;padding-left:10px;border-left:3px solid var(--ai)}
+h4{font-size:13.5px;font-weight:600;margin:20px 0 6px;color:var(--ink2)}
+p{margin:0 0 13px}
+strong{font-weight:600}
+em{font-style:normal;background:linear-gradient(transparent 62%, rgba(42,74,123,.18) 62%)}
+
+nav.toc{background:var(--card);border:1px solid var(--rule);padding:14px 16px;margin-bottom:30px}
+nav.toc h2{all:unset;display:block;font-size:12px;color:var(--ink3);margin-bottom:8px}
+nav.toc ol{margin:0;padding-left:20px;font-size:13.5px;line-height:1.9}
+nav.toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+nav.toc a:hover{border-bottom-color:var(--ink)}
+
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 16px}
+table{border-collapse:collapse;width:100%;font-size:13px;background:var(--card);min-width:420px}
+th,td{border:1px solid var(--rule2);padding:7px 10px;text-align:left;vertical-align:top;line-height:1.65}
+th{background:#EFEFEA;font-weight:600;white-space:nowrap}
+td.c,th.c{text-align:center}
+tbody tr:nth-child(even) td{background:#F7F7F4}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.formula{font-family:var(--mincho);font-size:16px;text-align:center;background:var(--card);
+  border:1px solid var(--rule2);padding:14px 12px;margin:14px 0;line-height:2.1}
+.frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 4px}
+.frac .num{display:block;padding:0 6px 2px;border-bottom:1px solid currentColor}
+.frac .den{display:block;padding:2px 6px 0}
+.calc{font-family:var(--mincho);font-size:14.5px;margin:0 0 13px;line-height:2}
+
+ul,ol{margin:0 0 15px;padding-left:22px}
+li{margin-bottom:6px}
+li>ul{margin-top:6px}
+
+.note{border-left:3px solid var(--shu);background:rgba(178,58,47,.05);
+  padding:11px 14px;margin:16px 0;font-size:13.5px;line-height:1.8}
+.note b{color:var(--shu)}
+.key{border:1px solid var(--ai);background:rgba(42,74,123,.05);
+  padding:12px 15px;margin:16px 0;font-size:13.5px;line-height:1.85}
+.ng{color:var(--shu);font-weight:600}
+.ok{color:var(--ai);font-weight:600}
+
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--rule);
+  font-size:11px;color:var(--ink3);line-height:1.8}
+@media (min-width:720px){ body{font-size:15.5px} }
+@media print{
+  body{background:#fff} nav.toc{display:none}
+  h2{page-break-after:avoid} table{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <h1>101 企業と不動産 — 理解ポイント整理</h1>
+  <p>2024・2025年度の101（各3問・22枝）を突き合わせて構造化。全50問中わずか3問の小科目だが、うち1問は毎年WACCの計算</p>
+</header>
+
+<nav class="toc">
+  <h2>目次</h2>
+  <ol>
+    <li><a href="#s0">まず構造をつかむ</a></li>
+    <li><a href="#s1">WACCの計算（問3）</a></li>
+    <li><a href="#s2">証券化のキーワード</a></li>
+    <li><a href="#s3">企業経営と不動産</a></li>
+    <li><a href="#s4">引っかけパターン</a></li>
+  </ol>
+</nav>
+
+<h2 id="s0"><span class="n">0</span>まず構造をつかむ</h2>
+
+<p>101は<strong>問1から問3までのわずか3問</strong>。50問中3問なので配点上の比重は小さいが、<strong>3問中1問が計算で、しかも毎年同じモデル図を使った同型問題</strong>である。取りこぼすと痛い。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th class="c">問</th><th>2024年度</th><th>2025年度</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td class="c">1</td><td>不動産証券化の基礎</td><td>企業と不動産証券化</td><td rowspan="2">2問で「証券化のキーワード」と「企業経営」を1問ずつ扱う。<strong>年度によって順番が入れ替わる</strong></td></tr>
+<tr><td class="c">2</td><td>企業と不動産証券化</td><td>不動産証券化基礎</td></tr>
+<tr><td class="c">3</td><td><strong>不動産ファンドの利益</strong></td><td><strong>不動産ファンドの資本コスト</strong></td><td>計算（モデル不動産ファンドの図）</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="key">
+問1と問2はどちらも<strong>「いくつあるか」型でイロハニホの5枝</strong>。2年分で20枝あるが、<strong>内容はほぼ同じ論点の使い回し</strong>で、実質10論点しかない。ここは丸暗記で対応できる。
+</div>
+
+<p>なお101は旧カリキュラムには存在しない区分。旧101「不動産証券化の概論」は現行の102に相当するため、<strong>過去問の蓄積は2024・2025年度の6問だけ</strong>である。</p>
+
+<h2 id="s1"><span class="n">1</span>WACCの計算（問3）</h2>
+
+<p>両年度とも同じモデル不動産ファンドの図が与えられる。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th colspan="4">不動産ファンド（単位：百万円）</th></tr></thead>
+<tbody>
+<tr><th>資産</th><td class="num">200,000</td><td class="num">150,000</td><th>負債</th></tr>
+<tr><th></th><td></td><td class="num">50,000</td><th>資本</th></tr>
+<tr><th>営業利益</th><td class="num">5,000</td><td class="num" rowspan="2">10,000</td><th rowspan="2">収入</th></tr>
+<tr><th>費用</th><td class="num">5,000</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>注記は2つ。<strong>注1：半期決算（年2回）</strong>、<strong>注2：法人課税はない</strong>。</p>
+
+<h3>1-1. 解き方</h3>
+
+<div class="formula">
+経済的利益 ＝ 税引後営業利益 − 投下資本 × WACC
+</div>
+
+<p>手順は3ステップ。</p>
+
+<ol>
+<li><strong>年間の営業利益に直す</strong>　図の数値は半期なので<strong>2倍</strong>する。5,000百万円 × 2 ＝ 10,000百万円 ＝ 100億円</li>
+<li><strong>投下資本を確認する</strong>　負債150,000 ＋ 資本50,000 ＝ 200,000百万円 ＝ 2,000億円（＝資産合計）</li>
+<li><strong>式に当てはめる</strong>　法人課税がないので税引後営業利益＝営業利益</li>
+</ol>
+
+<h3>1-2. 両年度の答え</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>年度</th><th>問われるもの</th><th>計算</th><th class="c">答</th></tr></thead>
+<tbody>
+<tr><td>2024</td><td>WACC 4% のときの<strong>創出価値</strong></td><td class="num">100億円 − 2,000億円 × 4% ＝ 100 − 80 ＝ 20億円</td><td class="c"><strong>20億円</strong></td></tr>
+<tr><td>2025</td><td>創出価値 40億円のときの<strong>WACC</strong></td><td class="num">100億円 − 2,000億円 × r ＝ 40 → r ＝ 60 ÷ 2,000 ＝ 3%</td><td class="c"><strong>3%</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>「半期決算だから2倍する」を忘れると、答えがちょうど選択肢の別の値に一致してしまう。</strong>2024年なら2倍を忘れると 50 − 80 でマイナス、2025年なら 50 − 2,000r ＝ 40 から r＝0.5% となり選択肢にない。逆に言えば、<em>選択肢に入らない数字が出たら2倍を忘れていないか疑う</em>とよい。
+</div>
+
+<p>問われる向きは年度によって入れ替わる（創出価値を問う年とWACCを問う年）。<strong>式を1本覚えて、どこが未知数になっても解けるようにしておく</strong>のが正解。</p>
+
+<h2 id="s2"><span class="n">2</span>証券化のキーワード</h2>
+
+<h3>2-1. 用語の定義</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>用語</th><th>正しい理解</th></tr></thead>
+<tbody>
+<tr><th>有価証券に化体<br>された不動産</th><td><strong>不動産</strong>のキャッシュフローに依存して決まる財産的価値に対する請求権を、<strong>有価証券</strong>の形に変えたもの</td></tr>
+<tr><th>オンバランス不動産</th><td>企業のB/Sに資産計上されたままの実物不動産。<strong>「有価証券に化体された不動産」とは対概念</strong>であり、同じことを意味しない</td></tr>
+<tr><th>vehicle（特別法人）</th><td>証券化のための特別法人。単に「ヴィークル」と呼ばれ、<strong>不動産ファンドとも呼ばれる</strong></td></tr>
+<tr><th>不動産証券化</th><td>特別法人が不動産証券化商品を発行し、それを投資家に販売すること、と言い換えられる</td></tr>
+<tr><th>証券投資信託</th><td>不動産ファンドと同じく、ファンドを利用した<strong>集団投資商品の一種</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>「有価証券に化体された不動産」の定義で不動産と有価証券を入れ替える枝が繰り返し出る。</strong>「不動産のCF → 有価証券の形へ」が正しい向き。逆向きの記述は誤り。
+</div>
+
+<h3>2-2. 有価証券の範囲</h3>
+
+<ul>
+<li><strong>株式は金商法上の有価証券</strong>（正確には金商法は「株券」を有価証券と定義している）</li>
+<li>投資証券、受益証券、優先出資証券は<strong>すべて有価証券</strong></li>
+<li>信託の受益権や集団投資スキーム持分も<strong>みなし有価証券</strong>として規制対象</li>
+<li>したがって「不動産証券化商品の中に有価証券でないものが存在する」は誤り</li>
+</ul>
+
+<h3>2-3. スキームの基本形</h3>
+
+<ul>
+<li>証券化は<strong>オリジネーターから資産を切り離し、SPVが有価証券を発行する</strong>のが基本。<span class="ng">オリジネーター自身が発行することもある、は誤り</span>（それでは倒産隔離が成立しない）</li>
+<li>101テキストでは証券化を<strong>多数の資産をプールしてリスクを分散する仕組み</strong>として説明しており、<span class="ng">「単一の資産も対象となる」という記述はない</span></li>
+</ul>
+
+<h2 id="s3"><span class="n">3</span>企業経営と不動産</h2>
+
+<h3>3-1. 企業価値向上の原則</h3>
+
+<div class="key">
+<strong>株主が企業の外に持っている投資機会が、企業の内部で行う投資の基準になる。</strong><br>
+株主は自ら市場で投資できるため、企業内部の投資はその機会費用（＝資本コスト）を上回るリターンを生まなければ価値を毀損する。これが問3のWACCの話につながる。
+</div>
+
+<h3>3-2. 資金調達の見方</h3>
+
+<p>資金調達には<strong>企業が金融資産を売り出す</strong>という側面がある。株式や社債という金融資産を投資家に販売する行為として捉える。その後の財務的な活動も含む概念。</p>
+
+<h3>3-3. オンバランス不動産の特性 — 最頻出</h3>
+
+<div class="formula">
+オンバランス不動産　→　資産の効率性（回転率）は<strong>非常に低い</strong>　／　マージン（税引後営業利益率）は<strong>非常に高い</strong>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>この「低い・高い」を逆にした枝が両年度で出ている。</strong>回転率が低いのは、大きな資産額に対して生み出す売上が相対的に小さいため。マージンが高いのは、賃料収入に対して直接の費用が少ないため。両方まとめて「不動産は資産効率が悪いが利幅は厚い」と覚える。
+</div>
+
+<h3>3-4. 企業戦略の分類</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>戦略</th><th>方向</th></tr></thead>
+<tbody>
+<tr><th>investment（投資）</th><td><strong>拡大型</strong></td></tr>
+<tr><th>divestment（ダイベストメント）</th><td><strong>縮小型</strong>。投資とは逆の戦略</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>ダイベストメントを「投資と同じく拡大型」とする枝が両年度で出ている。<strong>di- が付いたら逆向き</strong>と覚えればよい。</p>
+
+<h3>3-5. 証券化の目的</h3>
+
+<p>現在の日本では、不動産証券化は<strong>資金調達のためだけに行われるのではない</strong>。<em>企業価値を向上させるための戦略的な経営手法</em>として、少なからぬ日本企業に採用されている。「資金調達のためだけ」という限定は誤り。</p>
+
+<h2 id="s4"><span class="n">4</span>引っかけパターン</h2>
+
+<p>101の誤り枝は<strong>ほぼすべて「向きの逆転」</strong>である。3問しかない分、パターンも絞られている。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th>論点</th><th>正しい向き</th><th>誤り枝の作り方</th></tr></thead>
+<tbody>
+<tr><td>有価証券に化体された不動産</td><td>不動産のCF → 有価証券の形へ</td><td>有価証券のCF → 不動産の形へ</td></tr>
+<tr><td>オンバランス不動産の特性</td><td>回転率＝低い／マージン＝高い</td><td>回転率＝高い／マージン＝低い</td></tr>
+<tr><td>ダイベストメント</td><td>縮小型</td><td>拡大型</td></tr>
+<tr><td>証券化の発行体</td><td>SPVが発行</td><td>オリジネーター自身が発行</td></tr>
+<tr><td>オンバランス不動産と<br>有価証券に化体された不動産</td><td>対概念</td><td>同じことを意味する</td></tr>
+<tr><td>証券化の目的</td><td>資金調達＋企業価値向上</td><td>資金調達のためだけ</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="key">
+<strong>101は「逆にしただけ」の枝を見抜けば正答できる科目。</strong>3問しかないので、上の表を丸暗記し、問3のWACCで半期を2倍することさえ忘れなければ、満点を狙える。
+</div>
+
+<footer>
+出典：一般社団法人不動産証券化協会「2024年度／2025年度 Course1 修了試験・再認定試験 問題・解説」。個人の学習用に整理したもの。本文中の解釈・補足は公式解説を離れた部分を含むため、テキストで確認すること。
+</footer>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>旧103 不動産証券化商品の組成と管理 — 理解ポイント整理</title>
+<style>
+:root{
+  --paper:#E7E8E2; --card:#FCFCFA; --ink:#1B1E24; --ink2:#5C6371; --ink3:#8A9099;
+  --rule:#C7C9C1; --rule2:#DEDFD8; --ai:#2A4A7B; --shu:#B23A2F;
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","MS PMincho",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--gothic);
+  font-size:15px;line-height:1.85;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 72px}
+
+header.mast{border-bottom:1px solid var(--rule);padding:26px 0 16px;margin-bottom:22px}
+.mast h1{font-size:21px;font-weight:600;margin:0;letter-spacing:.01em;line-height:1.5}
+.mast p{margin:6px 0 0;font-size:12.5px;color:var(--ink2)}
+
+h2{font-size:17px;font-weight:600;margin:44px 0 14px;padding-bottom:7px;
+  border-bottom:2px solid var(--ink);letter-spacing:.01em}
+h2 .n{color:var(--ink3);font-variant-numeric:tabular-nums;margin-right:9px;font-weight:400}
+h3{font-size:15px;font-weight:600;margin:28px 0 9px;padding-left:10px;border-left:3px solid var(--ai)}
+h4{font-size:13.5px;font-weight:600;margin:20px 0 6px;color:var(--ink2)}
+p{margin:0 0 13px}
+strong{font-weight:600}
+em{font-style:normal;background:linear-gradient(transparent 62%, rgba(42,74,123,.18) 62%)}
+
+nav.toc{background:var(--card);border:1px solid var(--rule);padding:14px 16px;margin-bottom:30px}
+nav.toc h2{all:unset;display:block;font-size:12px;color:var(--ink3);margin-bottom:8px}
+nav.toc ol{margin:0;padding-left:20px;font-size:13.5px;line-height:1.9}
+nav.toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+nav.toc a:hover{border-bottom-color:var(--ink)}
+
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 16px}
+table{border-collapse:collapse;width:100%;font-size:13px;background:var(--card);min-width:420px}
+th,td{border:1px solid var(--rule2);padding:7px 10px;text-align:left;vertical-align:top;line-height:1.65}
+th{background:#EFEFEA;font-weight:600;white-space:nowrap}
+td.c,th.c{text-align:center}
+tbody tr:nth-child(even) td{background:#F7F7F4}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.formula{font-family:var(--mincho);font-size:16px;text-align:center;background:var(--card);
+  border:1px solid var(--rule2);padding:14px 12px;margin:14px 0;line-height:2.1}
+.frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 4px}
+.frac .num{display:block;padding:0 6px 2px;border-bottom:1px solid currentColor}
+.frac .den{display:block;padding:2px 6px 0}
+.calc{font-family:var(--mincho);font-size:14.5px;margin:0 0 13px;line-height:2}
+
+ul,ol{margin:0 0 15px;padding-left:22px}
+li{margin-bottom:6px}
+li>ul{margin-top:6px}
+
+.note{border-left:3px solid var(--shu);background:rgba(178,58,47,.05);
+  padding:11px 14px;margin:16px 0;font-size:13.5px;line-height:1.8}
+.note b{color:var(--shu)}
+.key{border:1px solid var(--ai);background:rgba(42,74,123,.05);
+  padding:12px 15px;margin:16px 0;font-size:13.5px;line-height:1.85}
+.ng{color:var(--shu);font-weight:600}
+.ok{color:var(--ai);font-weight:600}
+
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--rule);
+  font-size:11px;color:var(--ink3);line-height:1.8}
+@media (min-width:720px){ body{font-size:15.5px} }
+@media print{
+  body{background:#fff} nav.toc{display:none}
+  h2{page-break-after:avoid} table{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <h1>旧103 不動産証券化商品の組成と管理 — 理解ポイント整理</h1>
+  <p>2021〜2023年度の103（各35問・378枝）を突き合わせて構造化。<strong>2023年度以前の旧カリキュラムの科目</strong>で、現行では104「不動産証券化の法務／会計・税務」に相当する</p>
+</header>
+
+<nav class="toc">
+  <h2>目次</h2>
+  <ol>
+    <li><a href="#s0">まず構造をつかむ</a></li>
+    <li><a href="#s1">倒産隔離と真正譲渡（問1・2）</a></li>
+    <li><a href="#s2">賃貸借の承継と信託（問3・4）</a></li>
+    <li><a href="#s3">ヴィークルの制度比較（問5・6）</a></li>
+    <li><a href="#s4">金商法・不特法の適用関係（問7〜13）</a></li>
+    <li><a href="#s5">業規制と説明義務（問14〜18）</a></li>
+    <li><a href="#s6">J-REITの組成とガバナンス（問19）</a></li>
+    <li><a href="#s7">会計 — オフバランスと連結（問20〜23）</a></li>
+    <li><a href="#s8">会計 — 減損・資産除去債務ほか（問24〜27）</a></li>
+    <li><a href="#s9">税務 — 導管性と課税区分（問28〜33）</a></li>
+    <li><a href="#s10">税務 — 流通税と消費税（問34・35）</a></li>
+    <li><a href="#s11">引っかけパターンの類型</a></li>
+    <li><a href="#s12">現行104との対応</a></li>
+  </ol>
+</nav>
+
+<h2 id="s0"><span class="n">0</span>まず構造をつかむ</h2>
+
+<p>旧103は<strong>問1から問35までの35問</strong>。3年分で105問、378枝と<strong>全10科目でもっとも規模が大きい</strong>。現行104と問題数・構成ともほぼ同じ。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th class="c">問</th><th>ブロック</th><th>主なテーマ</th><th class="c">問数</th></tr></thead>
+<tbody>
+<tr><td class="c">1〜6</td><td><strong>法務・スキーム</strong></td><td>倒産隔離、真正譲渡、賃貸借の承継、信託、投資法人・TMK、組合</td><td class="c">6</td></tr>
+<tr><td class="c">7〜18</td><td><strong>金商法・業規制</strong></td><td>不特法との適用関係、有価証券の範囲、投資家保護法、説明義務、業登録、信託業、犯収法、情報管理</td><td class="c">12</td></tr>
+<tr><td class="c">19</td><td><strong>J-REIT</strong></td><td>組成、コンプライアンス態勢、制度上の課題</td><td class="c">1</td></tr>
+<tr><td class="c">20〜27</td><td><strong>会計</strong></td><td>オフバランス、連結、リース、減損、有価証券評価、資産除去債務、開示</td><td class="c">8</td></tr>
+<tr><td class="c">28〜35</td><td><strong>税務</strong></td><td>導管性要件、組合税制、信託税制、税会不一致、流通税、消費税</td><td class="c">8</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="key">
+現行104との違いは2点。<br>
+<strong>①業規制が12問と厚い</strong>（現行は9問）。不特法と金商法の適用関係を事例で問う設問が多い。<br>
+<strong>②J-REITが1問しかない</strong>（現行は4問）。<strong>利益相反とインサイダーは旧105（倫理）の問3・問4にあった</strong>ため。
+</div>
+
+<h3>ブロックごとの取りやすさ</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>ブロック</th><th>難度</th><th>コメント</th></tr></thead>
+<tbody>
+<tr><th>会計（8問）</th><td>取りやすい</td><td>基準の内容が明確。<strong>3年で枝がほぼ同一</strong>のものが多く、暗記で確実に取れる</td></tr>
+<tr><th>税務（8問）</th><td>取りやすい</td><td>導管性要件と課税区分の表を覚えれば安定</td></tr>
+<tr><th>法務（6問）</th><td>やや難</td><td>民法・信託法の条文知識。論点は繰り返される</td></tr>
+<tr><th>業規制（12問）</th><td>難</td><td><strong>複数の法律の適用関係を事例で判断させる。</strong>旧103でもっとも重い</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>会計8問と税務8問の計16問を固めるのが最優先</strong>という戦略は現行104と同じ。</p>
+
+<h2 id="s1"><span class="n">1</span>倒産隔離と真正譲渡（問1・2）</h2>
+
+<h3>1-1. 倒産隔離の3つの意味</h3>
+
+<div class="key">
+旧103では「倒産隔離」という語が<strong>複数の意味で使われる</strong>点を繰り返し問うている。<br>
+<strong>①SPC自体が倒産しないこと</strong>（債務超過を防ぐことも含む）<br>
+<strong>②売主（オリジネーター）の倒産に巻き込まれないこと</strong><br>
+<strong>③売主が倒産した場合に売買契約を否認されないこと</strong>（広い意味で）
+</div>
+
+<p>2023年度の問1は、これらのうち1つだけを取り上げて「倒産隔離とは○○を意味する」と限定する枝が並び、<strong>限定した瞬間に誤りになる</strong>構成だった。</p>
+
+<h3>1-2. SPC自体の倒産回避</h3>
+
+<ul>
+<li>SPCの活動は制限されているが、<strong>賃貸借契約上の債務不履行は起こりうる現実的なリスク</strong>。「SPCは倒産しない」と言い切るのは誤り</li>
+<li>役員や議決権保有者を<strong>関係者の利害関係人ではない独立した第三者</strong>にする</li>
+<li><strong>TMKでは一般社団法人にするのは「特定社員」</strong>（優先出資社員ではない）。社員総会の議決権のほとんどを持つのが特定社員だから</li>
+</ul>
+
+<h3>1-3. 真正譲渡と会計上のオフバランス</h3>
+
+<p>現行104と同じく<strong>「法律上の真正譲渡」と「会計上のオフバランス」は別問題だが、実務上は密接に関連する</strong>という論点。</p>
+
+<ul>
+<li>「売主が倒産する可能性がない場合でも、会計上の処理は真正譲渡の判断に影響する」→ <strong>正しい</strong></li>
+<li>会社更生手続きに入った場合、<strong>更生管財人から譲渡行為を否認されるリスク</strong>がある</li>
+<li>相当の対価を得て行われた不動産の譲渡について<strong>否認権を行使することは例外的</strong>（2021年度問3ロ）</li>
+</ul>
+
+<h3>1-4. 現物不動産を保有できるヴィークル</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>ヴィークル</th><th>現物不動産</th><th>備考</th></tr></thead>
+<tbody>
+<tr><th>合同会社（GK-TK）</th><td><strong>不特法上の特例事業なら可</strong></td><td>2013年から倒産隔離型の特例事業が可能に。それ以前は信託受益権化が前提</td></tr>
+<tr><th>TMK</th><td>可</td><td>ただし<strong>「特定資産の管理及び処分に係る業務」を他の者に委託</strong>する必要がある</td></tr>
+<tr><th>投資法人</th><td>可</td><td>資産運用会社に運用を委託。<strong>認可宅建業者が運用する場合はみなし宅建業者</strong>となる</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>TMKは宅建業法の適用を受けない</strong>（2023年度問10ロ）。この点は投資法人と異なる。</p>
+
+<h3>1-5. 合同会社の特徴</h3>
+
+<ul>
+<li><strong>決算公告義務はない</strong>（「ある」は誤り）</li>
+<li><strong>職務執行者の選任は、法人が社員となる場合にだけ必要</strong>（常に1名必要ではない）</li>
+</ul>
+
+<h2 id="s2"><span class="n">2</span>賃貸借の承継と信託（問3・4）</h2>
+
+<h3>2-1. 民法605条の2・605条の3</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>条文</th><th>効果</th></tr></thead>
+<tbody>
+<tr><th>605条の2<br>第1項</th><td>所有権移転に伴い<strong>賃貸人たる地位も自動的に移転</strong>。<strong>賃借人が対抗要件を備えていること</strong>が前提</td></tr>
+<tr><th>605条の2<br>第2項</th><td><strong>賃貸人たる地位の留保</strong>。①留保の合意、②<strong>譲受人が譲渡人に賃貸する合意</strong>の2つが必要（＝セール・アンド・リースバック）</td></tr>
+<tr><th>605条の3</th><td>賃借人が対抗要件を備えていなくても、<strong>譲渡人と譲受人の合意により賃貸人の地位を移転できる</strong>。賃借人の承諾は不要</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>信託による所有権移転にも605条の2が適用される</strong>（2023年度問3）。信託受託者が新賃貸人となる。</p>
+
+<h3>2-2. セール・アンド・リースバックとマスターリース</h3>
+
+<ul>
+<li>留保の合意により、<strong>譲渡人がマスターレッシー（転貸人）</strong>となる構造が生まれる</li>
+<li><strong>マスターレッシーが民事再生手続きに入っても、その事実のみをもって契約が終了するわけではない</strong>（2021年度問3ニ）</li>
+</ul>
+
+<h3>2-3. 信託の基本構造</h3>
+
+<div class="key">
+信託により、<strong>所有権は委託者Ａから受託者Ｂへ移転する</strong>（形式的な所有権という表現もあるが、移転すること自体は正しい）。<br>
+2022年度で「所有権は移転しない」とする枝が誤りとして出ている。
+</div>
+
+<ul>
+<li><strong>信託法上の受益権の定義に「指図権」は含まれない</strong>。指図権は信託法上明確に規定されていない</li>
+<li>受益権の定義は<strong>「受益債権及びこれを確保するために信託法の規定に基づいて受託者等に対し一定の行為を求めることができる権利」</strong></li>
+<li>当初委託者兼当初受益者が受益権を譲渡することは、金商法上<strong>新規有価証券の発行に該当する</strong>（定義府令14条のみなし規定）</li>
+</ul>
+
+<h3>2-4. 信託財産の独立性と責任財産</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>論点</th><th>結論</th></tr></thead>
+<tbody>
+<tr><th>受託者の債権者</th><td>信託財産に強制執行できない。受託者が破産しても<strong>信託財産は破産財団に属さない</strong></td></tr>
+<tr><th>委託者の債権者<br>（信託設定前の債権者）</th><td>信託財産責任負担債務に係る債権者でなければ、<strong>信託財産に対して権利行使できない</strong></td></tr>
+<tr><th>信託内借入れ</th><td>受託者が信託財産を担保に借入れた場合、<strong>融資債務は信託財産責任負担債務</strong>となる</td></tr>
+<tr><th>責任財産限定特約</th><td>特約がなければ<strong>受託者の固有財産も責任財産</strong>となる。特約を付すと<strong>信託財産限定責任負担債務</strong>となる</td></tr>
+<tr><th>テナントの敷金返還請求権</th><td>信託財産責任負担債務に係る債権にあたるかが論点</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>2-5. 自己信託</h3>
+
+<ul>
+<li>信託宣言により当初委託者が自ら受託者となる</li>
+<li><strong>受益権を50名以上が取得する場合に（自己）信託業の登録が必要</strong>（信託業法50条の2）。10口に分割して最大10名程度なら登録不要</li>
+<li>詐害信託として取り消される可能性は残る</li>
+</ul>
+
+<h2 id="s3"><span class="n">3</span>ヴィークルの制度比較（問5・6）</h2>
+
+<h3>3-1. 投資法人 — 制度の骨格</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><th>設立</th><td><strong>募集設立のみ</strong>。設立企画人が全部を引き受けるのではない。<strong>規約に公証人の認証は不要</strong></td></tr>
+<tr><th>使用人</th><td><strong>雇用できない</strong>（投信法63条2項）</td></tr>
+<tr><th>資産運用</th><td>必ず<strong>資産運用会社に委託</strong>。役員会が投資判断を行うわけではない</td></tr>
+<tr><th>一般事務</th><td>役員会・投資主総会の<strong>機関運営事務も一般事務受託会社に委託</strong></td></tr>
+<tr><th>資産運用委託契約</th><td><strong>締結・解約とも投資主総会の承認決議</strong>が必要</td></tr>
+<tr><th>合併</th><td>投資主総会の<strong>特別決議</strong>。<strong>みなし賛成制度はビルトインされていない</strong></td></tr>
+<tr><th>種類投資口</th><td>リーマンショック後の改正で<strong>発行可能</strong>となった</td></tr>
+<tr><th>投資口の払戻し</th><td>規約で<strong>する旨・しない旨のいずれかを必ず規定</strong>しなければならない</td></tr>
+<tr><th>開発行為</th><td>宅地造成・建物建築を<strong>禁止されているわけではない</strong></td></tr>
+<tr><th>執行役員の兼任</th><td>資産運用会社の代表者が投資法人の執行役員に就任することは<strong>法律上禁止されていない</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>3-2. 特定目的会社（TMK）— 投資法人との対比</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th></th><th>投資法人</th><th>TMK</th></tr></thead>
+<tbody>
+<tr><th>設立の厳格さ</th><td>—</td><td><strong>合同会社より厳格</strong>。定款の公証人認証、出資金に関する規制</td></tr>
+<tr><th>役員</th><td>執行役員・監督役員</td><td><strong>取締役1名以上、監査役1名以上</strong></td></tr>
+<tr><th>社員</th><td>投資主</td><td>特定社員と優先出資社員（<strong>両方が必ず存在するとは規定されていない</strong>）</td></tr>
+<tr><th>特定資産の処分</th><td>—</td><td><strong>社員総会の決議事項ではない</strong></td></tr>
+<tr><th>投資判断の外部委託</th><td><strong>必要</strong>（登録投資法人のみ）</td><td>任意。投資一任契約や投資助言契約を締結<strong>できる</strong></td></tr>
+<tr><th>役員の兼任制限</th><td>資産運用会社の役員が就任可</td><td><strong>特定譲渡人・特定資産管理処分受託者・信託受託者とその役員は取締役に就任できない</strong></td></tr>
+<tr><th>鑑定評価</th><td>取得・譲渡した場合に必要</td><td>「常に取得前に取得する」わけではない</td></tr>
+<tr><th>優先出資証券の私募</th><td>—</td><td><strong>必ずしも金融商品取引業者が行う必要はない</strong>（特定譲渡人による取扱いも可）</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>資産流動化計画と業務開始届出</h4>
+
+<ul>
+<li><strong>業務開始届出時に、特定資産の売買契約書の写しと特定資産管理処分委託契約書の添付が必要</strong></li>
+<li>特定資産が<strong>不動産信託受益権の場合は、別途特定資産管理処分受託者を置く必要はない</strong>（信託受託者が既にいるため）</li>
+<li>TMKは<strong>組合の出資持分の取得は原則禁止</strong>。ただし不動産信託受益権に投資する匿名組合の出資持分などは例外</li>
+<li>TMKは<strong>匿名組合契約の営業者となることはできない</strong>（資金調達方法が限定されているため）</li>
+</ul>
+
+<h3>3-3. 私募REITと上場REIT</h3>
+
+<ul>
+<li>投資法人の投資証券は<strong>第一項有価証券</strong>。募集の基準は<strong>50名以上</strong>（500名以上ではない）</li>
+<li>私募REITは上場による換金性がないため、規約で<strong>オープンエンド型（払戻し請求権を付与）</strong>とする</li>
+<li><strong>インサイダー規制は上場会社等が対象</strong>。2013年改正で上場投資法人が含まれるようになった。<strong>私募REITは対象外</strong></li>
+<li>上場REITの海外不動産投資は、<strong>2008年に東証規則が改正されて制約が解除</strong>された</li>
+</ul>
+
+<h3>3-4. 組合と不特法</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>類型</th><th>不特法の適用</th></tr></thead>
+<tbody>
+<tr><th>任意組合型</th><td>各当事者が出資し<strong>共同の事業として</strong>不動産取引を行う → <strong>原則として適用あり</strong>。ただし他の組合員から<strong>業務執行の委託を受けていない</strong>場合など例外あり</td></tr>
+<tr><th>匿名組合型</th><td>一方が相手方の行う不動産取引のため出資 → <strong>適用あり</strong></td></tr>
+<tr><th>投資事業有限責任組合</th><td><strong>投資事業に現物不動産の取得・保有は含まれない</strong>ため利用できない</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="s4"><span class="n">4</span>金商法・不特法の適用関係（問7〜13）</h2>
+
+<p><strong>旧103でもっとも重いブロック。</strong>「誰が」「何を」「どの資格で」行うかを1つずつ確認する。</p>
+
+<h3>4-1. 有価証券の分類</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>権利</th><th>分類</th><th>開示規制</th></tr></thead>
+<tbody>
+<tr><th>投資法人の投資証券</th><td><strong>第一項有価証券</strong>（2条1項各号）</td><td>あり</td></tr>
+<tr><th>TMKの優先出資証券</th><td><strong>第一項有価証券</strong></td><td>あり</td></tr>
+<tr><th>不動産信託受益権</th><td>第二項有価証券（2条2項1号）</td><td><strong>原則なし</strong></td></tr>
+<tr><th>匿名組合出資持分</th><td>第二項有価証券（2条2項5号・集団投資スキーム持分）</td><td><strong>原則なし</strong></td></tr>
+<tr><th>不特契約上の権利</th><td><strong>原則として集団投資スキーム持分ではない</strong>。ただし<strong>特例事業の場合は該当</strong></td><td>—</td></tr>
+<tr><th>電子記録移転権利</th><td>属性は第二項だが<strong>開示規制上は第一項扱い</strong></td><td>あり</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>金商法上の有価証券は<strong>証券に権利が表示されているものに限られない</strong>。不動産信託受益権を紙媒体の受益権証書に表示しなくても有価証券となる。</p>
+
+<h3>4-2. 自己運用行為</h3>
+
+<div class="key">
+<strong>自己運用行為</strong>（金商法2条8項15号）＝集団投資スキーム持分等を有する者から出資を受け、<strong>主として有価証券やデリバティブに投資</strong>すること。業として行えば<strong>自己運用業</strong>。
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>GK-TK方式で匿名組合出資を受けて不動産信託受益権を運用するGKは、自己運用行為を行っている</strong>。<br>
+一方<strong>TMKが優先出資社員から出資を受けて不動産信託受益権を運用する場合は自己運用行為にあたらない</strong>。優先出資は集団投資スキーム持分ではないため。この対比が2022年度に出題されている。
+</div>
+
+<h3>4-3. 不特法と金商法の重畳的適用（2022年度問7の空欄補充）</h3>
+
+<p>不特法上の<strong>倒産隔離型（特例事業）</strong>の仕組みでは、対象不動産の保有主体としての<strong>特例事業者</strong>が匿名組合員を募る際、投資家勧誘を<strong>第四号事業者</strong>に委託しなければならない。特例事業の不特契約上の権利は<strong>金商法上の集団投資スキーム持分</strong>となるため、金商法の規制も重ねてかかる。</p>
+
+<h3>4-4. 投資家保護法の3層構造</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>法律</th><th>ポイント</th></tr></thead>
+<tbody>
+<tr><th><strong>消費者契約法</strong></th><td>法人と個人の契約は消費者契約に該当。<strong>投資商品も除外されない</strong>。<strong>断定的判断の提供</strong>で誤認して契約すれば<strong>取消し</strong>が可能。<strong>契約当事者以外の者が行った行為でも取消権を行使できる</strong></td></tr>
+<tr><th><strong>金融サービス法</strong></th><td>断定的判断の提供の禁止。<strong>不法行為の特則</strong>により<strong>故意過失を問わず損害賠償責任</strong>。ただし不特法上の商品は<strong>金銭出資・金銭返還のタイプに限り</strong>適用</td></tr>
+<tr><th><strong>金商法</strong></th><td>適合性の原則（40条1号）。不特法21条の2が準用</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>4-5. 契約締結前交付書面の相手方</h3>
+
+<div class="key">
+金商法上、契約締結前交付書面の交付義務を負う相手方は<strong>「顧客」＝金融商品取引契約を締結する当事者</strong>。<br>
+売主のために売却の媒介を行う場合、交付義務の相手方は<strong>委託者である売主</strong>であって、買主ではない。買主のためにも媒介を行う場合は買主にも必要になる。
+</div>
+
+<ul>
+<li><strong>特定投資家を相手とする場合は交付義務が免除</strong>される（45条）</li>
+<li><strong>TMKははじめから特定投資家</strong>。オプトインは不要（既に特定投資家だから）</li>
+<li><strong>損失補填等の禁止は投資家の属性によらず適用</strong>される（特定投資家でも免除されない）</li>
+<li>宅建業法上の説明義務も、<strong>相手方が金商法上の特定投資家なら適用されない</strong>（宅建業法50条の2の4）</li>
+</ul>
+
+<h3>4-6. 宅建業法との重畳</h3>
+
+<ul>
+<li>宅建業法35条3項により、<strong>宅建業者が委託者となる信託の受益権を販売する場合も重要事項の説明義務</strong>を負う</li>
+<li>第二種金融商品取引業者が不動産信託受益権の売買や媒介を行う場合、<strong>宅地建物取引の専門的知識・経験を有する人的構成</strong>が求められる</li>
+</ul>
+
+<h2 id="s5"><span class="n">5</span>業規制と説明義務（問14〜18）</h2>
+
+<h3>5-1. 金融商品仲介業と外務員（2021年度問15）</h3>
+
+<ul>
+<li><strong>勧誘に係る規制</strong>（虚偽告知・断定的判断の提供の禁止）は仲介業者にも準用される</li>
+<li><strong>契約締結時交付書面の交付義務</strong>など、契約直前・以後に所属業者が遵守すべきものは仲介業者に及ばない</li>
+<li>仲介業で顧客が損害を被れば、原則として<strong>所属金融商品取引業者等が賠償責任</strong>を負う</li>
+<li><strong>第一種業者の外務員</strong>は、有価証券の売買等について<strong>一切の裁判外の行為を行う権限があるとみなされる</strong></li>
+</ul>
+
+<h3>5-2. 信託業（2021年度問16）</h3>
+
+<ul>
+<li><strong>管理型信託業</strong>＝委託者等のみの指図で管理・処分を行う信託、または保存行為・性質を変えない範囲の利用改良のみを行う信託だけを引き受ける営業</li>
+<li>委託者等のみの指図で管理・処分を行う信託では<strong>委託者が有価証券の発行者</strong>と位置づけられ、受託者と委託者の契約締結は<strong>募集・私募にあたらない</strong></li>
+<li>信託業は原則として<strong>内閣総理大臣の免許</strong>。管理型信託業や同一企業グループ内の引受けは例外</li>
+</ul>
+
+<h3>5-3. 犯罪収益移転防止法（2021年度問17）</h3>
+
+<p>犯収法とは別に、<strong>日本証券業協会や第二種金融商品取引業協会も会員に内部管理体制の整備</strong>を求めている。</p>
+
+<h3>5-4. 情報管理と守秘義務（2021年度問18）</h3>
+
+<p>現行104の問30に相当する論点。顧客の非公開情報の親子法人間の授受規制、個人情報保護法の第三者提供規制などが問われる。</p>
+
+<h2 id="s6"><span class="n">6</span>J-REITの組成とガバナンス（問19）</h2>
+
+<p>旧103ではJ-REITは<strong>1問のみ</strong>。利益相反とインサイダーは旧105（倫理）にあった。</p>
+
+<h3>6-1. コンプライアンス態勢とエクイティ・ストーリー（2022年度）</h3>
+
+<ul>
+<li><strong>コンプライアンスオフィサー</strong>　資産運用会社のコンプライアンス部門の責任者。業務運営を法令遵守の観点からチェックする</li>
+<li><strong>コンプライアンス委員会</strong>　コンプライアンスオフィサーのほか<strong>外部専門家を委員に加えることが多い</strong></li>
+<li><strong>エクイティ・ストーリー</strong>　投資・運用・管理・分配の方針、財務・成長の戦略等を含む方針・目標。投資家の投資判断に極めて重要</li>
+<li><strong>スポンサー</strong>　外部成長・内部成長に貢献するが、<strong>スポンサーとの取引は常に利益相反の問題を伴う</strong></li>
+</ul>
+
+<h2 id="s7"><span class="n">7</span>会計 — オフバランスと連結（問20〜23）</h2>
+
+<h3>7-1. 不動産流動化実務指針 — 5%ルール</h3>
+
+<div class="key">
+譲渡人のリスク負担割合が<strong>概ね5%の範囲内</strong>であれば、リスクと経済価値のほとんど全てが移転したものとして<strong>売却処理</strong>できる。<br>
+リスク負担割合＝<strong>譲渡時の適正な価額（時価）に対するリスク負担の金額の割合</strong>。
+</div>
+
+<p>2023年度で<strong>「概ね10%」</strong>とした枝が誤りとして出ている。現行104でも同じ形で出題されており、<strong>5年を通じた最頻出論点</strong>。</p>
+
+<ul>
+<li><strong>追加出資の可能性や実質的な追加負担リスクは加味して</strong>リスク負担割合を算定する</li>
+<li><strong>匿名組合の未払配当金</strong>（支払留保によるもの）は<strong>リスク負担に該当しない</strong></li>
+<li><strong>継続的関与</strong>は9項目が例示されている。「SPCが譲渡人に対して売戻しの権利を保有」「譲渡人が譲渡した不動産の管理業務を行っている」などが該当</li>
+<li><strong>セール・アンド・リースバック</strong>　継続的関与にあたるが、<strong>オペレーティング・リースで適正な賃借料を支払う場合は売却処理が認められる</strong></li>
+</ul>
+
+<h3>7-2. 2つのアプローチと会計基準の適用</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>アプローチ</th><th>適用対象</th></tr></thead>
+<tbody>
+<tr><th>財務構成要素アプローチ</th><td>金融商品</td></tr>
+<tr><th><strong>リスク・経済価値アプローチ</strong></th><td><strong>不動産および不動産信託受益権</strong>。構成要素ごとの分解は通常困難なため</td></tr>
+</tbody>
+</table>
+</div>
+
+<ul>
+<li><strong>収益認識会計基準は「常に」適用されるわけではない</strong>。<strong>資産運用型ヴィークルへの譲渡で通常の営業活動による売却の場合にのみ</strong>適用</li>
+<li>不動産流動化実務指針の適用対象となる譲渡には<strong>収益認識会計基準は適用されない</strong></li>
+<li>譲渡先が<strong>資産流動化型か資産運用型か</strong>で適用される会計基準が異なる</li>
+<li><strong>監査委員会報告第27号</strong>（関係会社間の取引に係る土地・設備等の売却益）は、<strong>関係会社間以外の譲渡でも判断基準の一つとして考慮</strong>される</li>
+</ul>
+
+<h3>7-3. 連結 — 支配力基準</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th class="c">類型</th><th>要件</th></tr></thead>
+<tbody>
+<tr><td class="c">①</td><td>議決権の<strong>過半数</strong>を自己の計算で所有</td></tr>
+<tr><td class="c">②</td><td>議決権<strong>40%以上50%以下</strong>＋方針決定を支配する契約等</td></tr>
+<tr><td class="c">③</td><td>自己＋緊密者・同意者の議決権が<strong>過半数</strong>＋自己の役員等が方針決定に影響を与えられる</td></tr>
+</tbody>
+</table>
+</div>
+
+<ul>
+<li>日本の会計基準は<strong>持株基準を目安としつつ実質支配力基準</strong>で判定する。「持株基準が採用されている」は誤り</li>
+<li><strong>緊密な者・同意している者の議決権も考慮して</strong>判定する</li>
+<li>「親会社」の定義に<strong>持分法の関連会社の定義を混ぜた枝</strong>が2022年度に出ている</li>
+</ul>
+
+<h3>7-4. 連結会計基準7-2項 — 非連結の要件</h3>
+
+<div class="key">
+特別目的会社が<strong>子会社に該当しないものと推定される</strong>ためには、次の要件を満たす必要がある。<br>
+<strong>①適正な価額で資産を譲り受けている</strong>ことに加え、<strong>②資産から生ずる収益を特別目的会社が発行する証券の所有者に享受させる</strong>こと等。
+</div>
+
+<p>2021・2023年度とも、<strong>要件を1つだけ挙げて「これが要件の1つ」とする枝</strong>が誤りとして出ている。要件は複数ある。</p>
+
+<p><strong>開示対象特別目的会社</strong>＝7-2項により子会社に該当しないと推定されたもの。概要・取引の概要・取引金額等を連結財務諸表に注記する（重要性が乏しいものを除く）。</p>
+
+<h3>7-5. リース会計 — 旧103では独立した1問</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>基準</th><th>要件</th></tr></thead>
+<tbody>
+<tr><th>現在価値基準</th><td>リース料総額の現在価値が見積購入価額の<strong>概ね90%以上</strong></td></tr>
+<tr><th>経済的耐用年数基準</th><td>解約不能リース期間が経済的耐用年数の<strong>概ね75%以上</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>リース期間5年 ÷ 耐用年数8年 ＝ 62.5%</strong> で75%に届かないという設例が2021・2023年度で連続して出ている。<strong>8年 ÷ 10年 ＝ 80%</strong> なら満たす（2022年度）。<br>
+また現在価値基準を<strong>「75%以上」</strong>と書き換えた枝も出ている。<strong>現在価値＝90%、耐用年数＝75%</strong>。
+</div>
+
+<h4>土地のリース — 旧103固有の論点</h4>
+
+<ul>
+<li><strong>土地のリース</strong>は「所有権移転条項」または「割安購入選択権」のいずれかを有する場合を除き、<strong>オペレーティング・リース取引に該当</strong>する</li>
+<li><strong>土地と建物等を一括したリース取引</strong>（契約上建物賃貸借とされているものを含む）は、原則として<strong>リース料総額を合理的に土地と建物に配分</strong>して判定する</li>
+</ul>
+
+<p>この論点は現行104では出題されていない。<strong>旧103固有の論点</strong>。</p>
+
+<ul>
+<li><strong>所有権移転外ファイナンス・リース</strong>でも重要性に乏しい場合を除き<strong>売買処理</strong>（平成19年3月改正）</li>
+<li><strong>オペレーティング・リースは資産計上されない</strong></li>
+</ul>
+
+<h2 id="s8"><span class="n">8</span>会計 — 減損・資産除去債務ほか（問24〜27）</h2>
+
+<h3>8-1. 減損会計 — 5ステップ</h3>
+
+<div class="formula">
+①グルーピング　→　②<strong>減損の兆候の把握</strong>　→　③<strong>減損の認識の判定</strong>　→　④減損損失の測定　→　⑤損益計算書に計上
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>②と③を入れ替えた枝が2021・2023年度で連続</strong>して出ている。<strong>兆候の把握が先、認識の判定が後</strong>。<br>
+また兆候があった場合の次のステップは<strong>「減損の認識の判定」で割引前将来キャッシュ・フローを算定</strong>すること。いきなり回収可能価額を算定するのではない。
+</div>
+
+<h3>8-2. 回収可能価額の計算 — 3年で数値だけ変わる</h3>
+
+<div class="key">
+<strong>回収可能価額 ＝ 使用価値と正味売却価額のいずれか「高い」方</strong><br>
+<strong>減損損失 ＝ 帳簿価額 − 回収可能価額</strong>
+</div>
+
+<div class="scroll">
+<table>
+<thead><tr><th>年度</th><th>帳簿価額</th><th>使用価値</th><th>正味売却価額</th><th>回収可能価額</th><th class="c">減損損失</th></tr></thead>
+<tbody>
+<tr><td>2021</td><td class="num">10,000</td><td class="num">6,000</td><td class="num">5,000</td><td class="num">6,000</td><td class="c"><strong>4,000</strong></td></tr>
+<tr><td>2022</td><td class="num">15,000</td><td class="num">9,000</td><td class="num">8,500</td><td class="num">9,000</td><td class="c"><strong>6,000</strong></td></tr>
+<tr><td>2023</td><td class="num">10,000</td><td class="num">6,000</td><td class="num">5,500</td><td class="num">6,000</td><td class="c"><strong>4,000</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>3年とも<strong>使用価値の方が高い</strong>設例。現行104（2024・2025年度）では<strong>正味売却価額の方が高い</strong>設例に変わっているので、<strong>「高い方」というルールを覚えることが重要</strong>で、どちらか一方に決め打ちしてはいけない。</p>
+
+<ul>
+<li><strong>グルーピング</strong>　概ね独立したCFを生み出す<strong>最小単位</strong>。個々の資産ごとではない</li>
+<li><strong>帳簿切離し方式</strong>　一度計上した減損損失は<strong>戻し入れない</strong></li>
+</ul>
+
+<h3>8-3. 資産除去債務 — 3年とも同じ4論点</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>論点</th><th>正しい理解</th></tr></thead>
+<tbody>
+<tr><th>適用対象</th><td>営業活動に使用する有形固定資産<strong>だけでなく、建設仮勘定・投資不動産も含む</strong></td></tr>
+<tr><th>認識対象</th><td>除去義務のほか、<strong>有害物質等を法令等の要求による特別な方法で除去する義務</strong>も含む</td></tr>
+<tr><th>費用処理</th><td>一時の費用ではなく、<strong>資産計上して減価償却を通じ残存耐用年数にわたり配分</strong></td></tr>
+<tr><th>見積不能時</th><td>計上せず、見積可能になった時点で負債計上。その間は<strong>①概要、②見積れない旨、③その理由</strong>を注記</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>8-4. その他の会計基準</h3>
+
+<ul>
+<li><strong>有価証券の評価</strong>　売買目的有価証券は<strong>時価</strong>をもって貸借対照表価額とし、評価差額は<strong>当期の損益</strong></li>
+<li><strong>棚卸資産</strong>　販売用不動産は商品であり<strong>棚卸資産会計基準の適用対象</strong>。除外する例外規定はない</li>
+<li><strong>賃貸等不動産</strong>　<strong>時価は注記</strong>するが、<strong>時価を貸借対照表価額とすることはない</strong></li>
+<li><strong>耐用年数</strong>　よほど不合理でない限り<strong>法人税法等の耐用年数を使用しても会計監査上妥当</strong></li>
+<li><strong>土地建物への配分</strong>　固定資産税評価額の比率以外にも<strong>合理的な方法があれば採用可</strong></li>
+<li><strong>会計上の見積りの開示</strong>　翌年度に重要な影響を及ぼすリスクがある項目について開示する</li>
+</ul>
+
+<h2 id="s9"><span class="n">9</span>税務 — 導管性と課税区分（問28〜33）</h2>
+
+<h3>9-1. ヴィークルの課税区分</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>区分</th><th>該当するヴィークル</th></tr></thead>
+<tbody>
+<tr><th>法人税の課税対象<strong>となる</strong></th><td>株式会社、合同会社、一般社団法人、投資法人、TMK（ただし法定4ヴィークルは<strong>支払配当の損金算入可</strong>）、法人課税信託</td></tr>
+<tr><th>法人税の課税対象<strong>とならない</strong></th><td>任意組合、匿名組合、受益者等課税信託、集団投資信託</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>重要</b>　<strong>匿名組合は「人格のない社団に該当しないこと」でパススルー性が担保される。</strong>組合員同士の合議を行っているなど<strong>実態として人格のない社団とみなされる場合は法人税課税の対象となりうる</strong>（2023年度）。旧103固有の踏み込んだ論点。
+</div>
+
+<h3>9-2. 信託税制の3分類</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>分類</th><th>課税のタイミング・主体</th></tr></thead>
+<tbody>
+<tr><th><strong>受益者等課税信託</strong></th><td>収益・費用を<strong>受益者のもの</strong>とみなす。<strong>信託の計算期間にかかわらず</strong>受益者の各事業年度に帰属。<strong>消費税も受益者の取引</strong>とみなす</td></tr>
+<tr><th><strong>集団投資信託</strong></th><td>受益者が<strong>現実に受領した時</strong>に課税</td></tr>
+<tr><th><strong>法人課税信託</strong></th><td>信託段階で<strong>受託者を納税義務者</strong>として法人税。委託者が法人で受益権を子会社等が保有する自己信託等、<strong>損益分配の操作が可能な信託</strong>が該当</td></tr>
+</tbody>
+</table>
+</div>
+
+<ul>
+<li><strong>損失取込み規制は「受益者等課税信託」に置かれている</strong>。法人課税信託ではない（2022年度の誤り枝）</li>
+<li>受益者等課税信託の受益者は、<strong>信託財産の資産・負債・収益・費用を自らのものとして個々の項目に区分して会計処理</strong>する。僅少でも純額処理は不可</li>
+<li>受益者等課税信託の受託者は<strong>単独で課税資産の譲渡等を行ったものとみなされない</strong></li>
+</ul>
+
+<h3>9-3. TMKの導管性要件</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>区分</th><th>要件</th></tr></thead>
+<tbody>
+<tr><th rowspan="3">対象法人の要件</th><td>特定目的会社名簿に登載されていること</td></tr>
+<tr><td>特定社債の発行価額の総額が<strong>1億円以上</strong>、または特定社債が<strong>機関投資家または特定債権流動化特定目的会社のみによって保有されることが見込まれる</strong>こと</td></tr>
+<tr><td>優先出資および基準特定出資の募集等が、<strong>募集ごとかつ種類ごとに50%超</strong>国内で行われる旨が資産流動化計画に記載されていること</td></tr>
+<tr><th rowspan="3">対象事業年度の要件</th><td>特定資産を<strong>信託しているか、管理処分業務を他の者に委託</strong>していること（自ら行うことはできない）</td></tr>
+<tr><td>資産流動化計画に記載のある特定資産<strong>以外の資産を取得しないこと</strong></td></tr>
+<tr><td>会計期間が<strong>1年を超えない</strong>こと</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>特定社債の引受けについて<strong>「発行時に機関投資家のみに引き受けられたこと」ではなく「保有されることが見込まれること」</strong>が要件（2022年度の誤り枝）。</p>
+
+<h3>9-4. 投資法人の導管性要件</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>要件</th><th>内容</th></tr></thead>
+<tbody>
+<tr><th>配当要件</th><td>配当等の支払額が<strong>配当可能利益の額の90%超</strong></td></tr>
+<tr><th>投資口の保有</th><td><strong>50人以上</strong>の者が所有、または<strong>機関投資家のみ</strong>が所有</td></tr>
+<tr><th>非同族会社要件</th><td><strong>1グループ</strong>で総投資口数の50%超、または重要事項に係る議決権の50%超を有していないこと（3グループではない）</td></tr>
+<tr><th>特定資産の保有</th><td>事業年度末の特定資産の帳簿価額が総資産価額の<strong>2分の1</strong>を超えること（70%ではない）</td></tr>
+<tr><th>他法人支配禁止</th><td>他の法人の発行済株式または出資の<strong>50%以上</strong>を有していないこと。<strong>匿名組合出資も出資等の範囲に含まれる</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>9-5. 税会不一致への対応</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>不一致の型</th><th>対応</th></tr></thead>
+<tbody>
+<tr><th>所得超過税会不一致<br>（税務所得 ＞ 会計利益）</th><td><strong>一時差異等調整引当額</strong>を設定して利益超過分配。<strong>永久差異（寄附金・交際費）は対象外</strong></td></tr>
+<tr><th>利益超過税会不一致<br>（会計利益 ＞ 税務所得）</th><td><strong>一時差異等調整積立金</strong>を計上。負ののれん発生益などが原因</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　<strong>「一時差異等調整引当額」と「一時差異等調整積立金」を取り違える枝</strong>が3年を通じて繰り返し出る。<br>
+<strong>所得超過 → 引当額（多く配る）</strong>、<strong>利益超過 → 積立金（配らずに積む）</strong>と対で覚える。<br>
+また<strong>永久差異には使えない</strong>点も頻出。
+</div>
+
+<h4>デリバティブと評価・換算差額等</h4>
+
+<p>繰延ヘッジ損失により<strong>負の評価・換算差額等</strong>が生じた場合、導管性判定式の調整が必要になる。TMKでは<strong>減損損失の70%相当額を分母から控除できる措置</strong>があるが、これですべての税会不一致が解消するわけではない。</p>
+
+<h3>9-6. 組合税制</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>論点</th><th>任意組合</th><th>匿名組合</th></tr></thead>
+<tbody>
+<tr><th>法人税法上の有価証券</th><td colspan="2"><strong>該当しない</strong>（金商法上はみなし有価証券でも）</td></tr>
+<tr><th>源泉徴収</th><td><strong>不要</strong></td><td><strong>原則としてすべての組合員に必要</strong>。非居住者・外国法人はPEの有無にかかわらず必要</td></tr>
+<tr><th>個人組合員の所得区分</th><td>不動産事業なら不動産所得</td><td>原則<strong>雑所得</strong>（重要な業務執行の決定に関与する場合を除く）。<strong>損失の他所得との通算は不可</strong></td></tr>
+<tr><th>法人組合員の認識時期</th><td>一定要件を満たせば計算期間末日</td><td><strong>現実に分配を受けていなくても計算期間の末日</strong>の属する事業年度</td></tr>
+<tr><th>損失の取込み</th><td>平成17年度改正で<strong>制限</strong>。個人の不動産所得の損失はなかったものとされる</td><td>制限あり</td></tr>
+<tr><th>消費税</th><td>—</td><td>資産の譲渡等・課税仕入れは<strong>営業者が単独で行ったこととなる</strong>（消基通1-3-2）</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>匿名組合の計算期間の末日と営業者の決算日が一致していない場合、<strong>匿名組合員に分配されない損益が営業者に残り、営業者側で法人税課税が生じる</strong>点にも注意。</p>
+
+<h3>9-7. TMKの税務上の取扱い</h3>
+
+<ul>
+<li><strong>外形標準課税は資本金額にかかわらず対象外</strong></li>
+<li><strong>受取配当等の益金不算入</strong>は、受け取る配当・支払う配当のいずれも適用なし</li>
+<li><strong>欠損金の繰戻還付</strong>は資本金額にかかわらず原則として適用なし</li>
+<li><strong>中小法人の軽減税率・貸倒引当金の損金算入</strong>も資本金額にかかわらず適用なし</li>
+</ul>
+
+<h2 id="s10"><span class="n">10</span>税務 — 流通税と消費税（問34・35）</h2>
+
+<h3>10-1. 流通税</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>税目</th><th>区分</th><th>ポイント</th></tr></thead>
+<tbody>
+<tr><th>不動産取得税</th><td><strong>都道府県税</strong></td><td><strong>有償・無償の別、登記の有無を問わない</strong>。課税標準は<strong>固定資産税評価額</strong>であって売買価額ではない</td></tr>
+<tr><th>登録免許税</th><td><strong>国税</strong></td><td>「都道府県民税」とする枝が誤り</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>信託と流通税 — 現物取得か受益権取得かで異なる</h4>
+
+<div class="key">
+<strong>信託受益権として取得</strong>　→　不動産取得税でいう不動産の取得に<strong>ならない</strong><br>
+<strong>現物で取得して直後に信託設定</strong>　→　現物の取得段階で<strong>不動産取得税が課される</strong><br>
+委託者から受託者への所有権移転登記は<strong>形式的移転として登録免許税は非課税</strong>だが、<strong>信託の登記には課税</strong>される
+</div>
+
+<h4>法定4ヴィークルの軽減措置</h4>
+
+<ul>
+<li>軽減対象は<strong>不動産取得税と移転登記に係る登録免許税のみ</strong></li>
+<li><strong>固定資産税、保存登記・変更登記に係る登録免許税は対象外</strong></li>
+<li>軽減措置は<strong>時限措置</strong>（恒久措置ではない）。開発型スキームなど取得までに時間がかかる場合は<strong>期限に注意</strong>が必要</li>
+<li>不特法の特例事業者が取得する不動産に係る軽減措置も<strong>同じく時限措置</strong></li>
+</ul>
+
+<h3>10-2. 消費税</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>論点</th><th>内容</th></tr></thead>
+<tbody>
+<tr><th>新設法人の判定</th><td><strong>事業年度「開始の日」</strong>の資本金が1,000万円以上なら納税義務免除なし。<strong>「終了の日」ではない</strong></td></tr>
+<tr><th>特定新規設立法人</th><td>資本金1,000万円未満でも、<strong>他の者に50%超支配</strong>されているなど一定要件で納税義務あり</td></tr>
+<tr><th>高額特定資産</th><td>仕入れ等の日の属する課税期間の<strong>翌課税期間から3年間</strong>、免税事業者・簡易課税を選択できない</td></tr>
+<tr><th>簡易課税</th><td>基準期間の課税売上高が<strong>5,000万円以下</strong>の場合に限る。みなし仕入率は<strong>取引内容に応じた事業区分</strong>で適用（不動産なら一律ではない）</td></tr>
+<tr><th>居住用賃貸建物</th><td>課税仕入れ等の税額は<strong>原則として仕入税額控除の対象外</strong>。<strong>資本的支出も含む</strong>。第3年度の課税期間の末日までに課税賃貸用に転用等すれば調整可</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="s11"><span class="n">11</span>引っかけパターンの類型</h2>
+
+<h3>型1：数値要件のすり替え（最頻出）</h3>
+<ul>
+<li>リスク負担割合（5% → 10%）</li>
+<li>現在価値基準90% / 経済的耐用年数基準75%</li>
+<li>TMKの特定社債1億円以上</li>
+<li>投資法人の特定資産保有（2分の1超 → 70%）</li>
+<li>非同族会社要件（1グループ → 3グループ）</li>
+<li>投資口の保有者数50人以上</li>
+<li>他法人支配禁止50%以上</li>
+<li>配当要件90%超</li>
+<li>簡易課税の5,000万円</li>
+<li>自己信託業の登録が必要な受益者数50名以上</li>
+</ul>
+
+<h3>型2：順序・段階の取り違え</h3>
+<ul>
+<li>減損の5ステップ（兆候の把握 → 認識の判定）← <strong>2年連続</strong></li>
+<li>事業年度「開始の日」と「終了の日」</li>
+<li>信託の所有権移転と信託の登記（登録免許税の課否）</li>
+</ul>
+
+<h3>型3：類似概念の入れ替え</h3>
+<ul>
+<li>一時差異等調整<strong>引当額</strong>と<strong>積立金</strong></li>
+<li>受益者等課税信託と集団投資信託と法人課税信託</li>
+<li>財務構成要素アプローチとリスク・経済価値アプローチ</li>
+<li>持株基準と実質支配力基準</li>
+<li>親会社の定義と関連会社の定義</li>
+<li>特定社員と優先出資社員</li>
+<li>自己運用行為の該当・非該当（GK-TKとTMK）</li>
+</ul>
+
+<h3>型4：限定・断定による誇張</h3>
+<ul>
+<li>倒産隔離とは○○を「意味する」（複数の意味がある）</li>
+<li>収益認識会計基準が「常に」適用される</li>
+<li>「必ず」取得前に鑑定書を取得する</li>
+<li>「いかなる場合も」売却処理は認められない（セール・アンド・リースバック）</li>
+<li>「必ず」個々の資産ごとに減損判定</li>
+<li>資産除去債務の対象は営業活動に使用する有形固定資産「のみ」</li>
+<li>匿名組合配当の源泉徴収は非居住者・外国法人に対するもの「についてのみ」</li>
+</ul>
+
+<h3>型5：税目・区分の取り違え</h3>
+<ul>
+<li>登録免許税（国税であって都道府県民税ではない）</li>
+<li>不動産取得税の課税標準（固定資産税評価額であって売買価額ではない）</li>
+<li>法定4ヴィークルの軽減対象（保存登記・変更登記は対象外）</li>
+<li>軽減措置の性質（時限措置であって恒久措置ではない）</li>
+</ul>
+
+<h2 id="s12"><span class="n">12</span>現行104との対応</h2>
+
+<p>2024年度の改定で、旧103の内容は<strong>現行104「不動産証券化の法務／会計・税務」へほぼそのまま移行</strong>した。問題数は35問で変わらない。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th>旧103の問</th><th>テーマ</th><th>現行104での位置</th></tr></thead>
+<tbody>
+<tr><td class="c">1・2</td><td>倒産隔離・真正譲渡</td><td><strong>問16・17</strong></td></tr>
+<tr><td class="c">3・4</td><td>賃貸借の承継・信託</td><td><strong>問18・19</strong></td></tr>
+<tr><td class="c">5・6</td><td>投資法人・TMK・組合</td><td><strong>問20〜22</strong></td></tr>
+<tr><td class="c">7〜18</td><td>金商法・不特法・業規制・説明義務</td><td><strong>問22〜30</strong>（12問 → 9問に集約）</td></tr>
+<tr><td class="c">19</td><td>J-REITの組成</td><td><strong>問31</strong></td></tr>
+<tr><td class="c">—</td><td>—</td><td><strong>問32〜34が拡充</strong>（私募REIT、利益相反、インサイダー。<strong>旧105 問3・4から移動</strong>）</td></tr>
+<tr><td class="c">20〜27</td><td>会計（8問）</td><td><strong>問35〜42</strong>（8問。ほぼ一致）</td></tr>
+<tr><td class="c">28〜35</td><td>税務（8問）</td><td><strong>問43〜50</strong>（8問。ほぼ一致）</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>学習上の使い分け</h3>
+
+<div class="key">
+<strong>旧103は105問すべてが現行104の演習に使える。</strong>現行104の70問と合わせれば<strong>175問</strong>となり、全科目で最大の演習量になる。<br>
+とくに<strong>会計8問と税務8問は3年で48問</strong>あり、現行104の32問と合わせて<strong>80問</strong>。基準や要件が変わっていない論点が大半なので、そのまま反復できる。
+</div>
+
+<h3>旧年度の方が厚い論点</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>論点</th><th>コメント</th></tr></thead>
+<tbody>
+<tr><th><strong>土地のリース</strong></th><td>所有権移転条項・割安購入選択権がなければオペレーティング・リース。土地建物一括の場合はリース料総額を合理的に配分。<strong>現行104では出題されていない</strong></td></tr>
+<tr><th><strong>不特法と金商法の重畳的適用</strong></th><td>旧103は12問と厚く、事例で丁寧に問う。現行104の業規制9問より演習素材として優れている</td></tr>
+<tr><th><strong>匿名組合のパススルー性</strong></th><td>「人格のない社団とみなされると法人税課税」という論点は旧103固有</td></tr>
+<tr><th><strong>投資家保護法の3層構造</strong></th><td>消費者契約法・金融サービス法・金商法の適用関係を事例で問う設問が多い</td></tr>
+<tr><th><strong>信託の責任財産</strong></th><td>責任財産限定特約の有無による違いなど、現行より踏み込んでいる</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>旧年度で代替できない論点</h3>
+
+<p>現行104で新設・拡充された次の論点は、旧103にほぼ存在しない。</p>
+
+<ul>
+<li><strong>セキュリティ・トークン（ST）</strong>　電子記録移転権利の開示規制上の扱い、取扱業者の資格。2025年度に本格出題</li>
+<li><strong>J-REITの利益相反・インサイダー</strong>　旧105の問3・4を演習素材として使う</li>
+<li><strong>私募REITの法的性格</strong>　オープンエンド型、投資証券の不発行など</li>
+</ul>
+
+<h3>数値・法令の更新に注意</h3>
+
+<p>税制と会計基準は改正が入る。とくに<strong>リース会計基準は改正が進んでいる</strong>ため、旧年度の枝をそのまま覚えると現行の試験で誤答になる可能性がある。<strong>数値要件は最新年度の値を優先</strong>し、旧年度は「どの論点が問われるか」を掴む素材として使うのが安全。</p>
+
+<footer>
+出典：一般社団法人不動産証券化協会「2021〜2023年度 Course1 修了試験・再認定試験 問題・解説」。個人の学習用に整理したもの。本文中の解釈・補足は公式解説を離れた部分を含むため、テキストで確認すること。法令・会計基準・税制は出題年度時点のものであり、その後の改正および現行カリキュラムのテキストとの差異に注意すること。
+</footer>
+
+
+</div>
+</body>
+</html>

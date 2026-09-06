@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>旧105 不動産証券化と倫理行動 — 理解ポイント整理</title>
+<style>
+:root{
+  --paper:#E7E8E2; --card:#FCFCFA; --ink:#1B1E24; --ink2:#5C6371; --ink3:#8A9099;
+  --rule:#C7C9C1; --rule2:#DEDFD8; --ai:#2A4A7B; --shu:#B23A2F;
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","MS PMincho",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--gothic);
+  font-size:15px;line-height:1.85;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 72px}
+
+header.mast{border-bottom:1px solid var(--rule);padding:26px 0 16px;margin-bottom:22px}
+.mast h1{font-size:21px;font-weight:600;margin:0;letter-spacing:.01em;line-height:1.5}
+.mast p{margin:6px 0 0;font-size:12.5px;color:var(--ink2)}
+
+h2{font-size:17px;font-weight:600;margin:44px 0 14px;padding-bottom:7px;
+  border-bottom:2px solid var(--ink);letter-spacing:.01em}
+h2 .n{color:var(--ink3);font-variant-numeric:tabular-nums;margin-right:9px;font-weight:400}
+h3{font-size:15px;font-weight:600;margin:28px 0 9px;padding-left:10px;border-left:3px solid var(--ai)}
+h4{font-size:13.5px;font-weight:600;margin:20px 0 6px;color:var(--ink2)}
+p{margin:0 0 13px}
+strong{font-weight:600}
+em{font-style:normal;background:linear-gradient(transparent 62%, rgba(42,74,123,.18) 62%)}
+
+nav.toc{background:var(--card);border:1px solid var(--rule);padding:14px 16px;margin-bottom:30px}
+nav.toc h2{all:unset;display:block;font-size:12px;color:var(--ink3);margin-bottom:8px}
+nav.toc ol{margin:0;padding-left:20px;font-size:13.5px;line-height:1.9}
+nav.toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+nav.toc a:hover{border-bottom-color:var(--ink)}
+
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 16px}
+table{border-collapse:collapse;width:100%;font-size:13px;background:var(--card);min-width:420px}
+th,td{border:1px solid var(--rule2);padding:7px 10px;text-align:left;vertical-align:top;line-height:1.65}
+th{background:#EFEFEA;font-weight:600;white-space:nowrap}
+td.c,th.c{text-align:center}
+tbody tr:nth-child(even) td{background:#F7F7F4}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.formula{font-family:var(--mincho);font-size:16px;text-align:center;background:var(--card);
+  border:1px solid var(--rule2);padding:14px 12px;margin:14px 0;line-height:2.1}
+.frac{display:inline-block;vertical-align:middle;text-align:center;margin:0 4px}
+.frac .num{display:block;padding:0 6px 2px;border-bottom:1px solid currentColor}
+.frac .den{display:block;padding:2px 6px 0}
+.calc{font-family:var(--mincho);font-size:14.5px;margin:0 0 13px;line-height:2}
+
+ul,ol{margin:0 0 15px;padding-left:22px}
+li{margin-bottom:6px}
+li>ul{margin-top:6px}
+
+.note{border-left:3px solid var(--shu);background:rgba(178,58,47,.05);
+  padding:11px 14px;margin:16px 0;font-size:13.5px;line-height:1.8}
+.note b{color:var(--shu)}
+.key{border:1px solid var(--ai);background:rgba(42,74,123,.05);
+  padding:12px 15px;margin:16px 0;font-size:13.5px;line-height:1.85}
+.ng{color:var(--shu);font-weight:600}
+.ok{color:var(--ai);font-weight:600}
+
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--rule);
+  font-size:11px;color:var(--ink3);line-height:1.8}
+@media (min-width:720px){ body{font-size:15.5px} }
+@media print{
+  body{background:#fff} nav.toc{display:none}
+  h2{page-break-after:avoid} table{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <h1>旧105 不動産証券化と倫理行動 — 理解ポイント整理</h1>
+  <p>2021〜2023年度の105（各5問・52枝）を突き合わせて構造化。<strong>2023年度以前の旧カリキュラムの科目</strong>で、現行では106に相当するが、<strong>5問中2問は現行104へ移った</strong></p>
+</header>
+
+<nav class="toc">
+  <h2>目次</h2>
+  <ol>
+    <li><a href="#s0">まず構造をつかむ</a></li>
+    <li><a href="#s1">専門家責任と使用者責任（問1）</a></li>
+    <li><a href="#s2">誠実公正義務と忠実義務（問2）</a></li>
+    <li><a href="#s3">J-REITの利益相反取引規制（問3）</a></li>
+    <li><a href="#s4">インサイダー取引規制（問4）</a></li>
+    <li><a href="#s5">マスター職業倫理規程（問5）</a></li>
+    <li><a href="#s6">引っかけパターンの類型</a></li>
+    <li><a href="#s7">現行カリキュラムとの対応</a></li>
+  </ol>
+</nav>
+
+<h2 id="s0"><span class="n">0</span>まず構造をつかむ</h2>
+
+<p>旧105は<strong>問1から問5までの5問</strong>。午前試験の冒頭に置かれ、3年ともテーマの並びが完全に固定されている。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th class="c">問</th><th>テーマ</th><th>現行での位置</th></tr></thead>
+<tbody>
+<tr><td class="c">1</td><td><strong>専門家責任・使用者責任</strong></td><td>現行<strong>106 問48</strong></td></tr>
+<tr><td class="c">2</td><td><strong>誠実公正義務・忠実義務・顧客本位の原則</strong></td><td>現行<strong>106 問49</strong></td></tr>
+<tr><td class="c">3</td><td><strong>J-REITの利益相反取引規制</strong></td><td><strong>現行104 問31・33・34へ移動</strong></td></tr>
+<tr><td class="c">4</td><td><strong>J-REITのインサイダー取引規制</strong></td><td><strong>現行104 問32・33・34へ移動</strong></td></tr>
+<tr><td class="c">5</td><td><strong>マスター職業倫理規程</strong></td><td>現行<strong>106 問50</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="key">
+現行106は3問だが、旧105は5問。<strong>差の2問はJ-REITの利益相反とインサイダーで、これらは現行104へ移った。</strong><br>
+したがって旧105を解くときは、<strong>問1・2・5を106の演習、問3・4を104の演習</strong>として切り分けるのが正しい使い方になる。
+</div>
+
+<h3>難度の傾向</h3>
+
+<p>問1・問2は<strong>事例に法律を当てはめる形式</strong>で、5科目のなかでも屈指の難度。一方<strong>問3・問4は手続きの暗記</strong>、<strong>問5は職業倫理規程の暗記</strong>で確実に取れる。旧105では<strong>5問中3問が暗記で取れる構成</strong>だった。</p>
+
+<h2 id="s1"><span class="n">1</span>専門家責任と使用者責任（問1）</h2>
+
+<h3>1-1. 専門家責任の定義</h3>
+
+<div class="key">
+<strong>専門家の民事責任</strong>とは、専門家がその職務を遂行するうえで他人に不適切な役務を提供することによって（あるいはなすべき役務を提供しないことによって）、これを信頼した<strong>依頼者「その他の第三者」</strong>が損害を受けた場合の賠償責任をいう。
+</div>
+
+<p>2023年度で<strong>「第三者に対して負う損害賠償責任は含まれない」</strong>とする枝が誤りとして出ている。依頼者に限られない。</p>
+
+<h3>1-2. 責任を負うのは誰か — 最頻出</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>命題</th><th class="c">正誤</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td>会社が不法行為責任を負う場合<strong>に限り</strong>、社員個人も不法行為責任を負う</td><td class="c ng">×</td><td>両者は独立。<strong>個人の不法行為が先にあり、それを前提に会社の使用者責任が生じる</strong>のが順序</td></tr>
+<tr><td>営業社員個人の不法行為は<strong>問題にならない</strong></td><td class="c ng">×</td><td>まず個人の民法709条責任が問題となる</td></tr>
+<tr><td>会社が賠償した場合、<strong>個人に求償できる</strong></td><td class="c ok">○</td><td>民法715条3項。あわせて<strong>懲戒処分</strong>も可能</td></tr>
+<tr><td>従業員と会社の<strong>両方</strong>が賠償責任を負う可能性がある</td><td class="c ok">○</td><td>原告は両方を被告にすることも、一方だけを被告にすることもできる</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>1-3. 資格の有無は責任の要件ではない</h3>
+
+<div class="note">
+<b>頻出</b>　「マスター資格に認定されていない場合には、専門家としての民事責任を問われる根拠はない」は<strong>誤り</strong>（2021年度）。<br>
+専門家責任は<strong>宅地建物取引士などの資格の有無に限られず</strong>、抽象的に言えば<strong>専門的な知識と職業倫理を要求される立場にいる個人</strong>であれば問われうる。
+</div>
+
+<h3>1-4. 行政法規と民事責任の関係</h3>
+
+<ul>
+<li>「金商法や監督指針上の<strong>すべての規定は行政処分のための規定にすぎない</strong>から、規定違反を理由に善管注意義務違反を主張できない」は誤り</li>
+<li><strong>善管注意義務の内容は、契約で具体的義務内容が明らかにされるものに限られない</strong>。販売業者が説明義務違反で損害賠償を認められた裁判例がある</li>
+<li>一方で<strong>金商法36条1項の誠実・公正義務は、文言だけでは具体的基準や関係性が明確でない</strong>ため、同条違反を根拠に直ちに請求が認められるわけでもない</li>
+</ul>
+
+<h3>1-5. 信義則上の説明義務（2023年度）</h3>
+
+<p>宅地建物取引士は、<strong>宅建業法上の重要事項説明だけでなく、信義則上の説明義務も負う</strong>。依頼者から具体的な指示（中途解約条項を入れる等）を受けていながら反した場合は<strong>善管注意義務違反</strong>となる。</p>
+
+<h2 id="s2"><span class="n">2</span>誠実公正義務と忠実義務（問2）</h2>
+
+<h3>2-1. 3つの義務の根拠条文</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>義務</th><th>根拠</th><th>主体</th></tr></thead>
+<tbody>
+<tr><th>誠実公正義務</th><td><strong>金商法36条1項</strong></td><td>金融商品取引業者等<strong>並びにその役員及び使用人</strong></td></tr>
+<tr><th>忠実義務（投資運用業）</th><td><strong>金商法42条1項</strong></td><td>金融商品取引業者等（権利者のために）</td></tr>
+<tr><th>忠実義務（第一種業者）</th><td><strong>金商法に規定なし</strong></td><td>ただし<strong>民法の受任者としての忠実義務</strong>は負うと解される</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　誠実公正義務は<strong>「使用人」も主体に含まれる</strong>。「使用人が負うとまでは規定していない」は誤り（2022年度）。<br>
+また<strong>第一種金融商品取引業者に金商法上の忠実義務の規定はない</strong>。「規定されている」とする枝が2023年度に出ている。
+</div>
+
+<h3>2-2. 忠実義務の定義</h3>
+
+<div class="key">
+<strong>忠実義務</strong>＝受任者は<strong>専ら依頼者の利益を優先</strong>させるべきであり、<strong>自己または第三者の利益を優先させてはならない</strong>という義務。<br>
+自己または第三者の利益と依頼者の利益が対立する場合には、<strong>利益相反行為をしてはならない義務</strong>を負う場合がある。
+</div>
+
+<h3>2-3. 「顧客」は誰か — 旧105固有の深い論点</h3>
+
+<p>3年を通じて<strong>「顧客」の指す範囲</strong>が繰り返し問われた。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th>文脈</th><th>「顧客」が指す者</th></tr></thead>
+<tbody>
+<tr><th>利益相反管理の文脈<br>（投資一任契約の場合）</th><td><strong>委託者</strong>。忠実義務は依頼者に対して負うものだから</td></tr>
+<tr><th>誠実公正義務の文脈</th><td><strong>投資家</strong>と解釈するのが自然。「私募の取扱いを委託する特定目的会社」を含めるのは誤り</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>2023年度では<strong>「募集の取扱いの委託を受けた第一種業者にとっての顧客は、委託者である投資法人ではなく勧誘の相手方である投資家」</strong>という枝が出たが、そもそも第一種業者に金商法上の忠実義務規定がないため誤りとされた。</p>
+
+<h3>2-4. 顧客本位の業務運営に関する原則</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>論点</th><th>正しい理解</th></tr></thead>
+<tbody>
+<tr><th>法的拘束力</th><td><strong>ない</strong>（ベストプラクティスを目指す原則）</td></tr>
+<tr><th>金商法との関係</th><td>原則に含まれる内容の一部（誠実公正義務、忠実義務）は<strong>金商法上の行為義務でもある</strong></td></tr>
+<tr><th>「顧客」の範囲</th><td>金商法上の「顧客」と<strong>必ずしも一致しない</strong></td></tr>
+<tr><th>求める内容</th><td>顧客の資産状況・取引経験・知識・目的を把握し、<strong>ふさわしい商品を組成・販売・推奨</strong>すること。利益相反の可能性を正確に把握し<strong>適切に管理</strong>すること</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>2-5. 監督指針の位置づけ（2022年度）</h3>
+
+<div class="key">
+2021年1月改正の監督指針は、<strong>適合性の検証の必要性と、顧客に対する誠実公正義務の履行とを「一体のもの」</strong>として捉えている。<strong>別の問題という位置づけはしていない。</strong>
+</div>
+
+<h3>2-6. 組織の体制整備は不可欠</h3>
+
+<p>「個人が自ら遵法意識を高めれば足り、会社の社内体制構築は必要でない」は誤り。<strong>個人がいくら意識を持っていても、帰属する組織が法令遵守の体制を整えていなければ能力を発揮できない。</strong></p>
+
+<h2 id="s3"><span class="n">3</span>J-REITの利益相反取引規制（問3）</h2>
+
+<p><strong>このブロックは現行104へ移った内容。</strong>手続きの暗記で確実に取れる。</p>
+
+<h3>3-1. 必要な手続きの一覧</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th class="c">順</th><th>手続き</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td class="c">①</td><td>取引に先立ち、<strong>投資法人の事前同意</strong>を得る。投資法人側は<strong>役員会の承認</strong>を経る</td><td>投信法</td></tr>
+<tr><td class="c">②</td><td>資産運用会社の<strong>社内規程に基づく意思決定プロセス</strong>で審議・決議</td><td>自主規制</td></tr>
+<tr><td class="c">③</td><td><strong>利害関係人等や役職員にあたらない外部の不動産鑑定士</strong>に鑑定評価を行わせ、結果を投資法人へ通知</td><td>投信法</td></tr>
+<tr><td class="c">④</td><td>機関決議を行った日に<strong>プレスリリース（適時開示）</strong></td><td>取引所規則</td></tr>
+<tr><td class="c">⑤</td><td>取引後、<strong>資産運用会社から投資法人へ</strong>取引報告書面を遅滞なく交付</td><td>投信法</td></tr>
+<tr><td class="c">⑥</td><td>投資主に通知する<strong>資産運用報告</strong>に期中の取引を表示</td><td>投信協会規則</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　崩し方は3通り。<br>
+<strong>①提出先の取り違え</strong>　取引報告書面は<strong>金融庁ではなく投資法人</strong>へ。また交付するのは<strong>資産運用会社から投資法人へ</strong>であって逆ではない。<br>
+<strong>②取得書類の取り違え</strong>　法令上必要なのは<strong>外部の不動産鑑定士による鑑定評価</strong>であって、<strong>外部弁護士のオピニオンレターではない</strong>（2022年度）。<br>
+<strong>③鑑定士の属性</strong>　資産運用会社の利害関係人等や役職員では不可。
+</div>
+
+<h3>3-2. 制度の位置づけ</h3>
+
+<ul>
+<li><strong>利益相反取引はJ-REIT特有ではない。</strong>資産の保有主体と運用主体が異なる場合に生じるもので、<strong>私募ファンドでも見られる</strong></li>
+<li>投信法は規制対象となる資産運用会社の関係者を<strong>「利害関係人等」</strong>と定義</li>
+<li>多くの資産運用会社が<strong>独自の社内規程</strong>でけん制機能を強化している</li>
+<li>上場投資法人と資産運用会社が東証に提出する<strong>運用体制報告書</strong>には、利益相反取引への対応方針と運用体制を記載する</li>
+<li>不動産取得時の適時開示では<strong>対象不動産の過去の取引情報も開示</strong>する</li>
+</ul>
+
+<h2 id="s4"><span class="n">4</span>インサイダー取引規制（問4）</h2>
+
+<p><strong>このブロックも現行104へ移った内容。</strong></p>
+
+<h3>4-1. 規制の枠組み（2021年度の空欄補充）</h3>
+
+<div class="key">
+金商法では、上場会社等に係る<strong>「会社関係者」</strong>またはこれらの会社関係者から情報を得た<strong>情報受領者</strong>が、当該会社等の業務等に関する<strong>「重要事実」</strong>を知った場合に、その重要事実が<strong>「公表」</strong>される前に株式等の売買等を行う取引が禁止される。
+</div>
+
+<h3>4-2. 「上場会社等」の範囲 — J-REIT特有の広さ</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>含まれる者</th></tr></thead>
+<tbody>
+<tr><td>上場投資法人</td></tr>
+<tr><td><strong>上場投資法人の資産運用会社</strong></td></tr>
+<tr><td><strong>資産運用会社の特定関係法人</strong>（親会社や一定の利害関係人等）</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>J-REITは外部運用型のため、会社関係者の範囲が通常の上場会社より広い。<strong>重要事実にも投資法人自身の決定事実だけでなく、資産運用会社に係る決定事実が含まれる</strong>。</p>
+
+<h3>4-3. 罰則と没収（2023年度）</h3>
+
+<div class="key">
+インサイダー取引規制違反では、罰金刑等と合わせて<strong>その取引で得た財産が没収</strong>される（金商法198条の2）。<br>
+没収されるのは<strong>取引によって不正に得られた「利益」だけではない。</strong>
+</div>
+
+<p>2023年度の事例では、3,000万円で買い付けて4,000万円で売却した場合、<strong>没収額は差益1,000万円ではなく売却により得た4,000万円全額</strong>とされた。<strong>「財産」の没収であって「利益」の没収ではない</strong>という点が核心。</p>
+
+<h3>4-4. 「公表」の要件</h3>
+
+<p>重要事実の「公表」は<strong>法令で要件が定められている</strong>。適当な方法で周知すれば足りるわけではない。</p>
+
+<h2 id="s5"><span class="n">5</span>マスター職業倫理規程（問5）</h2>
+
+<h3>5-1. 望ましくない行為の類型</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>行為</th><th>違反の性質</th></tr></thead>
+<tbody>
+<tr><td>不動産鑑定士に<strong>自らのファンドに有利な評価を働きかける</strong></td><td>外部専門家の職業倫理に反する要請。<strong>要請する側も応じる側も不可</strong></td></tr>
+<tr><td>通常より<strong>高い報酬や有利な条件で同じ資本傘下の会社に維持管理を委託</strong></td><td><strong>忠実義務違反</strong></td></tr>
+<tr><td>部下の「軽微な土壌汚染は説明不要」という報告を<strong>黙認</strong></td><td><strong>善管注意義務違反を越えて忠実義務違反</strong></td></tr>
+<tr><td>不動産投資運用業に従事していないマスターが<strong>継続教育を受講しない</strong></td><td><strong>例外なく</strong>継続教育の義務がある</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="key">
+判断の軸は<strong>「投資家の利益より自己・自社・関係会社の利益を優先していないか」</strong>。優先していれば忠実義務違反。<br>
+また<strong>「黙認」は不作為でも違反になる</strong>点が重要。プロは判断に迷う場面や部下が誤った方向へ進もうとする場面でこそ、躊躇なく姿勢を示さなければならない。
+</div>
+
+<h3>5-2. マスターの基本的義務</h3>
+
+<ul>
+<li>関係法令および<strong>不動産証券化協会の定める規則</strong>ならびに<strong>マスター職業倫理規程</strong>を遵守し、顧客に対し<strong>公正</strong>に職務を遂行する</li>
+<li>認定後も<strong>継続教育などを通じて常に理論と実務の研鑽</strong>に努め、専門知識・能力を維持向上させる</li>
+<li>上級者ほど<strong>業界の常識や商慣習に新たな視点から疑問を投げかけ</strong>、投資家の利益に適う改善を続ける（＝「不断の研鑽」）</li>
+</ul>
+
+<h3>5-3. 処分の種類 — 数と内容が問われる</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th class="c">順</th><th>処分</th></tr></thead>
+<tbody>
+<tr><td class="c">①</td><td>厳重注意</td></tr>
+<tr><td class="c">②</td><td><strong>戒告</strong></td></tr>
+<tr><td class="c">③</td><td>一時登録抹消</td></tr>
+<tr><td class="c">④</td><td>資格の取消し</td></tr>
+<tr><td class="c">⑤</td><td><strong>資格の剥奪</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>頻出</b>　2023年度で<strong>「厳重注意、一時登録抹消、資格の取消しの3つ」</strong>とする枝が誤りとして出ている。正しくは<strong>5種類</strong>。<strong>戒告と資格の剥奪が抜けている</strong>のが引っかけどころ。
+</div>
+
+<h3>5-4. 信認と契約の違い</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th></th><th>信認</th><th>契約</th></tr></thead>
+<tbody>
+<tr><th>関係者</th><td>通常<strong>3人</strong>（信認者・委託者／受認者・受託者／受益者）。ただし信認者が自らを受益者に指定すれば<strong>2人関係</strong>になる</td><td>2人</td></tr>
+<tr><th>前提</th><td>関係者間に<strong>圧倒的な情報格差</strong>があり、一方が他方を信頼しなければ関係が成り立たない。<strong>プロフェッショナルに全てを託す</strong></td><td>対等な当事者間の合意</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>2023年度で<strong>信認の説明を「契約では」として出した枝</strong>が誤りとされている。<strong>情報格差を前提に全てを託すのが信認</strong>。</p>
+
+<h2 id="s6"><span class="n">6</span>引っかけパターンの類型</h2>
+
+<h3>型1：断定・限定による誇張（最頻出）</h3>
+<ul>
+<li>会社が責任を負う場合「に限り」個人も責任を負う</li>
+<li>マスター資格がなければ専門家責任を問われる根拠は「ない」</li>
+<li>第三者に対して負う責任は「含まれない」</li>
+<li>「すべての」規定は行政処分のための規定にすぎない</li>
+<li>使用人が誠実公正義務を負うとまでは「規定していない」</li>
+<li>従事していないマスターは継続教育を受講する義務は「ない」</li>
+<li>利益相反取引はJ-REIT「特有」の取引形態</li>
+</ul>
+
+<h3>型2：提出先・交付先の取り違え</h3>
+<ul>
+<li>取引報告書面の提出先（金融庁ではなく<strong>投資法人</strong>）</li>
+<li>取引報告書面の交付方向（<strong>資産運用会社 → 投資法人</strong>）</li>
+</ul>
+
+<h3>型3：取得書類・専門家の取り違え</h3>
+<ul>
+<li>外部弁護士のオピニオンレター ↔ <strong>外部の不動産鑑定士による鑑定評価</strong></li>
+<li>鑑定士の属性（利害関係人等・役職員では不可）</li>
+</ul>
+
+<h3>型4：定義の入れ替え</h3>
+<ul>
+<li>信認と契約</li>
+<li>忠実義務と善管注意義務</li>
+<li>「顧客」の指す範囲（委託者と投資家）</li>
+</ul>
+
+<h3>型5：数・範囲のすり替え</h3>
+<ul>
+<li>処分の種類（5種類。厳重注意・戒告・一時登録抹消・資格の取消し・資格の剥奪）</li>
+<li>没収の対象（利益ではなく<strong>財産</strong>）</li>
+<li>信認関係の人数（原則3人だが2人になる場合もある）</li>
+</ul>
+
+<h2 id="s7"><span class="n">7</span>現行カリキュラムとの対応</h2>
+
+<h3>7-1. 移動の全体像</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>旧105の問</th><th>テーマ</th><th>現行での位置</th></tr></thead>
+<tbody>
+<tr><td class="c">1</td><td>専門家責任・使用者責任</td><td><strong>106 問48</strong>「個人と法人の不法行為責任」</td></tr>
+<tr><td class="c">2</td><td>誠実公正義務・忠実義務・顧客本位の原則</td><td><strong>106 問49</strong>「善管注意義務、忠実義務、信義誠実義務等」</td></tr>
+<tr><td class="c">3</td><td><strong>J-REITの利益相反取引規制</strong></td><td><strong>104 問31・33・34</strong></td></tr>
+<tr><td class="c">4</td><td><strong>J-REITのインサイダー取引規制</strong></td><td><strong>104 問32・33・34</strong></td></tr>
+<tr><td class="c">5</td><td>マスター職業倫理規程</td><td><strong>106 問50</strong>「プロフェッショナルとしての義務と責任等」</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>7-2. 学習上の使い分け</h3>
+
+<div class="key">
+<strong>問1・2・5（3年で9問）は現行106の演習に使える。</strong>現行106は6問しかないので、これを足すと<strong>15問</strong>となり演習量が2.5倍になる。<br>
+<strong>問3・4（3年で6問）は現行104の演習として扱う。</strong>利益相反とインサイダーは現行104でも毎年出る論点なので無駄にならない。
+</div>
+
+<h3>7-3. 旧年度の方が厚い論点</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>論点</th><th>コメント</th></tr></thead>
+<tbody>
+<tr><th><strong>「顧客」は誰か</strong></th><td>旧105は3年連続でこの論点を深く掘っている。現行106でも2025年度に「顧客は相対概念」として出題されており、<strong>旧年度で慣れておく価値が高い</strong></td></tr>
+<tr><th><strong>利益相反取引の手続き</strong></th><td>旧105は事例形式で<strong>手続きを1つずつ検証させる</strong>構成。現行104の問33・34より丁寧で、手続きを覚える素材として優れている</td></tr>
+<tr><th><strong>マスター職業倫理規程</strong></th><td>処分の種類、継続教育義務、不断の研鑽など。現行106の問50より<strong>規程そのものに踏み込んでいる</strong></td></tr>
+<tr><th><strong>インサイダーの罰則</strong></th><td>没収額の計算まで問われた。現行104では「懲役刑も科されうる」程度の扱い</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>7-4. 現行106で新たに加わった論点</h3>
+
+<p>現行106では、旧105になかった次の論点が加わっている。<strong>旧年度では代替できない</strong>ので注意。</p>
+
+<ul>
+<li><strong>信認義務の2要素の定義</strong>（忠実義務＝利益を第一に考える／善管注意義務＝十分な注意を払う）。現行106の問50で2年連続、定義を入れ替えた枝が出ている</li>
+<li><strong>金融サービス提供法2条1項</strong>の誠実業務遂行義務。「個人の誠実性を要求する条文はない」を誤りとする論点</li>
+<li><strong>行政法規違反と民事責任の関係</strong>を両方向から問う設問構成</li>
+<li><strong>ARES自主行動基準</strong>（協会が策定する会員向けの共通行動基準）</li>
+</ul>
+
+<footer>
+出典：一般社団法人不動産証券化協会「2021〜2023年度 Course1 修了試験・再認定試験 問題・解説」。個人の学習用に整理したもの。本文中の解釈・補足は公式解説を離れた部分を含むため、テキストで確認すること。法令の解釈にわたる部分は出題年度時点のものであり、現行カリキュラムのテキストとはページ番号・記載内容が異なる場合がある。
+</footer>
+
+
+</div>
+</body>
+</html>
