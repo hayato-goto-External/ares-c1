@@ -1,0 +1,18 @@
+{
+  "name": "証券化マスター 本番形式",
+  "short_name": "本番形式",
+  "description": "不動産証券化協会認定マスター Course1 の過去問を本番と同じ50問・120分で解く模試",
+  "id": "./exam.html",
+  "start_url": "./exam.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#E7E8E2",
+  "theme_color": "#E7E8E2",
+  "lang": "ja",
+  "icons": [
+    { "src": "./icon-exam-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "./icon-exam-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "./icon-exam-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

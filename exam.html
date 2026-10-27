@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E7E8E2">
+<title>証券化マスター Course1 本番形式</title>
+<link rel="manifest" href="./exam.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon-exam.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="本番形式">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+:root{
+  --paper:#E7E8E2; --sheet:#FCFCFA; --ink:#1B1E24; --ink2:#5C6371; --ink3:#8A9099;
+  --rule:#C7C9C1; --rule2:#DEDFD8; --ai:#2A4A7B; --ai-soft:rgba(42,74,123,.08);
+  --shu:#B23A2F; --shu-soft:rgba(178,58,47,.07); --mark:#1B1E24;
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","MS PMincho",serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#16181C; --sheet:#1F2227; --ink:#E6E7EA; --ink2:#A9AEB8; --ink3:#7C828C;
+    --rule:#3A3E46; --rule2:#2C3036; --ai:#8FA9D6; --ai-soft:rgba(143,169,214,.12);
+    --shu:#E07A6E; --shu-soft:rgba(224,122,110,.10); --mark:#E6E7EA;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--gothic);
+  font-size:15px;line-height:1.75;-webkit-text-size-adjust:100%}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+[hidden]{display:none!important}
+
+/* ---- 上部バー ---- */
+.bar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.bar-in{display:flex;align-items:center;gap:12px;min-height:52px;padding:6px 0}
+.bar-title{flex:1;min-width:0}
+.bar-title b{display:block;font-size:14px;font-weight:600;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-title span{display:block;font-size:11px;color:var(--ink3);line-height:1.4}
+.clock{font-variant-numeric:tabular-nums;font-size:19px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
+.clock.low{color:var(--shu)}
+.clock.over{color:var(--shu)}
+.clock small{font-size:10.5px;font-weight:400;color:var(--ink3);margin-right:4px}
+.btn-ghost{border:1px solid var(--rule);background:var(--sheet);border-radius:3px;
+  padding:6px 10px;font-size:12px;cursor:pointer;white-space:nowrap}
+.btn-ghost:hover{border-color:var(--ink3)}
+.track{height:3px;background:var(--rule2)}
+.track i{display:block;height:100%;width:0;background:var(--ai);transition:width .2s}
+
+/* ---- ホーム ---- */
+.home h1{font-size:20px;font-weight:600;margin:26px 0 4px;line-height:1.45}
+.home .lede{font-size:13px;color:var(--ink2);margin:0 0 22px}
+.yr{background:var(--sheet);border:1px solid var(--rule);margin-bottom:12px}
+.yr-head{display:flex;align-items:baseline;gap:10px;padding:11px 14px 9px;border-bottom:1px solid var(--rule2)}
+.yr-head b{font-size:15px;font-weight:600}
+.yr-head span{font-size:11.5px;color:var(--ink3)}
+.yr-row{display:grid;grid-template-columns:1fr 1fr}
+.set{display:block;width:100%;text-align:left;border:0;background:none;padding:12px 14px;cursor:pointer;
+  border-right:1px solid var(--rule2)}
+.set:last-child{border-right:0}
+.set:hover{background:var(--ai-soft)}
+.set .s1{font-size:14px;font-weight:600;display:block}
+.set .s2{font-size:11.5px;color:var(--ink3);display:block;line-height:1.5}
+.set .s3{font-size:12.5px;display:block;margin-top:5px;font-variant-numeric:tabular-nums}
+.set .s3.go{color:var(--ai)}
+.set .s3.done b{font-size:17px}
+.home .foot{font-size:11.5px;color:var(--ink3);margin:22px 0 40px;line-height:1.8}
+.home .foot a{color:var(--ai)}
+
+/* ---- 開始前 ---- */
+.intro{background:var(--sheet);border:1px solid var(--rule);padding:22px 20px;margin:22px 0}
+.intro h2{font-size:18px;font-weight:600;margin:0 0 4px}
+.intro p{font-size:13.5px;color:var(--ink2);margin:0 0 12px}
+.intro table{border-collapse:collapse;font-size:13px;margin:6px 0 18px;width:100%}
+.intro td{padding:5px 0;border-bottom:1px solid var(--rule2);vertical-align:top}
+.intro td:first-child{color:var(--ink3);width:6em}
+.btn-main{border:0;background:var(--ink);color:var(--paper);padding:12px 22px;font-size:14.5px;
+  font-weight:600;border-radius:3px;cursor:pointer}
+.btn-main:hover{opacity:.9}
+.intro .sub{margin-top:12px;display:flex;gap:14px;flex-wrap:wrap}
+.link{border:0;background:none;padding:2px 0;font-size:12.5px;color:var(--ink3);text-decoration:underline;cursor:pointer}
+
+/* ---- 問題 ---- */
+.q{background:var(--sheet);border:1px solid var(--rule);margin:18px 0 12px;padding:18px 18px 8px}
+.q-meta{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:12px}
+.q-no{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.q-sub{font-size:12.5px;color:var(--ink2)}
+.q-topic{font-size:11.5px;color:var(--ink3);width:100%}
+.stem{font-family:var(--mincho);font-size:16.5px;line-height:1.95;margin:0 0 14px}
+.fig{display:block;margin:0 0 14px;border:1px solid var(--rule2);background:#fff}
+.fig img{display:block;width:100%;height:auto}
+.br{margin:0 0 14px;padding:0;list-style:none}
+.br li{display:grid;grid-template-columns:1.6em 1fr;gap:2px 6px;font-family:var(--mincho);
+  font-size:15.5px;line-height:1.85;padding:6px 0;border-top:1px dashed var(--rule2)}
+.br li:first-child{border-top:0}
+.br .mk{font-weight:600}
+.ch{margin:0 0 6px;padding:0;list-style:none;border-top:1px solid var(--rule2)}
+.ch li{display:grid;grid-template-columns:1.6em 1fr;gap:2px 6px;font-size:14.5px;line-height:1.75;padding:7px 0;
+  border-bottom:1px solid var(--rule2)}
+.ch li.num{font-family:var(--mincho);font-size:15.5px;line-height:1.85}
+.ch .mk{font-weight:600;font-variant-numeric:tabular-nums}
+
+/* 判定後の枝ごとの○× */
+.verdict{display:inline-block;min-width:1.4em;font-weight:600;margin-right:4px}
+.verdict.o{color:var(--ai)} .verdict.x{color:var(--shu)}
+.why{grid-column:2;font-family:var(--gothic);font-size:13px;line-height:1.75;color:var(--ink2);margin-top:3px}
+.why .sup{display:block;margin-top:5px;padding-left:9px;border-left:2px solid var(--ai);color:var(--ink2)}
+.why .sup::before{content:"補足　";color:var(--ai);font-weight:600}
+
+/* ---- マークシート ---- */
+.marks{background:var(--sheet);border:1px solid var(--rule);padding:14px 16px 16px;margin-bottom:12px}
+.marks-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.marks-head b{font-size:12.5px;font-weight:600}
+.marks-head span{font-size:11.5px;color:var(--ink3)}
+.ovals{display:flex;gap:14px;justify-content:center}
+.oval{width:56px;height:76px;border:2px solid var(--ink2);border-radius:50%;background:transparent;
+  display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:600;
+  cursor:pointer;transition:background .12s,border-color .12s,color .12s;font-variant-numeric:tabular-nums}
+.oval:hover:not([disabled]){border-color:var(--ink);background:var(--ai-soft)}
+.oval[disabled]{cursor:default}
+.oval.pick{background:var(--mark);border-color:var(--mark);color:var(--sheet)}
+.oval.right{border-color:var(--ai);color:var(--ai);border-width:3px}
+.oval.pick.right{background:var(--ai);border-color:var(--ai);color:var(--sheet)}
+.oval.pick.wrong{background:var(--shu);border-color:var(--shu);color:var(--sheet)}
+.oval.dim{opacity:.38}
+
+/* ---- 採点結果 ---- */
+.res{border:1px solid var(--rule);background:var(--sheet);padding:14px 16px;margin-bottom:12px}
+.res.ok{border-color:var(--ai)} .res.ng{border-color:var(--shu)}
+.res-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.res-head .big{font-size:20px;font-weight:600}
+.res.ok .big{color:var(--ai)} .res.ng .big{color:var(--shu)}
+.res-head .ans{font-size:13px;color:var(--ink2)}
+.res .corr{margin:10px 0 0;padding:8px 11px;font-size:12.5px;line-height:1.75;background:var(--shu-soft);color:var(--ink)}
+.res .corr b{color:var(--shu)}
+.res .exp{margin:10px 0 0;font-size:13.5px;line-height:1.85;color:var(--ink)}
+.res .exp .sup{display:block;margin-top:8px;padding-left:9px;border-left:2px solid var(--ai);color:var(--ink2);font-size:13px}
+.res .exp .sup::before{content:"補足　";color:var(--ai);font-weight:600}
+.res .undo{margin-top:8px}
+
+/* ---- 下部ナビ ---- */
+.nav{position:sticky;bottom:0;background:var(--paper);border-top:1px solid var(--rule);z-index:15}
+.nav-in{display:flex;align-items:center;gap:10px;padding:9px 0 calc(9px + env(safe-area-inset-bottom))}
+.nav .grow{flex:1;text-align:center;font-size:12px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.nav button{border:1px solid var(--rule);background:var(--sheet);padding:9px 16px;font-size:13.5px;border-radius:3px;cursor:pointer}
+.nav button.fwd{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.nav button[disabled]{opacity:.35;cursor:default}
+
+/* ---- 解答用紙 ---- */
+.sheet-wrap{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.35);display:flex;justify-content:center;align-items:flex-end}
+.sheet{background:var(--sheet);width:100%;max-width:760px;max-height:88vh;overflow:auto;border-top:1px solid var(--rule);
+  padding:14px 16px calc(18px + env(safe-area-inset-bottom))}
+@media (min-width:720px){ .sheet-wrap{align-items:center} .sheet{border:1px solid var(--rule);max-height:84vh} }
+.sheet-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sheet-head b{flex:1;font-size:15px;font-weight:600}
+.sheet-sum{font-size:12px;color:var(--ink2);margin-bottom:10px;font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 22px}
+@media (min-width:560px){ .grid{grid-template-columns:repeat(3,1fr)} }
+.row{display:flex;align-items:center;gap:6px;padding:4px 2px;border-bottom:1px solid var(--rule2);cursor:pointer;
+  background:none;border-left:0;border-right:0;border-top:0;width:100%;text-align:left}
+.row:hover{background:var(--ai-soft)}
+.row.cur{background:var(--ai-soft)}
+.row .rn{width:2.2em;font-size:12px;color:var(--ink2);font-variant-numeric:tabular-nums;text-align:right;margin-right:4px}
+.row .dot{width:15px;height:21px;border:1.5px solid var(--ink3);border-radius:50%;font-size:9px;
+  display:flex;align-items:center;justify-content:center;color:var(--ink3)}
+.row .dot.p{background:var(--mark);border-color:var(--mark);color:var(--sheet)}
+.row .dot.p.r{background:var(--ai);border-color:var(--ai)}
+.row .dot.p.w{background:var(--shu);border-color:var(--shu)}
+.row .dot.c{border-color:var(--ai);border-width:2px}
+.row .rs{margin-left:auto;font-size:12px;width:1.2em;text-align:center}
+.row .rs.o{color:var(--ai)} .row .rs.x{color:var(--shu)}
+.sheet-foot{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+
+/* ---- 結果 ---- */
+.result h2{font-size:18px;font-weight:600;margin:24px 0 4px}
+.result .when{font-size:12px;color:var(--ink3);margin:0 0 16px}
+.score{display:flex;align-items:baseline;gap:8px;margin:0 0 6px}
+.score b{font-size:54px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.score span{font-size:16px;color:var(--ink2)}
+.score-note{font-size:13px;margin:0 0 20px}
+.score-note.pass{color:var(--ai)} .score-note.fail{color:var(--shu)}
+.tbl{border-collapse:collapse;width:100%;font-size:13px;background:var(--sheet);margin:0 0 18px}
+.tbl th,.tbl td{border:1px solid var(--rule2);padding:7px 9px;text-align:left;vertical-align:middle}
+.tbl th{font-weight:600;background:var(--paper);white-space:nowrap}
+.tbl td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl td.ok{color:var(--ai);font-weight:600} .tbl td.ng{color:var(--shu);font-weight:600}
+.meter{height:6px;background:var(--rule2);position:relative;min-width:60px}
+.meter i{position:absolute;inset:0 auto 0 0;background:var(--ink2)}
+.meter u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--shu)}
+.result h3{font-size:14.5px;font-weight:600;margin:22px 0 8px}
+.wrongs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 20px}
+.wrongs button{border:1px solid var(--shu);color:var(--shu);background:var(--sheet);padding:4px 9px;font-size:12.5px;border-radius:3px;cursor:pointer;font-variant-numeric:tabular-nums}
+.result .acts{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 40px}
+.result .acts button{border:1px solid var(--rule);background:var(--sheet);padding:9px 14px;font-size:13px;border-radius:3px;cursor:pointer}
+
+.warn{margin:12px 0;padding:9px 12px;font-size:12px;line-height:1.6;color:var(--shu);border:1px solid var(--shu);background:var(--shu-soft)}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+
+<!-- ホーム -->
+<div id="vHome" class="home wrap">
+  <h1>本番形式で解く</h1>
+  <p class="lede">過去問5年分を、本番と同じ50問・120分で。1問ごとにその場で採点します。</p>
+  <p class="warn" id="warnStore" hidden>このブラウザでは解答を保存できません。画面を閉じると記録が消えます。</p>
+  <div id="yearList"></div>
+  <p class="foot">
+    2024年度以降は現行カリキュラム、2023年度以前は旧カリキュラムの出題構成です。<br>
+    <a href="./index.html">一問一答を開く</a>
+  </p>
+</div>
+
+<!-- 試験画面 -->
+<div id="vExam" hidden>
+  <div class="bar">
+    <div class="wrap bar-in">
+      <button class="btn-ghost" id="btnHome" aria-label="セット選択に戻る">戻る</button>
+      <div class="bar-title"><b id="setName"></b><span id="setSub"></span></div>
+      <div class="clock" id="clock" aria-live="off"></div>
+      <button class="btn-ghost" id="btnPause"></button>
+    </div>
+    <div class="track"><i id="track"></i></div>
+  </div>
+
+  <div class="wrap">
+    <!-- 開始前 -->
+    <div id="intro" class="intro" hidden>
+      <h2 id="introTitle"></h2>
+      <p>開始すると120分のタイマーが動きます。解答はその場で採点され、解説が出ます。アプリを閉じたり画面を消したりするとタイマーは止まり、戻ると続きから再開します。</p>
+      <table id="introTbl"></table>
+      <button class="btn-main" id="btnStart">開始する</button>
+      <div class="sub"><button class="link" id="btnNoTimer">タイマーなしで解く</button></div>
+    </div>
+
+    <!-- 問題 -->
+    <div id="qArea" hidden>
+      <article class="q" id="qBox"></article>
+      <section class="marks" id="marks">
+        <div class="marks-head"><b>解答欄</b><span id="marksHint">番号をタップすると採点します</span></div>
+        <div class="ovals" id="ovals"></div>
+      </section>
+      <section id="res"></section>
+      <div style="height:8px"></div>
+    </div>
+
+    <!-- 結果 -->
+    <div id="result" class="result" hidden></div>
+  </div>
+
+  <div class="nav" id="nav">
+    <div class="wrap nav-in">
+      <button id="btnPrev">前へ</button>
+      <div class="grow"><button class="btn-ghost" id="btnSheet">解答用紙</button></div>
+      <button id="btnNext" class="fwd">次へ</button>
+    </div>
+  </div>
+</div>
+
+<!-- 解答用紙 -->
+<div class="sheet-wrap" id="sheetWrap" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheet-head"><b id="sheetTitle">解答用紙</b><button class="btn-ghost" id="btnSheetClose">閉じる</button></div>
+    <div class="sheet-sum" id="sheetSum"></div>
+    <div class="grid" id="grid"></div>
+    <div class="sheet-foot">
+      <button class="btn-main" id="btnFinish">終了して結果を見る</button>
+    </div>
+  </div>
+</div>
+
+<script src="./exam.js"></script>
+<script>
+(function(){
+"use strict";
+
+var DATA = window.EXAM_DATA || {};
+var LIMIT = 120 * 60 * 1000;
+var YEARS = ['2025','2024','2023','2022','2021'];
+var SESS = {AM:'午前', PM:'午後'};
+
+/* 現行カリキュラムの目標（直前3週間の得点計画） */
+var TARGET = {'101':3,'102':9,'103':18,'104':26,'105':15,'106':2};
+var BLOCKS104 = [['法務',16,21,4],['業規制',22,30,5],['J-REIT',31,34,3],['会計',35,42,7],['税務',43,50,7]];
+
+/* ---------- 保存 ---------- */
+var KEY = 'ares-c1-exam';
+var canStore = false, store = {sets:{}};
+try{ localStorage.setItem(KEY+'-t','1'); localStorage.removeItem(KEY+'-t'); canStore = true; }catch(e){}
+if(canStore){ try{ var raw = localStorage.getItem(KEY); if(raw){ store = JSON.parse(raw) || {sets:{}}; if(!store.sets) store.sets = {}; } }catch(e){ store = {sets:{}}; } }
+function save(){ if(!canStore) return; try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
+function st(key){ if(!store.sets[key]) store.sets[key] = {a:{}, el:0, run:false, t0:null, started:false, timer:true, done:false, cur:0}; return store.sets[key]; }
+
+/* ---------- ユーティリティ ---------- */
+function el(tag, cls, txt){ var e = document.createElement(tag); if(cls) e.className = cls; if(txt != null) e.textContent = txt; return e; }
+function $(id){ return document.getElementById(id); }
+function isRight(q, pick){
+  if(q.void) return true;
+  if(q.accept) return q.accept.indexOf(pick) >= 0;
+  return q.ans === pick;
+}
+function elapsed(s){ return s.el + (s.run && s.t0 ? Date.now() - s.t0 : 0); }
+function fmt(ms){
+  var t = Math.max(0, Math.round(ms / 1000));
+  var h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), sec = t % 60;
+  return (h ? h + ':' + (m < 10 ? '0' : '') : '') + m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+function tally(key){
+  var qs = DATA[key], s = st(key), done = 0, ok = 0;
+  qs.forEach(function(q){ var p = s.a[q.n]; if(p){ done++; if(isRight(q, p)) ok++; } });
+  return {done: done, ok: ok, total: qs.length};
+}
+
+/* ---------- ホーム ---------- */
+function renderHome(){
+  var box = $('yearList'); box.innerHTML = '';
+  YEARS.forEach(function(y){
+    var card = el('section','yr');
+    var hd = el('div','yr-head');
+    hd.appendChild(el('b', null, y + '年度'));
+    hd.appendChild(el('span', null, y >= '2024' ? '現行カリキュラム' : '旧カリキュラム'));
+    card.appendChild(hd);
+    var row = el('div','yr-row');
+    ['AM','PM'].forEach(function(ss){
+      var key = y + '-' + ss;
+      if(!DATA[key]) return;
+      var s = st(key), t = tally(key);
+      var b = el('button','set');
+      b.appendChild(el('span','s1', SESS[ss] + '　50問'));
+      b.appendChild(el('span','s2', subjectsOf(key)));
+      var s3;
+      if(s.done){
+        s3 = el('span','s3 done');
+        var bb = el('b', null, String(t.ok)); s3.appendChild(bb);
+        s3.appendChild(document.createTextNode(' / 50　' + (t.ok >= 35 ? '目安クリア' : 'あと' + (35 - t.ok) + '問')));
+      } else if(t.done || s.started){
+        s3 = el('span','s3 go', '続きから　' + t.done + '/50 解答' + (s.timer ? '・残り ' + fmt(LIMIT - elapsed(s)) : ''));
+      } else {
+        s3 = el('span','s3', '未着手');
+      }
+      b.appendChild(s3);
+      b.addEventListener('click', function(){ openSet(key); });
+      row.appendChild(b);
+    });
+    card.appendChild(row);
+    box.appendChild(card);
+  });
+}
+function subjectsOf(key){
+  var seen = [], qs = DATA[key];
+  qs.forEach(function(q){ if(seen.indexOf(q.sub) < 0) seen.push(q.sub); });
+  return seen.join('・');
+}
+
+/* ---------- 画面遷移 ---------- */
+var curKey = null, tick = null;
+
+function show(view){
+  $('vHome').hidden = view !== 'home';
+  $('vExam').hidden = view !== 'exam';
+  window.scrollTo(0, 0);
+}
+
+function openSet(key){
+  curKey = key;
+  var s = st(key);
+  var y = key.slice(0,4), ss = key.slice(5);
+  $('setName').textContent = y + '年度 ' + SESS[ss];
+  $('setSub').textContent = subjectsOf(key);
+  show('exam');
+  if(s.done){ renderResult(); }
+  else if(!s.started){ renderIntro(); }
+  else { if(s.timer && !s.run){ resume(); } renderQuestion(); }
+  startTick();
+}
+
+function goHome(){
+  var s = curKey ? st(curKey) : null;
+  if(s && s.run){ pause(); }
+  stopTick(); curKey = null; save();
+  renderHome(); show('home');
+}
+
+/* ---------- タイマー ---------- */
+function resume(){ var s = st(curKey); if(!s.timer || s.done) return; if(!s.run){ s.run = true; s.t0 = Date.now(); save(); } }
+function pause(){ var s = st(curKey); if(s.run){ s.el += Date.now() - s.t0; s.run = false; s.t0 = null; save(); } }
+function startTick(){ stopTick(); paintClock(); tick = setInterval(paintClock, 1000); }
+function stopTick(){ if(tick){ clearInterval(tick); tick = null; } }
+function paintClock(){
+  if(!curKey) return;
+  var s = st(curKey), c = $('clock'), bp = $('btnPause');
+  c.className = 'clock';
+  if(!s.timer){ c.innerHTML = '<small>経過</small>' + fmt(s.el); bp.hidden = true; return; }
+  bp.hidden = s.done || !s.started;
+  var rem = LIMIT - elapsed(s);
+  if(rem >= 0){
+    c.innerHTML = '<small>' + (s.run ? '残り' : '停止中') + '</small>' + fmt(rem);
+    if(rem < 10 * 60 * 1000) c.className = 'clock low';
+  } else {
+    c.innerHTML = '<small>時間切れ</small>+' + fmt(-rem);
+    c.className = 'clock over';
+  }
+  bp.textContent = s.run ? '一時停止' : '再開';
+}
+
+/* ---------- 開始前 ---------- */
+function renderIntro(){
+  $('intro').hidden = false; $('qArea').hidden = true; $('result').hidden = true; $('nav').hidden = true;
+  var key = curKey, y = key.slice(0,4), ss = key.slice(5);
+  $('introTitle').textContent = y + '年度 ' + SESS[ss] + '　50問・120分';
+  var counts = {}; DATA[key].forEach(function(q){ counts[q.sub] = (counts[q.sub]||0) + 1; });
+  var names = {}; DATA[key].forEach(function(q){ names[q.sub] = q.subName; });
+  var t = $('introTbl'); t.innerHTML = '';
+  Object.keys(counts).forEach(function(k){
+    var tr = el('tr'); tr.appendChild(el('td', null, k)); tr.appendChild(el('td', null, names[k] + '（' + counts[k] + '問）')); t.appendChild(tr);
+  });
+  var tr = el('tr'); tr.appendChild(el('td', null, '合格目安')); tr.appendChild(el('td', null, '7割＝35問（協会の正式基準は案内で確認）')); t.appendChild(tr);
+  paintClock();
+}
+function begin(withTimer){
+  var s = st(curKey);
+  s.started = true; s.timer = withTimer; s.el = 0; s.cur = 0;
+  if(withTimer){ s.run = true; s.t0 = Date.now(); }
+  save(); renderQuestion(); paintClock();
+}
+
+/* ---------- 問題 ---------- */
+function curQ(){ return DATA[curKey][st(curKey).cur]; }
+
+function renderQuestion(){
+  $('intro').hidden = true; $('result').hidden = true; $('qArea').hidden = false; $('nav').hidden = false;
+  var s = st(curKey), qs = DATA[curKey], q = qs[s.cur], pick = s.a[q.n] || 0, judged = !!pick;
+
+  var box = $('qBox'); box.innerHTML = '';
+  var meta = el('div','q-meta');
+  meta.appendChild(el('span','q-no','問' + q.n));
+  meta.appendChild(el('span','q-sub', q.sub + '　' + q.subName));
+  meta.appendChild(el('span','q-topic', '出題項目：' + q.topic));
+  box.appendChild(meta);
+
+  if(q.stem) box.appendChild(el('p','stem', q.stem));
+  if(q.figQ){ box.appendChild(figure(q.figQ, '問' + q.n + '（原文）')); }
+
+  var bmap = {};
+  (q.branches||[]).forEach(function(b){ bmap[b.mk] = b; });
+
+  if(q.mode === 'branches'){
+    var ul = el('ul','br');
+    q.branches.forEach(function(b){
+      var li = el('li');
+      var mk = el('span','mk', b.mk);
+      var tx = el('span');
+      if(judged){ tx.appendChild(verdict(b.ok)); }
+      tx.appendChild(document.createTextNode(b.text));
+      li.appendChild(mk); li.appendChild(tx);
+      if(judged) li.appendChild(why(b));
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+  }
+
+  if(!q.figQ || q.mode !== 'single'){
+    var ol = el('ul','ch');
+    q.choices.forEach(function(c){
+      var li = el('li', q.mode === 'numbered' ? 'num' : null);
+      li.appendChild(el('span','mk', String(c.no)));
+      var tx = el('span');
+      var b = q.mode === 'numbered' ? findBranch(q, c.no) : null;
+      if(judged && b) tx.appendChild(verdict(b.ok));
+      tx.appendChild(document.createTextNode(c.text));
+      li.appendChild(tx);
+      if(judged && b) li.appendChild(why(b));
+      ol.appendChild(li);
+    });
+    box.appendChild(ol);
+  }
+
+  // 解答欄
+  var ov = $('ovals'); ov.innerHTML = '';
+  [1,2,3,4].forEach(function(n){
+    var b = el('button','oval', String(n));
+    b.setAttribute('aria-label', n + '番で解答');
+    if(judged){
+      b.disabled = true;
+      if(n === pick) b.classList.add('pick');
+      var correct = q.void ? false : (q.accept ? q.accept.indexOf(n) >= 0 : q.ans === n);
+      if(correct) b.classList.add('right');
+      if(n === pick) b.classList.add(isRight(q, pick) ? 'right' : 'wrong');
+      if(n !== pick && !correct) b.classList.add('dim');
+    } else {
+      b.addEventListener('click', function(){ answer(n); });
+    }
+    ov.appendChild(b);
+  });
+  $('marksHint').textContent = judged ? (s.done ? '採点済み' : '採点済み・解答を取り消すと解き直せます') : '番号をタップすると採点します';
+
+  renderResultBox(q, pick);
+
+  $('btnPrev').disabled = s.cur === 0;
+  $('btnNext').textContent = s.cur === qs.length - 1 ? '解答用紙' : '次へ';
+  var t = tally(curKey);
+  $('track').style.width = (t.done / t.total * 100) + '%';
+}
+
+function findBranch(q, no){
+  var hit = null;
+  (q.branches||[]).forEach(function(b){ if(String(b.mk).normalize('NFKC') === String(no)) hit = b; });
+  return hit;
+}
+function verdict(ok){ return el('span','verdict ' + (ok ? 'o' : 'x'), ok ? '○' : '×'); }
+function why(b){
+  var w = el('div','why');
+  if(b.exp) w.appendChild(document.createTextNode(b.exp));
+  if(b.sup){ var s = el('span','sup', b.sup); w.appendChild(s); }
+  if(!b.exp && !b.sup) w.appendChild(document.createTextNode(b.ok ? 'この記述は正しい。' : 'この記述は誤り。'));
+  return w;
+}
+function figure(src, cap){
+  var a = el('a','fig'); a.href = src; a.target = '_blank'; a.rel = 'noopener';
+  var im = document.createElement('img'); im.src = src; im.alt = cap; im.loading = 'lazy'; im.decoding = 'async';
+  a.appendChild(im); return a;
+}
+
+function renderResultBox(q, pick){
+  var r = $('res'); r.innerHTML = '';
+  if(!pick) return;
+  var ok = isRight(q, pick);
+  var box = el('div','res ' + (ok ? 'ok' : 'ng'));
+  var hd = el('div','res-head');
+  hd.appendChild(el('span','big', ok ? '○ 正解' : '× 不正解'));
+  var ansTxt = q.void ? '全解答が正答扱い' : '正答 ' + (q.accept ? q.accept.join('・') : q.ans) + '　あなたの解答 ' + pick;
+  hd.appendChild(el('span','ans', ansTxt));
+  box.appendChild(hd);
+  if(q.corr){ var c = el('p','corr'); var bb = el('b', null, '協会の訂正・注記　'); c.appendChild(bb); c.appendChild(document.createTextNode(q.corr)); box.appendChild(c); }
+  if(q.mode === 'single'){
+    var ex = el('div','exp');
+    if(q.exp) ex.appendChild(document.createTextNode(q.exp));
+    if(q.sup){ ex.appendChild(el('span','sup', q.sup)); }
+    box.appendChild(ex);
+    if(q.figE) box.appendChild(figure(q.figE, '問' + q.n + 'の解説（原文）'));
+  }
+  if(!st(curKey).done){
+    var u = el('div','undo'); var lk = el('button','link','解答を取り消す');
+    lk.addEventListener('click', function(){ delete st(curKey).a[q.n]; save(); renderQuestion(); });
+    u.appendChild(lk); box.appendChild(u);
+  }
+  r.appendChild(box);
+}
+
+function answer(n){
+  var s = st(curKey), q = curQ();
+  if(s.done || s.a[q.n]) return;
+  s.a[q.n] = n; save();
+  renderQuestion();
+  var r = $('res');
+  if(r.firstChild && r.getBoundingClientRect().top > window.innerHeight * 0.7){
+    $('marks').scrollIntoView({block:'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+  }
+}
+
+function move(d){
+  var s = st(curKey), n = DATA[curKey].length;
+  var to = s.cur + d;
+  if(to < 0) return;
+  if(to >= n){ openSheet(); return; }
+  s.cur = to; save(); renderQuestion(); window.scrollTo(0, 0);
+}
+
+/* ---------- 解答用紙 ---------- */
+function openSheet(){
+  var s = st(curKey), qs = DATA[curKey], g = $('grid'); g.innerHTML = '';
+  var t = tally(curKey);
+  $('sheetSum').textContent = '解答 ' + t.done + ' / 50　正答 ' + t.ok + (t.done ? '（' + Math.round(t.ok / t.done * 100) + '%）' : '');
+  qs.forEach(function(q, i){
+    var p = s.a[q.n] || 0;
+    var row = el('button','row' + (i === s.cur ? ' cur' : ''));
+    row.setAttribute('aria-label', '問' + q.n + (p ? '、' + p + '番で解答、' + (isRight(q,p) ? '正解' : '不正解') : '、未解答'));
+    row.appendChild(el('span','rn', String(q.n)));
+    [1,2,3,4].forEach(function(n){
+      var d = el('span','dot', String(n));
+      if(p === n){ d.classList.add('p'); d.classList.add(isRight(q,p) ? 'r' : 'w'); }
+      else if(p && !q.void && (q.accept ? q.accept.indexOf(n) >= 0 : q.ans === n)){ d.classList.add('c'); }
+      row.appendChild(d);
+    });
+    var rs = el('span','rs' + (p ? (isRight(q,p) ? ' o' : ' x') : ''), p ? (isRight(q,p) ? '○' : '×') : '');
+    row.appendChild(rs);
+    row.addEventListener('click', function(){ s.cur = i; save(); closeSheet(); if(!s.done || $('qArea').hidden){ renderQuestion(); } else renderQuestion(); window.scrollTo(0,0); });
+    g.appendChild(row);
+  });
+  $('btnFinish').hidden = s.done;
+  $('sheetWrap').hidden = false;
+  $('btnSheetClose').focus();
+}
+function closeSheet(){ $('sheetWrap').hidden = true; }
+
+function finish(){
+  var s = st(curKey), t = tally(curKey);
+  if(t.done < 50 && !confirm('未解答が ' + (50 - t.done) + ' 問あります。終了して採点しますか？')) return;
+  pause(); s.done = true; s.fin = Date.now(); save();
+  closeSheet(); renderResult(); paintClock();
+}
+
+/* ---------- 結果 ---------- */
+function renderResult(){
+  $('intro').hidden = true; $('qArea').hidden = true; $('nav').hidden = true;
+  var r = $('result'); r.hidden = false; r.innerHTML = '';
+  var key = curKey, s = st(key), qs = DATA[key], t = tally(key);
+  var y = key.slice(0,4), ss = key.slice(5), isNew = y >= '2024';
+
+  r.appendChild(el('h2', null, y + '年度 ' + SESS[ss] + 'の結果'));
+  var used = s.timer ? '所要 ' + fmt(elapsed(s)) + (elapsed(s) > LIMIT ? '（時間超過）' : '') : 'タイマーなし';
+  r.appendChild(el('p','when', used + '　解答 ' + t.done + ' / 50'));
+
+  var sc = el('div','score'); sc.appendChild(el('b', null, String(t.ok))); sc.appendChild(el('span', null, '/ 50')); r.appendChild(sc);
+  var pass = t.ok >= 35;
+  r.appendChild(el('p','score-note ' + (pass ? 'pass' : 'fail'), pass ? '7割の目安（35問）をクリア' : '7割の目安（35問）まであと ' + (35 - t.ok) + ' 問'));
+
+  // 科目別
+  var subs = {}, names = {};
+  qs.forEach(function(q){
+    if(!subs[q.sub]) subs[q.sub] = {n:0, ok:0}; subs[q.sub].n++; names[q.sub] = q.subName;
+    var p = s.a[q.n]; if(p && isRight(q,p)) subs[q.sub].ok++;
+  });
+  r.appendChild(el('h3', null, '科目別'));
+  var tb = el('table','tbl');
+  var hd = el('tr'); ['科目','正答','目標',''].forEach(function(h){ hd.appendChild(el('th', null, h)); }); tb.appendChild(hd);
+  Object.keys(subs).forEach(function(k){
+    var row = el('tr'), v = subs[k];
+    row.appendChild(el('td', null, k + '　' + names[k]));
+    row.appendChild(el('td','n', v.ok + ' / ' + v.n));
+    var tgt = isNew ? TARGET[k] : null;
+    var tc = el('td','n' + (tgt != null ? (v.ok >= tgt ? ' ok' : ' ng') : ''), tgt != null ? String(tgt) : '—');
+    row.appendChild(tc);
+    var m = el('td'); var bar = el('div','meter'); var fill = el('i'); fill.style.width = (v.ok / v.n * 100) + '%'; bar.appendChild(fill);
+    if(tgt != null){ var u = el('u'); u.style.left = (tgt / v.n * 100) + '%'; bar.appendChild(u); }
+    m.appendChild(bar); row.appendChild(m);
+    tb.appendChild(row);
+  });
+  r.appendChild(tb);
+
+  // 104 のブロック別（現行の午後のみ）
+  if(isNew && ss === 'PM'){
+    r.appendChild(el('h3', null, '104のブロック別'));
+    var tb2 = el('table','tbl');
+    var h2 = el('tr'); ['ブロック','問','正答','目標'].forEach(function(h){ h2.appendChild(el('th', null, h)); }); tb2.appendChild(h2);
+    BLOCKS104.forEach(function(b){
+      var n = 0, ok = 0;
+      qs.forEach(function(q){ if(q.n >= b[1] && q.n <= b[2]){ n++; var p = s.a[q.n]; if(p && isRight(q,p)) ok++; } });
+      var row = el('tr');
+      row.appendChild(el('td', null, b[0]));
+      row.appendChild(el('td','n', b[1] + '〜' + b[2]));
+      row.appendChild(el('td','n', ok + ' / ' + n));
+      row.appendChild(el('td','n ' + (ok >= b[3] ? 'ok' : 'ng'), String(b[3])));
+      tb2.appendChild(row);
+    });
+    r.appendChild(tb2);
+  }
+  if(!isNew){
+    r.appendChild(el('p','when', '旧カリキュラムのため、現行の得点計画の目標は表示していません。'));
+  }
+
+  // 間違えた問題
+  var wrong = qs.filter(function(q){ var p = s.a[q.n]; return p && !isRight(q,p); });
+  var blank = qs.filter(function(q){ return !s.a[q.n]; });
+  r.appendChild(el('h3', null, '間違えた問題（' + wrong.length + '）'));
+  var w = el('div','wrongs');
+  wrong.forEach(function(q){
+    var b = el('button', null, '問' + q.n);
+    b.title = q.sub + ' ' + q.topic;
+    b.addEventListener('click', function(){ review(q.n); });
+    w.appendChild(b);
+  });
+  if(!wrong.length) w.appendChild(el('span','when','なし'));
+  r.appendChild(w);
+  if(blank.length){
+    r.appendChild(el('p','when', '未解答 ' + blank.length + ' 問：' + blank.map(function(q){ return '問' + q.n; }).join('、')));
+  }
+
+  var acts = el('div','acts');
+  var b1 = el('button', null, '解答を見直す'); b1.addEventListener('click', function(){ review(1); }); acts.appendChild(b1);
+  var b2 = el('button', null, 'もう一度解く'); b2.addEventListener('click', function(){
+    if(!confirm('このセットの解答と時間をリセットします。よろしいですか？')) return;
+    delete store.sets[curKey]; save(); renderIntro(); paintClock();
+  }); acts.appendChild(b2);
+  var b3 = el('button', null, 'セット選択に戻る'); b3.addEventListener('click', goHome); acts.appendChild(b3);
+  r.appendChild(acts);
+}
+
+function review(n){
+  var s = st(curKey);
+  var i = DATA[curKey].findIndex(function(q){ return q.n === n; });
+  s.cur = i < 0 ? 0 : i; save();
+  renderQuestion(); window.scrollTo(0, 0);
+}
+
+/* ---------- イベント ---------- */
+$('btnHome').addEventListener('click', goHome);
+$('btnStart').addEventListener('click', function(){ begin(true); });
+$('btnNoTimer').addEventListener('click', function(){ begin(false); });
+$('btnPause').addEventListener('click', function(){ var s = st(curKey); if(s.run) pause(); else resume(); paintClock(); });
+$('btnPrev').addEventListener('click', function(){ move(-1); });
+$('btnNext').addEventListener('click', function(){ move(1); });
+$('btnSheet').addEventListener('click', openSheet);
+$('btnSheetClose').addEventListener('click', closeSheet);
+$('sheetWrap').addEventListener('click', function(e){ if(e.target === this) closeSheet(); });
+$('btnFinish').addEventListener('click', finish);
+
+document.addEventListener('keydown', function(e){
+  if(!curKey || $('qArea').hidden) { if(e.key === 'Escape') closeSheet(); return; }
+  if(!$('sheetWrap').hidden){ if(e.key === 'Escape') closeSheet(); return; }
+  if(e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+  if(['1','2','3','4'].indexOf(e.key) >= 0){ answer(parseInt(e.key, 10)); }
+  else if(e.key === 'ArrowRight'){ move(1); }
+  else if(e.key === 'ArrowLeft'){ move(-1); }
+});
+
+/* 画面が隠れたら（アプリ切替・画面ロック）自動で止め、戻ったら再開する */
+var autoPaused = false;
+document.addEventListener('visibilitychange', function(){
+  if(!curKey) return;
+  var s = st(curKey);
+  if(document.hidden){
+    if(s.run){ pause(); autoPaused = true; }
+  } else if(autoPaused){
+    autoPaused = false; resume(); paintClock();
+  }
+});
+window.addEventListener('pagehide', function(){ if(curKey && st(curKey).run){ pause(); } save(); });
+
+if(!canStore) $('warnStore').hidden = false;
+renderHome();
+
+if('serviceWorker' in navigator && location.protocol !== 'file:'){
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+})();
+</script>
+</body>
+</html>

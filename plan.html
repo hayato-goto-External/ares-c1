@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>証券化マスター Course1 — 10週間の学習計画</title>
+<style>
+:root{
+  --paper:#E7E8E2; --card:#FCFCFA; --ink:#1B1E24; --ink2:#5C6371; --ink3:#8A9099;
+  --rule:#C7C9C1; --rule2:#DEDFD8; --ai:#2A4A7B; --shu:#B23A2F;
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","MS PMincho",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--gothic);
+  font-size:15px;line-height:1.8;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 72px}
+
+header.mast{position:sticky;top:0;z-index:10;background:var(--paper);
+  border-bottom:1px solid var(--rule);padding:18px 0 12px;margin-bottom:22px}
+.mast h1{font-size:19px;font-weight:600;margin:0;letter-spacing:.01em;line-height:1.5}
+.mast .sub{margin:4px 0 0;font-size:12px;color:var(--ink2)}
+.gauge{margin-top:10px;display:flex;align-items:center;gap:10px}
+.gauge-track{flex:1;height:10px;background:#D6D8D0;border:1px solid var(--rule);position:relative;overflow:hidden}
+.gauge-fill{position:absolute;inset:0 auto 0 0;background:var(--ai);width:0;transition:width .25s}
+.gauge-num{font-size:11.5px;color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.countdown{font-weight:600;color:var(--shu)}
+
+h2{font-size:16px;font-weight:600;margin:36px 0 12px;padding-bottom:6px;
+  border-bottom:2px solid var(--ink);letter-spacing:.01em}
+h2 .n{color:var(--ink3);font-variant-numeric:tabular-nums;margin-right:8px;font-weight:400}
+h3{font-size:14.5px;font-weight:600;margin:24px 0 8px;padding-left:10px;border-left:3px solid var(--ai)}
+p{margin:0 0 12px}
+
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 16px}
+table{border-collapse:collapse;width:100%;font-size:13px;background:var(--card);min-width:400px}
+th,td{border:1px solid var(--rule2);padding:6px 9px;text-align:left;vertical-align:top;line-height:1.6}
+th{background:#EFEFEA;font-weight:600;white-space:nowrap}
+td.c,th.c{text-align:center}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---- 週カード ---- */
+.week{background:var(--card);border:1px solid var(--rule);margin-bottom:14px}
+.week.done{border-color:var(--ai)}
+.week-head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;
+  padding:11px 14px;border-bottom:1px solid var(--rule2);cursor:pointer;user-select:none}
+.week-head .wno{font-weight:600;font-size:14px;letter-spacing:.02em}
+.week-head .wdate{font-size:11.5px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.week-head .wtheme{font-size:13px;color:var(--ink2);flex:1;min-width:120px}
+.week-head .wcount{font-size:11.5px;color:var(--ink3);font-variant-numeric:tabular-nums;white-space:nowrap}
+.week.done .week-head .wcount{color:var(--ai);font-weight:600}
+.week-head .caret{font-size:10px;color:var(--ink3)}
+.week-body{padding:8px 14px 13px}
+.week-body[hidden]{display:none}
+.wnote{font-size:12.5px;color:var(--ink2);line-height:1.75;margin:2px 0 10px;
+  padding-left:9px;border-left:2px solid var(--rule)}
+
+/* ---- チェック項目 ---- */
+.task{display:flex;align-items:flex-start;gap:9px;padding:5px 0;
+  font-size:13.5px;line-height:1.7;cursor:pointer}
+.task input{margin:5px 0 0;flex:none;width:16px;height:16px;accent-color:var(--ai);cursor:pointer}
+.task span{flex:1}
+.task.on span{color:var(--ink3);text-decoration:line-through}
+.task .tag{display:inline-block;font-size:10.5px;padding:0 5px;margin-right:5px;
+  border:1px solid var(--rule);border-radius:2px;color:var(--ink2);
+  vertical-align:1px;white-space:nowrap}
+.task.on .tag{opacity:.5}
+.tag.mov{border-color:#7A6A9E;color:#7A6A9E}
+.tag.txt{border-color:#8A7A4E;color:#8A7A4E}
+.tag.app{border-color:var(--ai);color:var(--ai)}
+.tag.note{border-color:#4E7A6A;color:#4E7A6A}
+.tag.chk{border-color:var(--shu);color:var(--shu)}
+
+.key{border:1px solid var(--ai);background:rgba(42,74,123,.05);
+  padding:11px 14px;margin:16px 0;font-size:13.5px;line-height:1.8}
+.note{border-left:3px solid var(--shu);background:rgba(178,58,47,.05);
+  padding:10px 13px;margin:16px 0;font-size:13px;line-height:1.75}
+.note b{color:var(--shu)}
+
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:20px 0 0}
+.tools button{border:none;background:none;font-size:11.5px;color:var(--ink3);
+  text-decoration:underline;padding:2px;cursor:pointer;font-family:inherit}
+.warn{margin:10px 0 0;padding:9px 12px;font-size:12px;line-height:1.6;
+  color:var(--shu);border:1px solid var(--shu);background:rgba(178,58,47,.05)}
+.backup{margin:10px 0 0}
+.backup p{margin:0 0 6px;font-size:11.5px;color:var(--ink2)}
+.backup textarea{width:100%;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;
+  line-height:1.5;padding:8px;border:1px solid var(--rule);background:var(--card);
+  color:var(--ink);border-radius:2px;resize:vertical;word-break:break-all}
+.backup-row{display:flex;flex-wrap:wrap;align-items:center;margin-top:6px}
+.backup-row>*{margin-right:10px}
+.backup-row button{border:1px solid var(--rule);background:var(--card);padding:6px 11px;
+  font-size:12px;border-radius:2px;color:var(--ink);text-decoration:none}
+.backup-msg{font-size:11.5px;color:var(--ai)}
+
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--rule);
+  font-size:11px;color:var(--ink3);line-height:1.8}
+@media (min-width:720px){ body{font-size:15.5px} }
+@media print{ body{background:#fff} .tools,.backup{display:none} .week-body{display:block!important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <h1>証券化マスター Course1 — 10週間の学習計画</h1>
+  <p class="sub">試験日 2026年11月14日（土） ／ <span class="countdown" id="cd"></span></p>
+  <div class="gauge">
+    <div class="gauge-track"><div class="gauge-fill" id="gaugeFill"></div></div>
+    <span class="gauge-num" id="gaugeNum">0 / 0</span>
+  </div>
+</header>
+
+<h2 id="s0"><span class="n">0</span>この計画の考え方</h2>
+
+<p>100問の配点は年度をまたいで固定されています。<strong>104と103だけで59問</strong>あるので、ここに時間を厚く配分します。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th>科目</th><th class="c">問数</th><th class="c">目標</th><th>取りにいく領域</th></tr></thead>
+<tbody>
+<tr><th>104 法務/会計・税務</th><td class="c">35</td><td class="c"><strong>25</strong></td><td>会計8＋税務8で13。法務4、J-REIT3、業規制5</td></tr>
+<tr><th>103 不動産投資の基礎</th><td class="c">24</td><td class="c"><strong>20</strong></td><td>計算2問確実。PMとERで稼ぐ</td></tr>
+<tr><th>105 不動産ファイナンス</th><td class="c">20</td><td class="c"><strong>15</strong></td><td>計算8問のうち7。理論で8</td></tr>
+<tr><th>102 証券化の概要</th><td class="c">15</td><td class="c"><strong>10</strong></td><td>数値問題は取りこぼす前提</td></tr>
+<tr><th>101 企業と不動産</th><td class="c">3</td><td class="c"><strong>3</strong></td><td>満点。WACC計算＋暗記10論点</td></tr>
+<tr><th>106 証券化と倫理行動</th><td class="c">3</td><td class="c"><strong>2</strong></td><td>問50は確実に</td></tr>
+<tr><th>合計</th><td class="c">100</td><td class="c"><strong>75</strong></td><td>7割の目安に対して余裕を持たせた設計</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="key">
+<strong>104の業規制9問と102の数値問題は、あえて捨て気味にする。</strong>事例形式で難度が高く、投入時間あたりの得点効率が悪い領域です。<br>
+逆に<strong>W1で計算を先に潰す</strong>のがこの計画の肝。103の問16・17、105の計算8問、102の問9、101の問3を合わせた<strong>約12問が5年連続で同型</strong>なので、最初に固めれば以降ずっと得点が読めます。
+</div>
+
+<h3>1日の型</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>時間帯</th><th>やること</th></tr></thead>
+<tbody>
+<tr><th>平日夜（1時間）</th><td>①ノートの該当章を10分読む → ②アプリで40分解く → ③間違えた枝だけ10分でテキスト確認</td></tr>
+<tr><th>土日（各1〜2時間）</th><td>前半で動画、後半でその範囲の過去問。<strong>どちらか1日はその週の総復習</strong>に充てる</td></tr>
+<tr><th>隙間時間</th><td>アプリの「未解答」で新規、「間違えた問題」で復習。○×は1問10秒、5分で20問</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>注意</b>　新しい範囲に進むのは<strong>動画を見た週だけ</strong>。他の日は復習に充てます。インプットだけで終わる週を作らないことが、この計画で一番大事な点です。
+</div>
+
+<h2 id="s1"><span class="n">1</span>週次チェックリスト</h2>
+
+<p>週の見出しをタップすると開閉します。チェックはブラウザに保存され、次に開いたときも残ります。</p>
+
+<div id="weeks"></div>
+
+<div class="tools">
+  <button id="btnOpen">すべて開く</button>
+  <button id="btnClose">すべて閉じる</button>
+  <button id="btnBackup">記録を書き出す・読み込む</button>
+  <button id="btnReset">チェックを全部消す</button>
+</div>
+
+<p class="warn" id="warnStore" hidden>
+  このブラウザではチェックを保存できません。画面を閉じると記録が消えるので、
+  「記録を書き出す・読み込む」でコードを控えてください。
+</p>
+
+<div class="backup" id="backup" hidden>
+  <p>下のコードをメモアプリなどに控えておくと、記録を復元できます。復元するときは控えたコードを貼り付けて「読み込む」を押します。</p>
+  <textarea id="backupCode" rows="3" spellcheck="false" autocapitalize="off" autocorrect="off"></textarea>
+  <div class="backup-row">
+    <button id="btnCopy">コードをコピー</button>
+    <button id="btnLoad">貼り付けたコードを読み込む</button>
+    <span class="backup-msg" id="backupMsg"></span>
+  </div>
+</div>
+
+<h2 id="s2"><span class="n">2</span>教材の使い分け</h2>
+
+<div class="scroll">
+<table>
+<thead><tr><th>教材</th><th>役割</th><th>使うタイミング</th></tr></thead>
+<tbody>
+<tr><th><span class="tag mov">動画</span> 研修動画</th><td>理解の枠組みを作る。<strong>各科目の入口で1回だけ</strong>。倍速可</td><td>土日の前半</td></tr>
+<tr><th><span class="tag txt">教材</span> 紙の教材</th><td>動画で分からなかった箇所と、過去問で間違えた箇所の<strong>ピンポイント参照</strong>。通読しない</td><td>間違えた直後</td></tr>
+<tr><th><span class="tag app">アプリ</span> 一問一答</th><td>演習の主役。科目・年度フィルタで当週のテーマに絞る</td><td>平日夜と隙間時間</td></tr>
+<tr><th><span class="tag note">ノート</span> 理解ポイント整理</th><td>平日夜の起点。論点を思い出してから解く</td><td>平日夜の最初の10分</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="key">
+<strong>紙の教材を通読しようとしないこと。</strong>10週で全ページを読む時間はありません。動画で枠組みを作り、ノートで論点を掴み、アプリで解き、間違えたところだけ教材に戻る。この順番を守るのが最短です。
+</div>
+
+<h2 id="s3"><span class="n">3</span>直前期に効く3つの確認</h2>
+
+<h3>3-1. 計算12問の型</h3>
+<p>直前1週は毎日1周します。慣れれば15分で終わります。</p>
+<div class="scroll">
+<table>
+<thead><tr><th>科目</th><th>問</th><th>型</th></tr></thead>
+<tbody>
+<tr><th>101</th><td>問3</td><td>経済的利益 ＝ 税引後営業利益 − 投下資本 × WACC（<strong>半期決算なので2倍</strong>）</td></tr>
+<tr><th>102</th><td>問9</td><td>償還利回り ＝ [クーポン ＋ (償還−購入)÷年数] ÷ <strong>購入価格</strong> × 100</td></tr>
+<tr><th>103</th><td>問16</td><td>直接還元法。<strong>運営費用の母数は運営収益、敷金は貸室賃料のみ、再調達原価は延床</strong></td></tr>
+<tr><th>103</th><td>問17</td><td>DCF法。<strong>売却価格は6年目の純収益、復帰価格には5年目の複利現価率</strong></td></tr>
+<tr><th>105</th><td>問35</td><td>DDM　P ＝ D ÷ (r − g)。<strong>成長率がマイナスの年に注意</strong></td></tr>
+<tr><th>105</th><td>問39</td><td>期待効用・確実性等価。<strong>確実性等価は2乗を忘れない</strong></td></tr>
+<tr><th>105</th><td>問40</td><td>リターンの計算。各年リターンの<strong>算術平均</strong>。分母は前期末株価</td></tr>
+<tr><th>105</th><td>問43</td><td>ポートフォリオの期待リターン（加重平均）、相関係数 ＝ 共分散 ÷ (σ<sub>A</sub>×σ<sub>B</sub>)</td></tr>
+<tr><th>105</th><td>問45</td><td>CAPM　E(r) ＝ r<sub>f</sub> ＋ β × (E(r<sub>M</sub>) − r<sub>f</sub>)</td></tr>
+<tr><th>105</th><td>問46・47</td><td>(1+r<sub>2</sub>)<sup>2</sup> ＝ (1+r<sub>1</sub>)(1+f<sub>1,2</sub>)。<strong>選択肢を2乗して当てにいく</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>3-2. 引っかけの4類型</h3>
+<div class="scroll">
+<table>
+<thead><tr><th>型</th><th>例</th></tr></thead>
+<tbody>
+<tr><th>対概念の入れ替え</th><td>AMとPM／CMBSとRMBS／直接金融と間接金融／運営業務と建物管理業務／忠実義務と善管注意義務</td></tr>
+<tr><th>向きの逆転</th><td><strong>LTVは上回るとまずい／DSCRは下回るとまずい</strong>／相関係数が小さいほどリスクは小さい／β＝共分散÷分散</td></tr>
+<tr><th>断定表現</th><td>「常に」「必ず」「〜ことはない」「〜のみ」「直ちに」が出たら疑う</td></tr>
+<tr><th>数値のすり替え</th><td>リスク負担割合5%／公示地価の8割・7割／固定資産税評価は3年ごと／GRESB創設2009年</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>3-3. 数値は最新年度を優先</h3>
+<p>過去問には市場データや制度の数値が多く出ますが、<strong>旧年度の値をそのまま覚えると誤答になります</strong>。私募REITの規模、EC化率、PCB処分期限などは2025年度の値を優先し、旧年度は「どの論点が問われるか」を掴む素材と割り切ってください。</p>
+
+<footer>
+2026年11月14日（土）実施の Course1 修了試験に向けた個人の学習計画。配点構造と出題傾向は2021〜2025年度の過去問分析に基づく。合格基準は協会の案内で確認すること。
+</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+var EXAM = new Date(2026, 10, 14);   // 2026-11-14
+
+var WEEKS = [
+ {no:'W1', date:'9/7〜9/13', theme:'計算を先に潰す',
+  note:'知識がなくても手順だけで解ける領域。ここを最初に固めると以降の得点が読めるようになる。',
+  tasks:[
+   ['note','ノート103の「計算2問の型」、105の「計算問題の型」を読む'],
+   ['app','103 問16（直接還元法）を2024・2025＋旧102 問38の3年分、計5回解く'],
+   ['app','103 問17（DCF法）を同じく5回解く'],
+   ['app','105 問39（期待効用・確実性等価）を2年分＋旧104 問36の3年分'],
+   ['app','105 問40（リターンの計算）と問46・47（スポット／フォワード）'],
+   ['app','102 問9（最終利回り）を5年分。式は1本だけ'],
+   ['app','101 問3（WACC）を2年分。半期を2倍するのを忘れない'],
+   ['chk','週末：計算の手順を白紙に書き出せるか確認する']
+  ]},
+ {no:'W2', date:'9/14〜9/20', theme:'104 会計（8問）',
+  note:'104で最も取りやすいブロック。基準が明確で数値例も定型的。',
+  tasks:[
+   ['mov','研修動画の104会計パートを視聴（倍速可・1回のみ）'],
+   ['note','ノート104の §6・§7 を通読'],
+   ['app','104 問35〜42 を2024・2025年度で解く'],
+   ['app','旧103 問20〜27 を3年分解く'],
+   ['chk','5%ルールと継続的関与を説明できるか'],
+   ['chk','減損の5ステップと「回収可能価額は高い方」を書けるか'],
+   ['chk','資産除去債務の4論点（対象・認識・費用配分・見積不能時）'],
+   ['txt','間違えた箇所だけ教材で確認'],
+   ['chk','週末：会計8問を通しで再演習']
+  ]},
+ {no:'W3', date:'9/21〜9/27', theme:'104 税務（8問）',
+  note:'導管性要件と課税区分の表を覚えれば安定して取れる。数値要件が明確。',
+  tasks:[
+   ['mov','研修動画の104税務パートを視聴'],
+   ['note','ノート104の §8・§9 を通読'],
+   ['app','104 問43〜50 を2年分'],
+   ['app','旧103 問28〜35 を3年分'],
+   ['chk','ヴィークルの課税区分4類型を白紙に書く'],
+   ['chk','TMKと投資法人の導管性要件（数値要件を含む）'],
+   ['chk','一時差異等調整「引当額」と「積立金」の使い分け'],
+   ['chk','流通税の軽減対象（不動産取得税と移転登記のみ）'],
+   ['chk','週末：会計8＋税務8の計16問を通しで演習']
+  ]},
+ {no:'W4', date:'9/28〜10/4', theme:'103 前半（投資の基礎〜マーケット）',
+  note:'実務の流れ順に並んでいる科目。案件を1件動かす流れとして読むと定着しやすい。',
+  tasks:[
+   ['mov','研修動画の103前半を視聴'],
+   ['note','ノート103の §2〜§4 を通読'],
+   ['app','103 問4〜12 を2年分'],
+   ['app','旧102 問26〜34 を3年分'],
+   ['chk','地価4指標の表（主体・基準日・割合・周期）を書く'],
+   ['chk','AMとPMの役割分担、GK-TKの口座階層3つ'],
+   ['chk','投資スタイル4分類とコアの適合投資家'],
+   ['txt','間違えた箇所だけ教材で確認']
+  ]},
+ {no:'W5', date:'10/5〜10/11', theme:'103 後半（DD〜PM〜ESG）',
+  note:'PMの用語対比が多い。対になる概念を左右に並べて書けるようにする。',
+  tasks:[
+   ['mov','研修動画の103後半を視聴'],
+   ['note','ノート103の §5〜§8 を通読'],
+   ['app','103 問13〜27 を2年分'],
+   ['app','旧102 問35〜50 を3年分'],
+   ['chk','運営業務（ソフト）と建物管理業務（ハード）'],
+   ['chk','工事区分A・B・Cの発注者と費用負担'],
+   ['chk','ESGフレームワーク（PRI・GRI・TCFD・GRESB・CRREM）の区別'],
+   ['chk','週末：103の24問を通しで演習']
+  ]},
+ {no:'W6', date:'10/12〜10/18', theme:'105 理論（計算以外）',
+  note:'W1で計算は済んでいるので、ここは概念と用語に集中する。',
+  tasks:[
+   ['mov','研修動画の105を視聴'],
+   ['note','ノート105の §2 を通読'],
+   ['app','105 問28〜34、問37・38、問41・44 を2年分'],
+   ['app','旧104 問37〜48 を3年分'],
+   ['chk','βの式（共分散÷分散）とCAPMの式を書く'],
+   ['chk','リスクの2分割、効率的フロンティアと無差別曲線'],
+   ['chk','償還方法4類型とコストの向き'],
+   ['chk','デュレーションの4論点'],
+   ['chk','週末：105の20問を通しで演習']
+  ]},
+ {no:'W7', date:'10/19〜10/25', theme:'104 法務＋J-REIT',
+  note:'論点は5つに絞られる。条文の丸暗記より、説明できるようにする方が効率的。',
+  tasks:[
+   ['mov','研修動画の104法務パートを視聴'],
+   ['note','ノート104の §1〜§3、§5 を通読'],
+   ['app','104 問16〜22、問31〜34 を2年分'],
+   ['app','旧103 問1〜6 と 旧105 問3・4 を3年分'],
+   ['chk','倒産隔離の2側面と真正譲渡（会計と法律は別問題）'],
+   ['chk','賃貸人たる地位の移転（民法605条の2・605条の3）'],
+   ['chk','投資法人とTMKの対比表'],
+   ['chk','利益相反取引の3ステップとインサイダーの会社関係者']
+  ]},
+ {no:'W8', date:'10/26〜11/1', theme:'102・101・106（残り3科目）',
+  note:'配点は合計21問。ノート中心で速く回す。102の数値は割り切って良い。',
+  tasks:[
+   ['note','ノート102・101・106を通読'],
+   ['app','102 問1〜15 を2年分'],
+   ['app','旧101 問6〜22 を3年分'],
+   ['app','101と106を2年分（各6問なので短時間）'],
+   ['app','旧105 問1・2・5 を3年分'],
+   ['chk','直接金融・間接金融・市場型間接金融の3分類'],
+   ['chk','忠実義務と善管注意義務の定義（入れ替えが最頻出）'],
+   ['chk','101の暗記10論点（オンバランス不動産の特性など）']
+  ]},
+ {no:'W9', date:'11/2〜11/8', theme:'弱点潰し',
+  note:'新しい範囲には進まない。アプリの「間違えた問題」フィルタだけを使う。',
+  tasks:[
+   ['app','「間違えた問題」フィルタで全科目を1周'],
+   ['app','同じフィルタで2周目。まだ間違える枝を洗い出す'],
+   ['chk','科目別の正答率を確認し、低い科目を特定'],
+   ['app','正答率の低い科目をもう1周'],
+   ['app','計算12問を通しで解く'],
+   ['note','各ノートの「引っかけパターンの類型」章を全科目分読む'],
+   ['txt','どうしても入らない論点だけ教材に戻る']
+  ]},
+ {no:'W10', date:'11/9〜11/14', theme:'直前週',
+  note:'新しいことはしない。範囲を広げると不安になるだけ。',
+  tasks:[
+   ['chk','月：計算12問を1周（15分）＋数値の暗記'],
+   ['chk','火：計算1周＋引っかけ4類型の確認'],
+   ['chk','水：計算1周＋104の会計・税務を流し読み'],
+   ['chk','木：計算1周＋103と105のノートを流し読み'],
+   ['chk','金：計算1周。持ち物と会場・集合時間を確認して早く寝る'],
+   ['chk','当日：午前50問（101・103・105・106）／午後50問（102・104）']
+  ]}
+];
+
+var TAGNAME = {mov:'動画', txt:'教材', app:'アプリ', note:'ノート', chk:'確認'};
+
+/* --- 記録（保存できない環境でも動作を続ける） --- */
+var KEY='ares-c1-plan';
+var log={}, canStore=false;
+try{ localStorage.setItem(KEY+'-t','1'); localStorage.removeItem(KEY+'-t'); canStore=true; }catch(e){}
+function save(){ if(!canStore) return; try{ localStorage.setItem(KEY, JSON.stringify(log)); }catch(e){} }
+function load(){ if(!canStore) return; try{ var r=localStorage.getItem(KEY); if(r) log=JSON.parse(r)||{}; }catch(e){ log={}; } }
+load();
+
+var ALL=[];
+WEEKS.forEach(function(w,wi){ w.tasks.forEach(function(t,ti){ ALL.push(wi+'-'+ti); }); });
+
+function encode(){ return ALL.map(function(id){ return log[id]?'1':'0'; }).join(''); }
+function decode(code){
+  code=(code||'').replace(/\s/g,'');
+  if(code.length!==ALL.length) return false;
+  if(!/^[01]+$/.test(code)) return false;
+  var next={};
+  ALL.forEach(function(id,i){ if(code.charAt(i)==='1') next[id]=true; });
+  log=next; save(); return true;
+}
+
+/* --- 描画 --- */
+function el(tag,cls,txt){var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e;}
+
+function render(){
+  var box=document.getElementById('weeks');
+  box.innerHTML='';
+  WEEKS.forEach(function(w,wi){
+    var done=w.tasks.filter(function(t,ti){ return log[wi+'-'+ti]; }).length;
+    var sec=el('section','week'+(done===w.tasks.length?' done':''));
+
+    var head=el('div','week-head');
+    head.appendChild(el('span','wno',w.no));
+    head.appendChild(el('span','wdate',w.date));
+    head.appendChild(el('span','wtheme',w.theme));
+    head.appendChild(el('span','wcount',done+'/'+w.tasks.length));
+    var caret=el('span','caret','▼');
+    head.appendChild(caret);
+    sec.appendChild(head);
+
+    var body=el('div','week-body');
+    if(w.note) body.appendChild(el('p','wnote',w.note));
+    w.tasks.forEach(function(t,ti){
+      var id=wi+'-'+ti;
+      var lab=el('label','task'+(log[id]?' on':''));
+      var cb=document.createElement('input'); cb.type='checkbox'; cb.checked=!!log[id];
+      cb.addEventListener('change',function(){
+        if(cb.checked) log[id]=true; else delete log[id];
+        save(); render(); openState[wi]=true; applyOpen();
+      });
+      var sp=el('span');
+      var tg=el('span','tag '+t[0], TAGNAME[t[0]]);
+      sp.appendChild(tg);
+      sp.appendChild(document.createTextNode(t[1]));
+      lab.appendChild(cb); lab.appendChild(sp);
+      body.appendChild(lab);
+    });
+    sec.appendChild(body);
+
+    head.addEventListener('click',function(ev){
+      if(ev.target.tagName==='INPUT') return;
+      openState[wi]=!openState[wi]; applyOpen();
+    });
+    box.appendChild(sec);
+  });
+  applyOpen();
+  gauge();
+}
+
+var openState=WEEKS.map(function(_,i){ return i===0; });
+function applyOpen(){
+  var secs=document.querySelectorAll('.week');
+  for(var i=0;i<secs.length;i++){
+    secs[i].querySelector('.week-body').hidden = !openState[i];
+    secs[i].querySelector('.caret').textContent = openState[i] ? '▲' : '▼';
+  }
+}
+
+function gauge(){
+  var done=ALL.filter(function(id){ return log[id]; }).length;
+  document.getElementById('gaugeFill').style.width=(done/ALL.length*100)+'%';
+  document.getElementById('gaugeNum').textContent=done+' / '+ALL.length+'　'+Math.round(done/ALL.length*100)+'%';
+}
+
+function countdown(){
+  var now=new Date(); now.setHours(0,0,0,0);
+  var d=Math.round((EXAM-now)/86400000);
+  var t=document.getElementById('cd');
+  if(d>1) t.textContent='あと '+d+' 日';
+  else if(d===1) t.textContent='明日';
+  else if(d===0) t.textContent='本日';
+  else t.textContent='お疲れさまでした';
+}
+
+document.getElementById('btnOpen').addEventListener('click',function(){
+  openState=openState.map(function(){return true;}); applyOpen();
+});
+document.getElementById('btnClose').addEventListener('click',function(){
+  openState=openState.map(function(){return false;}); applyOpen();
+});
+document.getElementById('btnReset').addEventListener('click',function(){
+  if(!confirm('チェックをすべて消します。よろしいですか？')) return;
+  log={}; save(); render();
+});
+
+if(!canStore) document.getElementById('warnStore').hidden=false;
+var bk=document.getElementById('backup');
+document.getElementById('btnBackup').addEventListener('click',function(){
+  bk.hidden=!bk.hidden;
+  if(!bk.hidden){ document.getElementById('backupCode').value=encode();
+    document.getElementById('backupMsg').textContent=''; }
+});
+document.getElementById('btnCopy').addEventListener('click',function(){
+  var ta=document.getElementById('backupCode'); var msg=document.getElementById('backupMsg');
+  ta.focus(); ta.setSelectionRange(0,ta.value.length);
+  function done(){ msg.textContent='コピーしました'; }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(ta.value).then(done,function(){
+      msg.textContent='選択したので、長押しでコピーしてください'; });
+  } else {
+    try{ document.execCommand('copy'); done(); }
+    catch(e){ msg.textContent='選択したので、長押しでコピーしてください'; }
+  }
+});
+document.getElementById('btnLoad').addEventListener('click',function(){
+  var msg=document.getElementById('backupMsg');
+  if(decode(document.getElementById('backupCode').value)){ msg.textContent='読み込みました'; render(); }
+  else { msg.textContent='コードの形式が違います'; }
+});
+
+countdown();
+render();
+})();
+</script>
+</body>
+</html>

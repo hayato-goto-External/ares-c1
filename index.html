@@ -39,6 +39,9 @@ button{font-family:inherit;color:inherit;cursor:pointer}
 .mast-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .mast-title{font-size:14px;font-weight:600;letter-spacing:.02em}
 .mast-sub{font-size:11.5px;color:var(--ink2)}
+.mast-link{margin-left:auto;font-size:12px;color:var(--ai);text-decoration:none;
+  border:1px solid var(--ai);border-radius:3px;padding:3px 9px;white-space:nowrap}
+.mast-link:hover{background:rgba(42,74,123,.08)}
 .gauge{margin-top:7px;display:flex;align-items:center;gap:10px}
 .gauge-track{
   flex:1;height:9px;background:#D6D8D0;
@@ -189,6 +192,7 @@ button{font-family:inherit;color:inherit;cursor:pointer}
   <div class="mast-row">
     <span class="mast-title">不動産証券化マスター Course1 一問一答</span>
     <span class="mast-sub">2021〜2025年度 修了試験・再認定試験</span>
+    <a class="mast-link" href="./exam.html">本番形式で解く</a>
   </div>
   <div class="gauge">
     <div class="gauge-track"><div class="gauge-fill" id="gaugeOk"></div><div class="gauge-fill err" id="gaugeNg"></div></div>

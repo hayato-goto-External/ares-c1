@@ -1,14 +1,23 @@
 /* 版を上げるとキャッシュが入れ替わる。中身を更新したらこの数字を増やす */
-const VERSION = 'v3';
+const VERSION = 'v5';
 const CACHE = 'ares-c1-' + VERSION;
 const ASSETS = [
   "./index.html",
+  "./exam.html",
   "./cards.js",
+  "./exam.js",
+  "./plan.html",
+  "./final3.html",
   "./manifest.webmanifest",
+  "./exam.webmanifest",
   "./icon-192.png",
   "./icon-512.png",
   "./icon-maskable-512.png",
   "./apple-touch-icon.png",
+  "./icon-exam-192.png",
+  "./icon-exam-512.png",
+  "./icon-exam-maskable-512.png",
+  "./apple-touch-icon-exam.png",
   "./note/new-101.html",
   "./note/new-102.html",
   "./note/new-103.html",

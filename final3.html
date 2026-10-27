@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>証券化マスター Course1 — 直前3週間の計画</title>
+<style>
+:root{
+  --paper:#E7E8E2; --card:#FCFCFA; --ink:#1B1E24; --ink2:#5C6371; --ink3:#8A9099;
+  --rule:#C7C9C1; --rule2:#DEDFD8; --ai:#2A4A7B; --shu:#B23A2F; --grn:#2F6B4F;
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--gothic);
+  font-size:15px;line-height:1.8;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 72px}
+
+header.mast{position:sticky;top:0;z-index:10;background:var(--paper);
+  border-bottom:1px solid var(--rule);padding:16px 0 11px;margin-bottom:20px}
+.mast h1{font-size:18px;font-weight:600;margin:0;line-height:1.45}
+.mast .sub{margin:3px 0 0;font-size:12px;color:var(--ink2)}
+.cd{font-weight:600;color:var(--shu)}
+.gauge{margin-top:9px;display:flex;align-items:center;gap:10px}
+.gauge-track{flex:1;height:10px;background:#D6D8D0;border:1px solid var(--rule);position:relative;overflow:hidden}
+.gauge-fill{position:absolute;inset:0 auto 0 0;background:var(--ai);width:0;transition:width .25s}
+.gauge-num{font-size:11.5px;color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+h2{font-size:16px;font-weight:600;margin:34px 0 12px;padding-bottom:6px;
+  border-bottom:2px solid var(--ink)}
+h2 .n{color:var(--ink3);font-variant-numeric:tabular-nums;margin-right:8px;font-weight:400}
+h3{font-size:14.5px;font-weight:600;margin:22px 0 8px;padding-left:10px;border-left:3px solid var(--ai)}
+p{margin:0 0 12px}
+
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 16px}
+table{border-collapse:collapse;width:100%;font-size:13px;background:var(--card);min-width:420px}
+th,td{border:1px solid var(--rule2);padding:6px 9px;text-align:left;vertical-align:top;line-height:1.6}
+th{background:#EFEFEA;font-weight:600;white-space:nowrap}
+td.c,th.c{text-align:center}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.keep td{color:var(--ink3)}
+td.up{color:var(--ai);font-weight:600;text-align:center}
+td.zero{color:var(--ink3);text-align:center}
+
+/* 週 */
+.week{background:var(--card);border:1px solid var(--rule);margin-bottom:14px}
+.week.done{border-color:var(--ai)}
+.week-head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;
+  padding:11px 14px;border-bottom:1px solid var(--rule2);cursor:pointer;user-select:none}
+.week-head .wno{font-weight:600;font-size:14px}
+.week-head .wdate{font-size:11.5px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.week-head .wtheme{font-size:13px;color:var(--ink2);flex:1;min-width:110px}
+.week-head .wcount{font-size:11.5px;color:var(--ink3);font-variant-numeric:tabular-nums;white-space:nowrap}
+.week.done .week-head .wcount{color:var(--ai);font-weight:600}
+.week-head .caret{font-size:10px;color:var(--ink3)}
+.week-body{padding:4px 14px 12px}
+.week-body[hidden]{display:none}
+
+/* 日 */
+.day{padding:9px 0;border-bottom:1px solid var(--rule2)}
+.day:last-child{border-bottom:0}
+.day-head{display:flex;align-items:baseline;gap:8px;margin-bottom:3px}
+.day-date{font-size:13px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.day-dow{font-size:11px;color:var(--ink3)}
+.day-focus{font-size:11.5px;color:var(--ai);flex:1}
+.day.exam .day-date{color:var(--shu)}
+.day.exam .day-focus{color:var(--shu);font-weight:600}
+
+.task{display:flex;align-items:flex-start;gap:9px;padding:3px 0;
+  font-size:13.5px;line-height:1.7;cursor:pointer}
+.task input{margin:5px 0 0;flex:none;width:16px;height:16px;accent-color:var(--ai);cursor:pointer}
+.task span{flex:1}
+.task.on span{color:var(--ink3);text-decoration:line-through}
+.task .tag{display:inline-block;font-size:10.5px;padding:0 5px;margin-right:5px;
+  border:1px solid var(--rule);border-radius:2px;color:var(--ink2);vertical-align:1px;white-space:nowrap}
+.task.on .tag{opacity:.5}
+.tag.app{border-color:var(--ai);color:var(--ai)}
+.tag.note{border-color:#4E7A6A;color:#4E7A6A}
+.tag.txt{border-color:#8A7A4E;color:#8A7A4E}
+.tag.chk{border-color:var(--shu);color:var(--shu)}
+.tag.calc{border-color:#7A5AA0;color:#7A5AA0}
+
+.key{border:1px solid var(--ai);background:rgba(42,74,123,.05);
+  padding:11px 14px;margin:16px 0;font-size:13.5px;line-height:1.8}
+.note{border-left:3px solid var(--shu);background:rgba(178,58,47,.05);
+  padding:10px 13px;margin:16px 0;font-size:13px;line-height:1.75}
+.note b{color:var(--shu)}
+.ok{border-left:3px solid var(--grn);background:rgba(47,107,79,.05);
+  padding:10px 13px;margin:16px 0;font-size:13px;line-height:1.75}
+.ok b{color:var(--grn)}
+
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:18px 0 0}
+.tools button{border:none;background:none;font-size:11.5px;color:var(--ink3);
+  text-decoration:underline;padding:2px;cursor:pointer;font-family:inherit}
+.warn{margin:10px 0 0;padding:9px 12px;font-size:12px;line-height:1.6;
+  color:var(--shu);border:1px solid var(--shu);background:rgba(178,58,47,.05)}
+.backup{margin:10px 0 0}
+.backup p{margin:0 0 6px;font-size:11.5px;color:var(--ink2)}
+.backup textarea{width:100%;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;
+  line-height:1.5;padding:8px;border:1px solid var(--rule);background:var(--card);
+  color:var(--ink);border-radius:2px;resize:vertical;word-break:break-all}
+.backup-row{display:flex;flex-wrap:wrap;align-items:center;margin-top:6px}
+.backup-row>*{margin-right:10px}
+.backup-row button{border:1px solid var(--rule);background:var(--card);padding:6px 11px;
+  font-size:12px;border-radius:2px;color:var(--ink)}
+.backup-msg{font-size:11.5px;color:var(--ai)}
+
+footer{margin-top:42px;padding-top:14px;border-top:1px solid var(--rule);
+  font-size:11px;color:var(--ink3);line-height:1.8}
+@media (min-width:720px){ body{font-size:15.5px} }
+@media print{ body{background:#fff} .tools,.backup{display:none} .week-body{display:block!important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <h1>証券化マスター Course1 — 直前3週間の計画</h1>
+  <p class="sub">試験日 2026年11月14日（土） ／ <span class="cd" id="cd"></span></p>
+  <div class="gauge">
+    <div class="gauge-track"><div class="gauge-fill" id="gaugeFill"></div></div>
+    <span class="gauge-num" id="gaugeNum">0 / 0</span>
+  </div>
+</header>
+
+<h2 id="s0"><span class="n">0</span>ここからの方針</h2>
+
+<div class="note">
+<b>やり方を変える</b>　一巡が終わっているのに6割ということは、インプット不足ではなく<strong>解きっぱなしで定着していない</strong>状態です。同じ回し方を続けても伸びません。<strong>間違えた枝を型に分類する</strong>ことを、この3週間の中心に据えてください。
+</div>
+
+<h3>どこで+14問を作るか</h3>
+
+<div class="scroll">
+<table>
+<thead><tr><th>領域</th><th class="c">問数</th><th class="c">現状</th><th class="c">目標</th><th class="c">差</th><th>回収手段</th></tr></thead>
+<tbody>
+<tr><th>106 倫理</th><td class="c">3</td><td class="c">1</td><td class="c">2</td><td class="up">+1</td><td>未着手。問50の定義だけで取れる</td></tr>
+<tr><th>101 企業と不動産</th><td class="c">3</td><td class="c">2</td><td class="c">3</td><td class="up">+1</td><td>WACC＋暗記10論点で満点</td></tr>
+<tr><th>104 会計</th><td class="c">8</td><td class="c">5</td><td class="c">7</td><td class="up">+2</td><td>設例が定型。基準と数値の暗記</td></tr>
+<tr><th>104 税務</th><td class="c">8</td><td class="c">5</td><td class="c">7</td><td class="up">+2</td><td>課税区分4類型と導管性要件</td></tr>
+<tr><th>104 J-REIT</th><td class="c">4</td><td class="c">2</td><td class="c">3</td><td class="up">+1</td><td>利益相反3ステップの暗記</td></tr>
+<tr><th>103</th><td class="c">24</td><td class="c">14</td><td class="c">18</td><td class="up">+4</td><td>計算2問確実＋PM/ERの対比表</td></tr>
+<tr><th>105</th><td class="c">20</td><td class="c">12</td><td class="c">15</td><td class="up">+3</td><td>計算の型を落とさない</td></tr>
+<tr class="keep"><th>104 法務</th><td class="c">6</td><td class="c">4</td><td class="c">4</td><td class="zero">0</td><td>現状維持</td></tr>
+<tr class="keep"><th>104 業規制</th><td class="c">9</td><td class="c">5</td><td class="c">5</td><td class="zero">0</td><td><strong>深追いしない</strong></td></tr>
+<tr class="keep"><th>102</th><td class="c">15</td><td class="c">9</td><td class="c">9</td><td class="zero">0</td><td>数値問題は追わない</td></tr>
+<tr><th>合計</th><td class="c">100</td><td class="c">59</td><td class="c"><strong>73</strong></td><td class="up">+14</td><td></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="key">
+不安に挙がった104も<strong>扱いを分けます</strong>。会計・税務16問は基準が明確で暗記が効くので投資対効果が高い。一方で<strong>業規制9問は事例形式で、残り20日で伸ばすのは現実的ではありません</strong>。骨格4つだけ押さえて、それ以上は追わないでください。
+</div>
+
+<h2 id="s1"><span class="n">1</span>日次チェックリスト</h2>
+
+<p>週の見出しをタップすると開閉します。チェックはブラウザに保存されます。</p>
+
+<div id="weeks"></div>
+
+<div class="tools">
+  <button id="btnOpen">すべて開く</button>
+  <button id="btnClose">すべて閉じる</button>
+  <button id="btnBackup">記録を書き出す・読み込む</button>
+  <button id="btnReset">チェックを全部消す</button>
+</div>
+
+<p class="warn" id="warnStore" hidden>
+  このブラウザではチェックを保存できません。画面を閉じると記録が消えるので、
+  「記録を書き出す・読み込む」でコードを控えてください。
+</p>
+
+<div class="backup" id="backup" hidden>
+  <p>下のコードを控えておくと記録を復元できます。復元するときは控えたコードを貼り付けて「読み込む」を押します。</p>
+  <textarea id="backupCode" rows="3" spellcheck="false" autocapitalize="off" autocorrect="off"></textarea>
+  <div class="backup-row">
+    <button id="btnCopy">コードをコピー</button>
+    <button id="btnLoad">貼り付けたコードを読み込む</button>
+    <span class="backup-msg" id="backupMsg"></span>
+  </div>
+</div>
+
+<h2 id="s2"><span class="n">2</span>間違えた枝を4類型に分類する</h2>
+
+<p>この3週間でもっとも効く習慣です。「なんとなく違った」で次に進むのをやめて、<strong>どの型でやられたかを毎回ラベリング</strong>してください。自分の弱点の型が見えてきます。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th class="c">型</th><th>内容</th><th>例</th></tr></thead>
+<tbody>
+<tr><td class="c"><strong>1</strong></td><th>対概念の入れ替え</th><td>AMとPM／運営業務と建物管理業務／CMBSとRMBS／忠実義務と善管注意義務／引当額と積立金</td></tr>
+<tr><td class="c"><strong>2</strong></td><th>向きの逆転</th><td>LTVは上回るとまずい・DSCRは下回るとまずい／相関係数が小さいほどリスクは小さい／β＝共分散÷分散</td></tr>
+<tr><td class="c"><strong>3</strong></td><th>断定表現</th><td>「常に」「必ず」「〜のみ」「直ちに」「〜することはない」が出たら疑う</td></tr>
+<tr><td class="c"><strong>4</strong></td><th>数値のすり替え</th><td>リスク負担割合5％／公示地価の8割・7割／固定資産税評価は3年ごと／現在価値基準90％・耐用年数基準75％</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="s3"><span class="n">3</span>白紙チェック：書けなければ穴</h2>
+
+<p>週末に紙へ書き出してください。読んで分かるのと書けるのは別です。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th>いつ</th><th>書き出すもの</th></tr></thead>
+<tbody>
+<tr><th>第1週末<br>（11/1）</th><td>① ヴィークルの課税区分4類型（どこに何が入るか）<br>② 減損の5ステップと「回収可能価額は高い方」<br>③ 5％ルールと継続的関与</td></tr>
+<tr><th>第2週末<br>（11/8）</th><td>④ 運営業務（ソフト）と建物管理業務（ハード）の切り分け<br>⑤ 工事区分A・B・Cの指定業者と費用負担<br>⑥ β＝共分散÷分散、CAPMの式<br>⑦ 利益相反取引の3ステップ</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="s4"><span class="n">4</span>業規制の「捨て方」</h2>
+
+<p>完全に捨てるのではなく、骨格4つだけ押さえます。これで9問中4〜5問は拾えます。</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th>骨格</th><th>押さえる点</th></tr></thead>
+<tbody>
+<tr><th>みなし有価証券の範囲</th><td>信託受益権、組合出資持分（原則として該当）、<strong>特例事業の不特契約のみ</strong>該当</td></tr>
+<tr><th>4業態の区分と財産要件</th><td>投資運用業は最低資本金・最低純資産とも5,000万円。<strong>規制がないのは投資助言・代理業</strong></td></tr>
+<tr><th>適格機関投資家等特例業務</th><td>自己私募と自己運用の<strong>両方</strong>の登録が不要になる</td></tr>
+<tr><th>一項／二項の開示規制</th><td>募集の基準は一項<strong>50名以上</strong>・二項<strong>500名以上</strong>。二項は<strong>原則として開示規制の対象外</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<b>割り切り</b>　事例問題で迷ったら、深く考えずに<strong>断定表現を含む枝を外す</strong>。それ以上は追わないでください。ここで粘ると会計・税務に回す時間が消えます。
+</div>
+
+<h2 id="s5"><span class="n">5</span>当日の戦術</h2>
+
+<div class="key">
+午後の50問のうち<strong>35問が104</strong>です。法務・業規制の事例問題で時間を使うと、確実に取れるはずの会計・税務に手が回らなくなります。<br>
+<strong>午後は問35（会計）から先に解く</strong>のも一つの手です。会計8問・税務8問を先に確保してから、残り時間で前半の法務・業規制に戻ります。
+</div>
+
+<div class="scroll">
+<table>
+<thead><tr><th>試験</th><th>科目</th><th>進め方</th></tr></thead>
+<tbody>
+<tr><th>午前<br>50問</th><td>101（3）・103（24）・105（20）・106（3）</td><td>問16・17（103の計算）と105の計算は<strong>後回しにして最後にまとめて</strong>。知識問題を先に流す</td></tr>
+<tr><th>午後<br>50問</th><td>102（15）・104（35）</td><td><strong>問35から着手</strong>。会計→税務→J-REIT→102→法務→業規制の順</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ok">
+<b>最後に</b>　6割から7割台は、新しい知識を足すより<strong>取りこぼしを潰すこと</strong>で届きます。第3週に新しい範囲へ手を出したくなったら、それは不安から来る衝動です。間違えた問題と計算の型だけに絞ってください。
+</div>
+
+<footer>
+2026年11月14日（土）実施の Course1 修了試験に向けた直前3週間の計画。現状推定は本人申告の正答率6割をもとに配分したもの。合格基準は協会の案内で確認すること。
+</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+var EXAM = new Date(2026, 10, 14);
+
+var WEEKS = [
+ {no:'第1週', date:'10/26〜11/1', theme:'106を片付け、104の会計・税務を固める',
+  days:[
+   {d:'10/26', w:'月', f:'106を終わらせる①', t:[
+     ['note','ノート106を通読。問50の信認義務の定義を押さえる'],
+     ['app','アプリで106（2024・2025年度の6問）を解く']
+   ]},
+   {d:'10/27', w:'火', f:'106を終わらせる②', t:[
+     ['app','旧105の問1・問2・問5を3年分（9問）'],
+     ['chk','忠実義務と善管注意義務の定義を白紙に書く']
+   ]},
+   {d:'10/28', w:'水', f:'104 会計', t:[
+     ['app','104 問35〜42 を2024・2025年度で解く'],
+     ['chk','間違えた枝を4類型のどれかに分類して記録する']
+   ]},
+   {d:'10/29', w:'木', f:'104 会計', t:[
+     ['app','旧103 問20〜27 を3年分'],
+     ['chk','減損の5ステップと「回収可能価額は高い方」を白紙に書く'],
+     ['txt','リース会計の90％・75％だけ教材で確認']
+   ]},
+   {d:'10/30', w:'金', f:'104 税務', t:[
+     ['app','104 問43〜50 を2024・2025年度で解く'],
+     ['chk','ヴィークルの課税区分4類型を白紙に書く']
+   ]},
+   {d:'10/31', w:'土', f:'104 税務', t:[
+     ['app','旧103 問28〜35 を3年分'],
+     ['chk','TMKと投資法人の導管性要件（数値要件を含む）を確認'],
+     ['chk','一時差異等調整「引当額」と「積立金」の使い分け']
+   ]},
+   {d:'11/1', w:'日', f:'第1週の総復習', t:[
+     ['app','会計8＋税務8の計16問を通しで再演習'],
+     ['chk','白紙チェック①②③（課税区分／減損／5％ルール）'],
+     ['chk','4類型の記録を見返し、自分が多い型を特定する']
+   ]}
+  ]},
+ {no:'第2週', date:'11/2〜11/8', theme:'計算の総ざらいと対比表の暗記',
+  days:[
+   {d:'11/2', w:'月', f:'計算①', t:[
+     ['calc','103 問16（直接還元法）を5年分。母数の違いを声に出して確認'],
+     ['calc','103 問17（DCF法）を5年分。6年目と5年目を間違えない']
+   ]},
+   {d:'11/3', w:'火', f:'計算②', t:[
+     ['calc','105 問35（DDM）、問39（期待効用）、問40（リターン）を5年分'],
+     ['chk','確実性等価で2乗を忘れていないか確認']
+   ]},
+   {d:'11/4', w:'水', f:'計算③', t:[
+     ['calc','105 問43（ポートフォリオ）、問45（CAPM）、問46・47（スポット）'],
+     ['calc','102 問9（最終利回り）と101 問3（WACC）を5年分'],
+     ['chk','β＝共分散÷分散。半期決算は2倍。この2点を再確認']
+   ]},
+   {d:'11/5', w:'木', f:'103 の対比表', t:[
+     ['note','ノート103の §7（PM）と §6（ER）を読み直す'],
+     ['app','103 問18〜25 を2年分'],
+     ['chk','運営業務（ソフト）と建物管理業務（ハード）、工事区分ABC']
+   ]},
+   {d:'11/6', w:'金', f:'105 の対比表', t:[
+     ['note','ノート105の §2 を読み直す'],
+     ['app','105 問28〜38、問41・44 を2年分'],
+     ['chk','リスクの2分割、デュレーションの4論点']
+   ]},
+   {d:'11/7', w:'土', f:'104 J-REIT', t:[
+     ['app','104 問31〜34 を2年分＋旧105 問3・4 を3年分'],
+     ['chk','利益相反の3ステップ（事前同意→外部鑑定士→遅滞なく報告書面）'],
+     ['chk','インサイダーの会社関係者の範囲（資産運用会社とその特定関係法人）']
+   ]},
+   {d:'11/8', w:'日', f:'第2週の総復習', t:[
+     ['chk','業規制の骨格4つだけ確認（それ以上は追わない）'],
+     ['chk','白紙チェック④〜⑦（PM／工事区分／β／利益相反）'],
+     ['calc','計算問題を通しで1周']
+   ]}
+  ]},
+ {no:'第3週', date:'11/9〜11/14', theme:'間違えた問題のみ。新規に手を出さない',
+  days:[
+   {d:'11/9', w:'月', f:'弱点潰し①', t:[
+     ['app','「間違えた問題」フィルタで全科目を1周'],
+     ['calc','計算問題を1周（15分）']
+   ]},
+   {d:'11/10', w:'火', f:'弱点潰し②', t:[
+     ['app','「間違えた問題」フィルタで2周目'],
+     ['calc','計算問題を1周'],
+     ['chk','数値の暗記（5％・90％・75％・8割7割・3年ごと）']
+   ]},
+   {d:'11/11', w:'水', f:'104 の流し読み', t:[
+     ['note','ノート104の会計・税務の章を流し読み'],
+     ['calc','計算問題を1周']
+   ]},
+   {d:'11/12', w:'木', f:'103・105 の流し読み', t:[
+     ['note','ノート103と105を流し読み'],
+     ['calc','計算問題を1周'],
+     ['chk','4類型の最終確認']
+   ]},
+   {d:'11/13', w:'金', f:'前日', t:[
+     ['calc','計算問題を1周。これだけ'],
+     ['chk','持ち物・会場・集合時間を確認'],
+     ['chk','新しいことはしない。早く寝る']
+   ]},
+   {d:'11/14', w:'土', f:'試験当日', exam:true, t:[
+     ['chk','午前50問（101・103・105・106）。計算は後回しにして最後にまとめて'],
+     ['chk','午後50問（102・104）。問35の会計から着手する']
+   ]}
+  ]}
+];
+
+var TAGNAME = {app:'アプリ', note:'ノート', txt:'教材', chk:'確認', calc:'計算'};
+
+var KEY='ares-c1-final3';
+var log={}, canStore=false;
+try{ localStorage.setItem(KEY+'-t','1'); localStorage.removeItem(KEY+'-t'); canStore=true; }catch(e){}
+function save(){ if(!canStore) return; try{ localStorage.setItem(KEY, JSON.stringify(log)); }catch(e){} }
+(function(){ if(!canStore) return; try{ var r=localStorage.getItem(KEY); if(r) log=JSON.parse(r)||{}; }catch(e){ log={}; } })();
+
+var ALL=[];
+WEEKS.forEach(function(w,wi){ w.days.forEach(function(d,di){ d.t.forEach(function(_,ti){ ALL.push(wi+'-'+di+'-'+ti); }); }); });
+
+function encode(){ return ALL.map(function(id){ return log[id]?'1':'0'; }).join(''); }
+function decode(code){
+  code=(code||'').replace(/\s/g,'');
+  if(code.length!==ALL.length || !/^[01]+$/.test(code)) return false;
+  var next={};
+  ALL.forEach(function(id,i){ if(code.charAt(i)==='1') next[id]=true; });
+  log=next; save(); return true;
+}
+
+function el(tag,cls,txt){var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e;}
+
+var openState=WEEKS.map(function(_,i){ return i===0; });
+
+function render(){
+  var box=document.getElementById('weeks');
+  box.innerHTML='';
+  WEEKS.forEach(function(w,wi){
+    var total=0, done=0;
+    w.days.forEach(function(d,di){ d.t.forEach(function(_,ti){ total++; if(log[wi+'-'+di+'-'+ti]) done++; }); });
+    var sec=el('section','week'+(done===total?' done':''));
+
+    var head=el('div','week-head');
+    head.appendChild(el('span','wno',w.no));
+    head.appendChild(el('span','wdate',w.date));
+    head.appendChild(el('span','wtheme',w.theme));
+    head.appendChild(el('span','wcount',done+'/'+total));
+    head.appendChild(el('span','caret','▼'));
+    sec.appendChild(head);
+
+    var body=el('div','week-body');
+    w.days.forEach(function(d,di){
+      var dy=el('div','day'+(d.exam?' exam':''));
+      var dh=el('div','day-head');
+      dh.appendChild(el('span','day-date',d.d));
+      dh.appendChild(el('span','day-dow','（'+d.w+'）'));
+      dh.appendChild(el('span','day-focus',d.f));
+      dy.appendChild(dh);
+      d.t.forEach(function(t,ti){
+        var id=wi+'-'+di+'-'+ti;
+        var lab=el('label','task'+(log[id]?' on':''));
+        var cb=document.createElement('input'); cb.type='checkbox'; cb.checked=!!log[id];
+        cb.addEventListener('change',function(){
+          if(cb.checked) log[id]=true; else delete log[id];
+          save(); render();
+        });
+        var sp=el('span');
+        sp.appendChild(el('span','tag '+t[0], TAGNAME[t[0]]));
+        sp.appendChild(document.createTextNode(t[1]));
+        lab.appendChild(cb); lab.appendChild(sp);
+        dy.appendChild(lab);
+      });
+      body.appendChild(dy);
+    });
+    sec.appendChild(body);
+    head.addEventListener('click',function(ev){
+      if(ev.target.tagName==='INPUT') return;
+      openState[wi]=!openState[wi]; applyOpen();
+    });
+    box.appendChild(sec);
+  });
+  applyOpen();
+  gauge();
+}
+
+function applyOpen(){
+  var secs=document.querySelectorAll('.week');
+  for(var i=0;i<secs.length;i++){
+    secs[i].querySelector('.week-body').hidden = !openState[i];
+    secs[i].querySelector('.caret').textContent = openState[i] ? '▲' : '▼';
+  }
+}
+
+function gauge(){
+  var done=ALL.filter(function(id){ return log[id]; }).length;
+  document.getElementById('gaugeFill').style.width=(done/ALL.length*100)+'%';
+  document.getElementById('gaugeNum').textContent=done+' / '+ALL.length+'　'+Math.round(done/ALL.length*100)+'%';
+}
+
+function countdown(){
+  var now=new Date(); now.setHours(0,0,0,0);
+  var d=Math.round((EXAM-now)/86400000);
+  var t=document.getElementById('cd');
+  if(d>1) t.textContent='あと '+d+' 日';
+  else if(d===1) t.textContent='明日';
+  else if(d===0) t.textContent='本日';
+  else t.textContent='お疲れさまでした';
+}
+
+document.getElementById('btnOpen').addEventListener('click',function(){
+  openState=openState.map(function(){return true;}); applyOpen();
+});
+document.getElementById('btnClose').addEventListener('click',function(){
+  openState=openState.map(function(){return false;}); applyOpen();
+});
+document.getElementById('btnReset').addEventListener('click',function(){
+  if(!confirm('チェックをすべて消します。よろしいですか？')) return;
+  log={}; save(); render();
+});
+
+if(!canStore) document.getElementById('warnStore').hidden=false;
+var bk=document.getElementById('backup');
+document.getElementById('btnBackup').addEventListener('click',function(){
+  bk.hidden=!bk.hidden;
+  if(!bk.hidden){ document.getElementById('backupCode').value=encode();
+    document.getElementById('backupMsg').textContent=''; }
+});
+document.getElementById('btnCopy').addEventListener('click',function(){
+  var ta=document.getElementById('backupCode'), msg=document.getElementById('backupMsg');
+  ta.focus(); ta.setSelectionRange(0,ta.value.length);
+  function ok(){ msg.textContent='コピーしました'; }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(ta.value).then(ok,function(){
+      msg.textContent='選択したので、長押しでコピーしてください'; });
+  } else {
+    try{ document.execCommand('copy'); ok(); }
+    catch(e){ msg.textContent='選択したので、長押しでコピーしてください'; }
+  }
+});
+document.getElementById('btnLoad').addEventListener('click',function(){
+  var msg=document.getElementById('backupMsg');
+  if(decode(document.getElementById('backupCode').value)){ msg.textContent='読み込みました'; render(); }
+  else { msg.textContent='コードの形式が違います'; }
+});
+
+countdown();
+render();
+})();
+</script>
+</body>
+</html>
