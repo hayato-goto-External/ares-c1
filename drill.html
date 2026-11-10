@@ -228,12 +228,12 @@ button{font-family:inherit;color:inherit}
 <!-- ホーム -->
 <div id="vHome" class="home wrap">
   <h1>104 法務・税務 問題集</h1>
-  <p class="lede">2021〜2025年度の過去問から、104の法務（30問）と税務（40問）だけを集めました。1問ごとにその場で採点します。</p>
+  <p class="lede">2021〜2025年度の過去問から、104の法務3ブロック（法務・スキーム／金商法・業規制／J-REIT）と税務を集めました。1問ごとにその場で採点します。</p>
   <p class="warn" id="warnStore" hidden>このブラウザでは解答を保存できません。画面を閉じると記録が消えます。</p>
   <div id="catList"></div>
   <p class="foot">
-    範囲：現行カリキュラム（2024・2025年度）は104の問16〜21（法務）と問43〜50（税務）、旧カリキュラム（2021〜2023年度）は103の問1〜6と問28〜35。<br>
-    旧カリキュラムの税務は出題当時の税制です。その後の改正で扱いが変わった論点がありえます。<br>
+    範囲：現行カリキュラム（2024・2025年度）は104の問16〜21（法務・スキーム）、問22〜30（金商法・業規制）、問31〜34（J-REIT）、問43〜50（税務）。旧カリキュラム（2021〜2023年度）は旧103の問1〜6、問7〜18、問19、問28〜35と、旧105（午前）の問3・4（J-REIT）。<br>
+    旧カリキュラムの業規制・税務は出題当時の法令・税制です。その後の改正で扱いが変わった論点がありえます。<br>
     <a href="./exam.html">本番形式の模試へ</a>　<a href="./index.html">一問一答へ</a>
   </p>
 </div>
@@ -315,10 +315,33 @@ function qtable(t){
 
 var SRC = window.EXAM_DATA || {};
 var YEARS = ['2025','2024','2023','2022','2021'];
-var RANGE = {'法務':{n:[16,21], o:[1,6]}, '税務':{n:[43,50], o:[28,35]}};
+var RANGE = {
+  '法務':   {n:[['PM',16,21]], o:[['PM',1,6]]},
+  '業規制': {n:[['PM',22,30]], o:[['PM',7,18,'noJ']]},
+  'J-REIT': {n:[['PM',31,34]], o:[['PM',7,19,'onlyJ'],['AM',3,4]]},
+  '税務':   {n:[['PM',43,50]], o:[['PM',28,35]]}
+};
+var NAME = {'法務':'法務・スキーム', '業規制':'金商法・業規制', 'J-REIT':'J-REIT', '税務':'税務'};
+var OLDNOTE = {'業規制':'2023年度以前の出題。出題当時の法令にもとづく', 'J-REIT':'2023年度以前の出題。出題当時の法令にもとづく', '税務':'2023年度以前の出題。出題当時の税制にもとづく'};
 
 /* テーマ：判定は上から順に当てる（match）、表示は order の順 */
 var THEME = {
+ '業規制': {
+   match: [['セキュリティ・トークン',['トークン']],
+           ['不動産特定共同事業',['不動産特定共同事業','不特法']],
+           ['情報管理・犯収法',['情報管理','犯罪収益']],
+           ['開示・書面交付',['開示','届出','書面']],
+           ['勧誘規制・説明義務・投資家保護',['勧誘','説明','投資家保護','誤導','投資家の属性']],
+           ['業登録・業態',['金融商品取引業','投資運用業','特例業務','販売資格','宅建業','仲介','信託業','アセットマネジメント','ファンド間']],
+           ['金商法の適用・有価証券',['金商法','有価証券','特定投資家','適用','関係法令','法令規則','組合契約']],
+           ['制度・スキーム・歴史',['歴史','不動産投資商品','組成','特定目的会社','スキーム']]],
+   order: ['金商法の適用・有価証券','業登録・業態','開示・書面交付','勧誘規制・説明義務・投資家保護','不動産特定共同事業','セキュリティ・トークン','情報管理・犯収法','制度・スキーム・歴史'] },
+ 'J-REIT': {
+   match: [['利益相反とインサイダー',['及びインサイダー']],
+           ['組成・制度・ガバナンス',['組成','私募','制度上','コンプライアンス']],
+           ['利益相反取引規制',['利益相反']],
+           ['インサイダー取引規制',['インサイダー']]],
+   order: ['組成・制度・ガバナンス','利益相反取引規制','インサイダー取引規制','利益相反とインサイダー'] },
  '法務': {
    match: [['倒産隔離・真正譲渡',['倒産隔離','売主の事情','真正']],
            ['賃貸借の承継',['賃貸借','テナント','所有権移転']],
@@ -345,14 +368,20 @@ var POOL = {};   // cat -> [q]
 Object.keys(RANGE).forEach(function(cat){
   var list = [];
   YEARS.forEach(function(y){
-    var isNew = y >= '2024', r = isNew ? RANGE[cat].n : RANGE[cat].o;
-    (SRC[y + '-PM'] || []).forEach(function(q){
-      if(q.n < r[0] || q.n > r[1]) return;
+    var isNew = y >= '2024';
+    (isNew ? RANGE[cat].n : RANGE[cat].o).forEach(function(r){
+    var ss = r[0];
+    (SRC[y + '-' + ss] || []).forEach(function(q){
+      if(q.n < r[1] || q.n > r[2]) return;
+      var isJ = q.topic.indexOf('J-REIT') >= 0;
+      if(r[3] === 'noJ' && isJ) return;
+      if(r[3] === 'onlyJ' && !isJ) return;
       var th = null;
       THEME[cat].match.some(function(m){ if(m[1].some(function(k){ return q.topic.indexOf(k) >= 0; })){ th = m[0]; return true; } return false; });
       var c = {}; for(var k in q) c[k] = q[k];
-      c.id = y + '-PM-' + q.n; c.year = y; c.orig = q.n; c.theme = th || 'その他'; c.isNew = isNew;
+      c.id = y + '-' + ss + '-' + q.n; c.year = y; c.sess = ss; c.orig = q.n; c.theme = th || 'その他'; c.isNew = isNew;
       list.push(c);
+    });
     });
   });
   POOL[cat] = list;
@@ -389,7 +418,7 @@ function tally(list){
   return {done: d, ok: ok, total: list.length};
 }
 function wrongOf(list){ return list.filter(function(q){ var p = store.ans[q.id]; return p && !isRight(q, p); }); }
-function label(q){ return q.year + '年度 ' + (q.isNew ? '104' : '旧103') + ' 問' + q.orig; }
+function label(q){ return q.year + '年度 ' + (q.isNew ? '104' : '旧' + q.sub) + (q.sess === 'AM' ? '（午前）' : '') + ' 問' + q.orig; }
 
 /* ---------- ホーム ---------- */
 function renderHome(){
@@ -398,7 +427,7 @@ function renderHome(){
     var all = POOL[cat], t = tally(all), wr = wrongOf(all);
     var card = el('section','cat');
     var hd = el('div','cat-head');
-    hd.appendChild(el('b', null, '104 ' + cat));
+    hd.appendChild(el('b', null, '104 ' + NAME[cat]));
     hd.appendChild(el('span','cnt', all.length + '問'));
     var pr = el('div','cat-prog'); var tr = el('div','tr'); var fi = el('i'); fi.style.width = (t.done / t.total * 100) + '%'; tr.appendChild(fi); pr.appendChild(tr);
     pr.appendChild(el('span', null, '解答 ' + t.done + '/' + t.total + (t.done ? '　正答率 ' + Math.round(t.ok / t.done * 100) + '%' : '')));
@@ -423,7 +452,7 @@ function renderHome(){
     b3.addEventListener('click', function(){ openRetry(cat); }); acts.appendChild(b3);
     var b4 = el('button', null, '記録を消す'); b4.disabled = !t.done;
     b4.addEventListener('click', function(){
-      if(!confirm('104 ' + cat + 'の解答記録をすべて消します。よろしいですか？')) return;
+      if(!confirm('104 ' + NAME[cat] + 'の解答記録をすべて消します。よろしいですか？')) return;
       all.forEach(function(q){ delete store.ans[q.id]; }); save(); renderHome();
     }); acts.appendChild(b4);
     card.appendChild(acts);
@@ -440,14 +469,14 @@ function openSet(cat, mode){
   var list = ordered(cat, mode);
   var first = list.findIndex(function(q){ return !store.ans[q.id]; });
   cur = {cat: cat, mode: mode, list: list, i: first < 0 ? 0 : first,
-         title: '104 ' + cat, sub: mode === 'theme' ? 'テーマ順・' + list.length + '問' : '年度順・' + list.length + '問'};
+         title: '104 ' + NAME[cat], sub: mode === 'theme' ? 'テーマ順・' + list.length + '問' : '年度順・' + list.length + '問'};
   show('exam'); renderQuestion();
 }
 function openRetry(cat){
   var list = wrongOf(ordered(cat, 'theme'));
   if(!list.length) return;
   list.forEach(function(q){ delete store.ans[q.id]; }); save();
-  cur = {cat: cat, mode: 'retry', list: list, i: 0, title: '104 ' + cat + ' 解き直し', sub: '前回間違えた' + list.length + '問'};
+  cur = {cat: cat, mode: 'retry', list: list, i: 0, title: '104 ' + NAME[cat] + ' 解き直し', sub: '前回間違えた' + list.length + '問'};
   show('exam'); renderQuestion();
 }
 function goHome(){ cur = null; save(); renderHome(); show('home'); }
@@ -466,7 +495,7 @@ function renderQuestion(){
   tp.appendChild(el('span','theme-tag', q.theme));
   meta.appendChild(tp);
   box.appendChild(meta);
-  if(!q.isNew && cur.cat === '税務') box.appendChild(el('p','oldnote','2023年度以前の出題。出題当時の税制にもとづく'));
+  if(!q.isNew && OLDNOTE[cur.cat]) box.appendChild(el('p','oldnote', OLDNOTE[cur.cat]));
 
   if(q.stem) box.appendChild(el('p','stem', q.stem));
   if(q.table) box.appendChild(qtable(q.table));
@@ -572,7 +601,7 @@ function openSheet(){
     var p = store.ans[q.id] || 0;
     var row = el('button','row' + (i === cur.i ? ' cur' : ''));
     row.setAttribute('aria-label', label(q) + (p ? '、' + (isRight(q,p) ? '正解' : '不正解') : '、未解答'));
-    row.appendChild(el('span','rl', q.year.slice(2) + '年 問' + q.orig));
+    row.appendChild(el('span','rl', q.year.slice(2) + '年' + (q.sess === 'AM' ? '午前' : '') + ' 問' + q.orig));
     [1,2,3,4].forEach(function(n){
       var d = el('span','dot', String(n));
       if(p === n){ d.classList.add('p'); d.classList.add(isRight(q,p) ? 'r' : 'w'); }
@@ -619,7 +648,7 @@ function renderResult(){
   r.appendChild(el('h3', null, '間違えた問題（' + wr.length + '）'));
   var w = el('div','wrongs');
   wr.forEach(function(q){
-    var b = el('button', null, q.year.slice(2) + '年 問' + q.orig);
+    var b = el('button', null, q.year.slice(2) + '年' + (q.sess === 'AM' ? '午前' : '') + ' 問' + q.orig);
     b.title = q.theme + '：' + q.topic;
     b.addEventListener('click', function(){ cur.i = list.indexOf(q); renderQuestion(); window.scrollTo(0,0); });
     w.appendChild(b);
