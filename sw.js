@@ -1,9 +1,10 @@
 /* 版を上げるとキャッシュが入れ替わる。中身を更新したらこの数字を増やす */
-const VERSION = 'v5';
+const VERSION = 'v7';
 const CACHE = 'ares-c1-' + VERSION;
 const ASSETS = [
   "./index.html",
   "./exam.html",
+  "./drill.html",
   "./cards.js",
   "./exam.js",
   "./plan.html",

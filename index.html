@@ -184,6 +184,8 @@ button{font-family:inherit;color:inherit;cursor:pointer}
   body{font-size:15.5px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.qtable-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 14px}.qtable{border-collapse:collapse;width:100%;min-width:300px;font-family:var(--gothic);font-size:14px;line-height:1.7;background:var(--card)}.qtable th,.qtable td{border:1px solid var(--rule);padding:8px 10px;text-align:center;vertical-align:middle}.qtable th{background:var(--paper);font-weight:600;font-size:13px}.qtable th.rh{text-align:left;white-space:nowrap}.qtable .blank{display:inline-block;min-width:3em;border:1px solid var(--ink2);padding:0 .7em;margin-left:2px;line-height:1.5}
+.chlist{list-style:none;margin:14px 0 4px;padding:0;border-top:1px solid var(--rule2)}.chlist li{display:flex;gap:10px;padding:8px 2px;border-bottom:1px solid var(--rule2);font-size:14.5px;line-height:1.7}.chlist .chno{font-weight:600;min-width:1.1em;font-variant-numeric:tabular-nums}.chlist .chtx{flex:1}
 </style>
 </head>
 <body>
@@ -243,6 +245,30 @@ button{font-family:inherit;color:inherit;cursor:pointer}
 
 <script src="./cards.js"></script>
 <script>
+
+function qtable(t){
+  var wrap = document.createElement('div'); wrap.className = 'qtable-wrap';
+  var tb = document.createElement('table'); tb.className = 'qtable';
+  function cell(tag, txt, cls){
+    var c = document.createElement(tag); if(cls) c.className = cls;
+    String(txt).split('\n').forEach(function(line, i){
+      if(i) c.appendChild(document.createElement('br'));
+      line.split(/(［[^］]+］)/).forEach(function(seg){
+        var m = seg.match(/^［([^］]+)］$/);
+        if(m){ var b = document.createElement('span'); b.className = 'blank'; b.textContent = m[1]; c.appendChild(b); }
+        else if(seg) c.appendChild(document.createTextNode(seg));
+      });
+    });
+    return c;
+  }
+  if(t.head){ var tr = document.createElement('tr'); t.head.forEach(function(h){ tr.appendChild(cell('th', h)); }); tb.appendChild(tr); }
+  t.rows.forEach(function(r){
+    var tr = document.createElement('tr');
+    r.forEach(function(v, i){ tr.appendChild(t.rowhead && i === 0 ? cell('th', v, 'rh') : cell('td', v)); });
+    tb.appendChild(tr);
+  });
+  wrap.appendChild(tb); return wrap;
+}
 (function(){
 "use strict";
 var CARDS = window.CARDS_DATA || [];
@@ -430,11 +456,24 @@ function renderCard(){
   sheet.appendChild(el('div','hr'));
 
   if(c.lead) sheet.appendChild(el('div','lead',c.lead));
+  if(c.table && c.kind==='ox') sheet.appendChild(qtable(c.table));
 
   if(c.figQ){
     sheet.appendChild(figBox(c.figQ,'問題'+c.q+'（原文のまま）'));
   }else{
     sheet.appendChild(el('div','stem',c.text));
+    if(c.table && c.kind!=='ox') sheet.appendChild(qtable(c.table));
+    if(c.kind!=='ox' && c.choices && c.choices.length){
+      var cl=el('ol','chlist');
+      c.choices.forEach(function(t){
+        var m=String(t).match(/^([１２３４1234])[．.\s]*(.*)$/);
+        var li=el('li');
+        li.appendChild(el('span','chno', m ? m[1].replace(/[１２３４]/,function(x){return '１２３４'.indexOf(x)+1;}) : ''));
+        li.appendChild(el('span','chtx', m ? m[2] : t));
+        cl.appendChild(li);
+      });
+      sheet.appendChild(cl);
+    }
   }
 
   var rec=log[c.id];
@@ -475,7 +514,7 @@ function buildResult(c,rec){
   v.appendChild(el('span','ansline',label));
   wrap.appendChild(v);
 
-  if(c.kind!=='ox' && c.choices && !c.figQ){
+  if(false){
     var ch=el('div','block');
     ch.appendChild(el('h4','選択肢'));
     c.choices.forEach(function(t){ ch.appendChild(el('p',null,t)); });

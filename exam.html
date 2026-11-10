@@ -200,6 +200,7 @@ button{font-family:inherit;color:inherit}
 
 .warn{margin:12px 0;padding:9px 12px;font-size:12px;line-height:1.6;color:var(--shu);border:1px solid var(--shu);background:var(--shu-soft)}
 @media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+.qtable-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 14px}.qtable{border-collapse:collapse;width:100%;min-width:300px;font-family:var(--gothic);font-size:14px;line-height:1.7;background:var(--sheet)}.qtable th,.qtable td{border:1px solid var(--rule);padding:8px 10px;text-align:center;vertical-align:middle}.qtable th{background:var(--paper);font-weight:600;font-size:13px}.qtable th.rh{text-align:left;white-space:nowrap}.qtable .blank{display:inline-block;min-width:3em;border:1px solid var(--ink2);padding:0 .7em;margin-left:2px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -212,7 +213,7 @@ button{font-family:inherit;color:inherit}
   <div id="yearList"></div>
   <p class="foot">
     2024年度以降は現行カリキュラム、2023年度以前は旧カリキュラムの出題構成です。<br>
-    <a href="./index.html">一問一答を開く</a>
+    <a href="./drill.html">104 法務・税務の問題集</a>　<a href="./index.html">一問一答を開く</a>
   </p>
 </div>
 
@@ -278,6 +279,31 @@ button{font-family:inherit;color:inherit}
 <script>
 (function(){
 "use strict";
+
+function qtable(t){
+  var wrap = document.createElement('div'); wrap.className = 'qtable-wrap';
+  var tb = document.createElement('table'); tb.className = 'qtable';
+  function cell(tag, txt, cls){
+    var c = document.createElement(tag); if(cls) c.className = cls;
+    String(txt).split('\n').forEach(function(line, i){
+      if(i) c.appendChild(document.createElement('br'));
+      line.split(/(［[^］]+］)/).forEach(function(seg){
+        var m = seg.match(/^［([^］]+)］$/);
+        if(m){ var b = document.createElement('span'); b.className = 'blank'; b.textContent = m[1]; c.appendChild(b); }
+        else if(seg) c.appendChild(document.createTextNode(seg));
+      });
+    });
+    return c;
+  }
+  if(t.head){ var tr = document.createElement('tr'); t.head.forEach(function(h){ tr.appendChild(cell('th', h)); }); tb.appendChild(tr); }
+  t.rows.forEach(function(r){
+    var tr = document.createElement('tr');
+    r.forEach(function(v, i){ tr.appendChild(t.rowhead && i === 0 ? cell('th', v, 'rh') : cell('td', v)); });
+    tb.appendChild(tr);
+  });
+  wrap.appendChild(tb); return wrap;
+}
+
 
 var DATA = window.EXAM_DATA || {};
 var LIMIT = 120 * 60 * 1000;
@@ -444,6 +470,7 @@ function renderQuestion(){
   box.appendChild(meta);
 
   if(q.stem) box.appendChild(el('p','stem', q.stem));
+  if(q.table) box.appendChild(qtable(q.table));
   if(q.figQ){ box.appendChild(figure(q.figQ, '問' + q.n + '（原文）')); }
 
   var bmap = {};

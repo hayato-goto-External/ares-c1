@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E7E8E2">
+<title>104 法務・税務 問題集</title>
+<link rel="manifest" href="./exam.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon-exam.png">
+<style>
+:root{
+  --paper:#E7E8E2; --sheet:#FCFCFA; --ink:#1B1E24; --ink2:#5C6371; --ink3:#8A9099;
+  --rule:#C7C9C1; --rule2:#DEDFD8; --ai:#2A4A7B; --ai-soft:rgba(42,74,123,.08);
+  --shu:#B23A2F; --shu-soft:rgba(178,58,47,.07); --mark:#1B1E24;
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","MS PMincho",serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#16181C; --sheet:#1F2227; --ink:#E6E7EA; --ink2:#A9AEB8; --ink3:#7C828C;
+    --rule:#3A3E46; --rule2:#2C3036; --ai:#8FA9D6; --ai-soft:rgba(143,169,214,.12);
+    --shu:#E07A6E; --shu-soft:rgba(224,122,110,.10); --mark:#E6E7EA;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--gothic);
+  font-size:15px;line-height:1.75;-webkit-text-size-adjust:100%}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+[hidden]{display:none!important}
+
+/* ---- 上部バー ---- */
+.bar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.bar-in{display:flex;align-items:center;gap:12px;min-height:52px;padding:6px 0}
+.bar-title{flex:1;min-width:0}
+.bar-title b{display:block;font-size:14px;font-weight:600;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-title span{display:block;font-size:11px;color:var(--ink3);line-height:1.4}
+.clock{font-variant-numeric:tabular-nums;font-size:19px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
+.clock.low{color:var(--shu)}
+.clock.over{color:var(--shu)}
+.clock small{font-size:10.5px;font-weight:400;color:var(--ink3);margin-right:4px}
+.btn-ghost{border:1px solid var(--rule);background:var(--sheet);border-radius:3px;
+  padding:6px 10px;font-size:12px;cursor:pointer;white-space:nowrap}
+.btn-ghost:hover{border-color:var(--ink3)}
+.track{height:3px;background:var(--rule2)}
+.track i{display:block;height:100%;width:0;background:var(--ai);transition:width .2s}
+
+/* ---- ホーム ---- */
+.home h1{font-size:20px;font-weight:600;margin:26px 0 4px;line-height:1.45}
+.home .lede{font-size:13px;color:var(--ink2);margin:0 0 22px}
+.yr{background:var(--sheet);border:1px solid var(--rule);margin-bottom:12px}
+.yr-head{display:flex;align-items:baseline;gap:10px;padding:11px 14px 9px;border-bottom:1px solid var(--rule2)}
+.yr-head b{font-size:15px;font-weight:600}
+.yr-head span{font-size:11.5px;color:var(--ink3)}
+.yr-row{display:grid;grid-template-columns:1fr 1fr}
+.set{display:block;width:100%;text-align:left;border:0;background:none;padding:12px 14px;cursor:pointer;
+  border-right:1px solid var(--rule2)}
+.set:last-child{border-right:0}
+.set:hover{background:var(--ai-soft)}
+.set .s1{font-size:14px;font-weight:600;display:block}
+.set .s2{font-size:11.5px;color:var(--ink3);display:block;line-height:1.5}
+.set .s3{font-size:12.5px;display:block;margin-top:5px;font-variant-numeric:tabular-nums}
+.set .s3.go{color:var(--ai)}
+.set .s3.done b{font-size:17px}
+.home .foot{font-size:11.5px;color:var(--ink3);margin:22px 0 40px;line-height:1.8}
+.home .foot a{color:var(--ai)}
+
+/* ---- 開始前 ---- */
+.intro{background:var(--sheet);border:1px solid var(--rule);padding:22px 20px;margin:22px 0}
+.intro h2{font-size:18px;font-weight:600;margin:0 0 4px}
+.intro p{font-size:13.5px;color:var(--ink2);margin:0 0 12px}
+.intro table{border-collapse:collapse;font-size:13px;margin:6px 0 18px;width:100%}
+.intro td{padding:5px 0;border-bottom:1px solid var(--rule2);vertical-align:top}
+.intro td:first-child{color:var(--ink3);width:6em}
+.btn-main{border:0;background:var(--ink);color:var(--paper);padding:12px 22px;font-size:14.5px;
+  font-weight:600;border-radius:3px;cursor:pointer}
+.btn-main:hover{opacity:.9}
+.intro .sub{margin-top:12px;display:flex;gap:14px;flex-wrap:wrap}
+.link{border:0;background:none;padding:2px 0;font-size:12.5px;color:var(--ink3);text-decoration:underline;cursor:pointer}
+
+/* ---- 問題 ---- */
+.q{background:var(--sheet);border:1px solid var(--rule);margin:18px 0 12px;padding:18px 18px 8px}
+.q-meta{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:12px}
+.q-no{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.q-sub{font-size:12.5px;color:var(--ink2)}
+.q-topic{font-size:11.5px;color:var(--ink3);width:100%}
+.stem{font-family:var(--mincho);font-size:16.5px;line-height:1.95;margin:0 0 14px}
+.fig{display:block;margin:0 0 14px;border:1px solid var(--rule2);background:#fff}
+.fig img{display:block;width:100%;height:auto}
+.br{margin:0 0 14px;padding:0;list-style:none}
+.br li{display:grid;grid-template-columns:1.6em 1fr;gap:2px 6px;font-family:var(--mincho);
+  font-size:15.5px;line-height:1.85;padding:6px 0;border-top:1px dashed var(--rule2)}
+.br li:first-child{border-top:0}
+.br .mk{font-weight:600}
+.ch{margin:0 0 6px;padding:0;list-style:none;border-top:1px solid var(--rule2)}
+.ch li{display:grid;grid-template-columns:1.6em 1fr;gap:2px 6px;font-size:14.5px;line-height:1.75;padding:7px 0;
+  border-bottom:1px solid var(--rule2)}
+.ch li.num{font-family:var(--mincho);font-size:15.5px;line-height:1.85}
+.ch .mk{font-weight:600;font-variant-numeric:tabular-nums}
+
+/* 判定後の枝ごとの○× */
+.verdict{display:inline-block;min-width:1.4em;font-weight:600;margin-right:4px}
+.verdict.o{color:var(--ai)} .verdict.x{color:var(--shu)}
+.why{grid-column:2;font-family:var(--gothic);font-size:13px;line-height:1.75;color:var(--ink2);margin-top:3px}
+.why .sup{display:block;margin-top:5px;padding-left:9px;border-left:2px solid var(--ai);color:var(--ink2)}
+.why .sup::before{content:"補足　";color:var(--ai);font-weight:600}
+
+/* ---- マークシート ---- */
+.marks{background:var(--sheet);border:1px solid var(--rule);padding:14px 16px 16px;margin-bottom:12px}
+.marks-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.marks-head b{font-size:12.5px;font-weight:600}
+.marks-head span{font-size:11.5px;color:var(--ink3)}
+.ovals{display:flex;gap:14px;justify-content:center}
+.oval{width:56px;height:76px;border:2px solid var(--ink2);border-radius:50%;background:transparent;
+  display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:600;
+  cursor:pointer;transition:background .12s,border-color .12s,color .12s;font-variant-numeric:tabular-nums}
+.oval:hover:not([disabled]){border-color:var(--ink);background:var(--ai-soft)}
+.oval[disabled]{cursor:default}
+.oval.pick{background:var(--mark);border-color:var(--mark);color:var(--sheet)}
+.oval.right{border-color:var(--ai);color:var(--ai);border-width:3px}
+.oval.pick.right{background:var(--ai);border-color:var(--ai);color:var(--sheet)}
+.oval.pick.wrong{background:var(--shu);border-color:var(--shu);color:var(--sheet)}
+.oval.dim{opacity:.38}
+
+/* ---- 採点結果 ---- */
+.res{border:1px solid var(--rule);background:var(--sheet);padding:14px 16px;margin-bottom:12px}
+.res.ok{border-color:var(--ai)} .res.ng{border-color:var(--shu)}
+.res-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.res-head .big{font-size:20px;font-weight:600}
+.res.ok .big{color:var(--ai)} .res.ng .big{color:var(--shu)}
+.res-head .ans{font-size:13px;color:var(--ink2)}
+.res .corr{margin:10px 0 0;padding:8px 11px;font-size:12.5px;line-height:1.75;background:var(--shu-soft);color:var(--ink)}
+.res .corr b{color:var(--shu)}
+.res .exp{margin:10px 0 0;font-size:13.5px;line-height:1.85;color:var(--ink)}
+.res .exp .sup{display:block;margin-top:8px;padding-left:9px;border-left:2px solid var(--ai);color:var(--ink2);font-size:13px}
+.res .exp .sup::before{content:"補足　";color:var(--ai);font-weight:600}
+.res .undo{margin-top:8px}
+
+/* ---- 下部ナビ ---- */
+.nav{position:sticky;bottom:0;background:var(--paper);border-top:1px solid var(--rule);z-index:15}
+.nav-in{display:flex;align-items:center;gap:10px;padding:9px 0 calc(9px + env(safe-area-inset-bottom))}
+.nav .grow{flex:1;text-align:center;font-size:12px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.nav button{border:1px solid var(--rule);background:var(--sheet);padding:9px 16px;font-size:13.5px;border-radius:3px;cursor:pointer}
+.nav button.fwd{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.nav button[disabled]{opacity:.35;cursor:default}
+
+/* ---- 解答用紙 ---- */
+.sheet-wrap{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.35);display:flex;justify-content:center;align-items:flex-end}
+.sheet{background:var(--sheet);width:100%;max-width:760px;max-height:88vh;overflow:auto;border-top:1px solid var(--rule);
+  padding:14px 16px calc(18px + env(safe-area-inset-bottom))}
+@media (min-width:720px){ .sheet-wrap{align-items:center} .sheet{border:1px solid var(--rule);max-height:84vh} }
+.sheet-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sheet-head b{flex:1;font-size:15px;font-weight:600}
+.sheet-sum{font-size:12px;color:var(--ink2);margin-bottom:10px;font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 22px}
+@media (min-width:560px){ .grid{grid-template-columns:repeat(3,1fr)} }
+.row{display:flex;align-items:center;gap:6px;padding:4px 2px;border-bottom:1px solid var(--rule2);cursor:pointer;
+  background:none;border-left:0;border-right:0;border-top:0;width:100%;text-align:left}
+.row:hover{background:var(--ai-soft)}
+.row.cur{background:var(--ai-soft)}
+.row .rn{width:2.2em;font-size:12px;color:var(--ink2);font-variant-numeric:tabular-nums;text-align:right;margin-right:4px}
+.row .dot{width:15px;height:21px;border:1.5px solid var(--ink3);border-radius:50%;font-size:9px;
+  display:flex;align-items:center;justify-content:center;color:var(--ink3)}
+.row .dot.p{background:var(--mark);border-color:var(--mark);color:var(--sheet)}
+.row .dot.p.r{background:var(--ai);border-color:var(--ai)}
+.row .dot.p.w{background:var(--shu);border-color:var(--shu)}
+.row .dot.c{border-color:var(--ai);border-width:2px}
+.row .rs{margin-left:auto;font-size:12px;width:1.2em;text-align:center}
+.row .rs.o{color:var(--ai)} .row .rs.x{color:var(--shu)}
+.sheet-foot{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+
+/* ---- 結果 ---- */
+.result h2{font-size:18px;font-weight:600;margin:24px 0 4px}
+.result .when{font-size:12px;color:var(--ink3);margin:0 0 16px}
+.score{display:flex;align-items:baseline;gap:8px;margin:0 0 6px}
+.score b{font-size:54px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.score span{font-size:16px;color:var(--ink2)}
+.score-note{font-size:13px;margin:0 0 20px}
+.score-note.pass{color:var(--ai)} .score-note.fail{color:var(--shu)}
+.tbl{border-collapse:collapse;width:100%;font-size:13px;background:var(--sheet);margin:0 0 18px}
+.tbl th,.tbl td{border:1px solid var(--rule2);padding:7px 9px;text-align:left;vertical-align:middle}
+.tbl th{font-weight:600;background:var(--paper);white-space:nowrap}
+.tbl td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl td.ok{color:var(--ai);font-weight:600} .tbl td.ng{color:var(--shu);font-weight:600}
+.meter{height:6px;background:var(--rule2);position:relative;min-width:60px}
+.meter i{position:absolute;inset:0 auto 0 0;background:var(--ink2)}
+.meter u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--shu)}
+.result h3{font-size:14.5px;font-weight:600;margin:22px 0 8px}
+.wrongs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 20px}
+.wrongs button{border:1px solid var(--shu);color:var(--shu);background:var(--sheet);padding:4px 9px;font-size:12.5px;border-radius:3px;cursor:pointer;font-variant-numeric:tabular-nums}
+.result .acts{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 40px}
+.result .acts button{border:1px solid var(--rule);background:var(--sheet);padding:9px 14px;font-size:13px;border-radius:3px;cursor:pointer}
+
+.warn{margin:12px 0;padding:9px 12px;font-size:12px;line-height:1.6;color:var(--shu);border:1px solid var(--shu);background:var(--shu-soft)}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+.qtable-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 14px}.qtable{border-collapse:collapse;width:100%;min-width:300px;font-family:var(--gothic);font-size:14px;line-height:1.7;background:var(--sheet)}.qtable th,.qtable td{border:1px solid var(--rule);padding:8px 10px;text-align:center;vertical-align:middle}.qtable th{background:var(--paper);font-weight:600;font-size:13px}.qtable th.rh{text-align:left;white-space:nowrap}.qtable .blank{display:inline-block;min-width:3em;border:1px solid var(--ink2);padding:0 .7em;margin-left:2px;line-height:1.5}
+</style>
+<style>
+/* ---- 問題集固有 ---- */
+.cat{background:var(--sheet);border:1px solid var(--rule);margin-bottom:14px}
+.cat-head{padding:13px 15px 10px;border-bottom:1px solid var(--rule2)}
+.cat-head b{font-size:16px;font-weight:600}
+.cat-head .cnt{font-size:12px;color:var(--ink3);margin-left:8px}
+.cat-prog{display:flex;align-items:center;gap:10px;margin-top:7px}
+.cat-prog .tr{flex:1;height:5px;background:var(--rule2);position:relative}
+.cat-prog .tr i{position:absolute;inset:0 auto 0 0;background:var(--ai)}
+.cat-prog span{font-size:11.5px;color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cat-acts{display:flex;flex-wrap:wrap;gap:8px;padding:12px 15px}
+.cat-acts button{border:1px solid var(--rule);background:var(--sheet);padding:8px 12px;font-size:13px;border-radius:3px;cursor:pointer}
+.cat-acts button.pri{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cat-acts button.rt{border-color:var(--shu);color:var(--shu)}
+.cat-acts button[disabled]{opacity:.4;cursor:default}
+.themes{padding:0 15px 12px;font-size:12px;color:var(--ink2);line-height:1.9}
+.themes span{display:inline-block;margin-right:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.themes span.weak{color:var(--shu)}
+.theme-tag{display:inline-block;font-size:11px;padding:0 6px;border:1px solid var(--ai);color:var(--ai);border-radius:2px;margin-left:2px}
+.oldnote{font-size:11.5px;color:var(--ink3);margin:-6px 0 12px;padding-left:8px;border-left:2px solid var(--rule)}
+.grp{grid-column:1/-1;font-size:11.5px;font-weight:600;color:var(--ai);padding:10px 2px 3px}
+.row .rl{font-size:11px;color:var(--ink3);width:4.6em;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- ホーム -->
+<div id="vHome" class="home wrap">
+  <h1>104 法務・税務 問題集</h1>
+  <p class="lede">2021〜2025年度の過去問から、104の法務（30問）と税務（40問）だけを集めました。1問ごとにその場で採点します。</p>
+  <p class="warn" id="warnStore" hidden>このブラウザでは解答を保存できません。画面を閉じると記録が消えます。</p>
+  <div id="catList"></div>
+  <p class="foot">
+    範囲：現行カリキュラム（2024・2025年度）は104の問16〜21（法務）と問43〜50（税務）、旧カリキュラム（2021〜2023年度）は103の問1〜6と問28〜35。<br>
+    旧カリキュラムの税務は出題当時の税制です。その後の改正で扱いが変わった論点がありえます。<br>
+    <a href="./exam.html">本番形式の模試へ</a>　<a href="./index.html">一問一答へ</a>
+  </p>
+</div>
+
+<!-- 問題画面 -->
+<div id="vExam" hidden>
+  <div class="bar">
+    <div class="wrap bar-in">
+      <button class="btn-ghost" id="btnHome" aria-label="一覧に戻る">戻る</button>
+      <div class="bar-title"><b id="setName"></b><span id="setSub"></span></div>
+      <div class="clock" id="score" aria-live="polite"></div>
+    </div>
+    <div class="track"><i id="track"></i></div>
+  </div>
+
+  <div class="wrap">
+    <div id="qArea" hidden>
+      <article class="q" id="qBox"></article>
+      <section class="marks" id="marks">
+        <div class="marks-head"><b>解答欄</b><span id="marksHint">番号をタップすると採点します</span></div>
+        <div class="ovals" id="ovals"></div>
+      </section>
+      <section id="res"></section>
+      <div style="height:8px"></div>
+    </div>
+    <div id="result" class="result" hidden></div>
+  </div>
+
+  <div class="nav" id="nav">
+    <div class="wrap nav-in">
+      <button id="btnPrev">前へ</button>
+      <div class="grow"><button class="btn-ghost" id="btnSheet">一覧</button></div>
+      <button id="btnNext" class="fwd">次へ</button>
+    </div>
+  </div>
+</div>
+
+<!-- 一覧（解答用紙） -->
+<div class="sheet-wrap" id="sheetWrap" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheet-head"><b id="sheetTitle">解答一覧</b><button class="btn-ghost" id="btnSheetClose">閉じる</button></div>
+    <div class="sheet-sum" id="sheetSum"></div>
+    <div class="grid" id="grid"></div>
+    <div class="sheet-foot">
+      <button class="btn-main" id="btnFinish">結果を見る</button>
+    </div>
+  </div>
+</div>
+
+<script src="./exam.js"></script>
+<script>
+(function(){
+"use strict";
+
+function qtable(t){
+  var wrap = document.createElement('div'); wrap.className = 'qtable-wrap';
+  var tb = document.createElement('table'); tb.className = 'qtable';
+  function cell(tag, txt, cls){
+    var c = document.createElement(tag); if(cls) c.className = cls;
+    String(txt).split('\n').forEach(function(line, i){
+      if(i) c.appendChild(document.createElement('br'));
+      line.split(/(［[^］]+］)/).forEach(function(seg){
+        var m = seg.match(/^［([^］]+)］$/);
+        if(m){ var b = document.createElement('span'); b.className = 'blank'; b.textContent = m[1]; c.appendChild(b); }
+        else if(seg) c.appendChild(document.createTextNode(seg));
+      });
+    });
+    return c;
+  }
+  if(t.head){ var tr = document.createElement('tr'); t.head.forEach(function(h){ tr.appendChild(cell('th', h)); }); tb.appendChild(tr); }
+  t.rows.forEach(function(r){
+    var tr = document.createElement('tr');
+    r.forEach(function(v, i){ tr.appendChild(t.rowhead && i === 0 ? cell('th', v, 'rh') : cell('td', v)); });
+    tb.appendChild(tr);
+  });
+  wrap.appendChild(tb); return wrap;
+}
+
+
+var SRC = window.EXAM_DATA || {};
+var YEARS = ['2025','2024','2023','2022','2021'];
+var RANGE = {'法務':{n:[16,21], o:[1,6]}, '税務':{n:[43,50], o:[28,35]}};
+
+/* テーマ：判定は上から順に当てる（match）、表示は order の順 */
+var THEME = {
+ '法務': {
+   match: [['倒産隔離・真正譲渡',['倒産隔離','売主の事情','真正']],
+           ['賃貸借の承継',['賃貸借','テナント','所有権移転']],
+           ['信託',['信託']],
+           ['組合',['組合']],
+           ['投資法人・TMK',['投資法人','特定目的会社','リート']],
+           ['媒体・仕組み',['媒体','仕組み','基本的論点']]],
+   order: ['媒体・仕組み','倒産隔離・真正譲渡','賃貸借の承継','信託','投資法人・TMK','組合'] },
+ '税務': {
+   match: [['税会不一致',['税会']],
+           ['ヴィークルの課税区分',['ヴィークル','納税義務','課税判定','課税対象']],
+           ['信託の税務',['信託']],
+           ['組合の税務',['組合']],
+           ['TMKの税務・導管性',['特定目的会社','TMK']],
+           ['投資法人の税務・導管性',['投資法人']],
+           ['流通税',['流通税','不動産取得税','登録免許税']],
+           ['消費税',['消費税']],
+           ['リース',['リース']]],
+   order: ['ヴィークルの課税区分','信託の税務','組合の税務','TMKの税務・導管性','投資法人の税務・導管性','税会不一致','流通税','消費税','リース'] }
+};
+
+/* ---------- 問題プール ---------- */
+var POOL = {};   // cat -> [q]
+Object.keys(RANGE).forEach(function(cat){
+  var list = [];
+  YEARS.forEach(function(y){
+    var isNew = y >= '2024', r = isNew ? RANGE[cat].n : RANGE[cat].o;
+    (SRC[y + '-PM'] || []).forEach(function(q){
+      if(q.n < r[0] || q.n > r[1]) return;
+      var th = null;
+      THEME[cat].match.some(function(m){ if(m[1].some(function(k){ return q.topic.indexOf(k) >= 0; })){ th = m[0]; return true; } return false; });
+      var c = {}; for(var k in q) c[k] = q[k];
+      c.id = y + '-PM-' + q.n; c.year = y; c.orig = q.n; c.theme = th || 'その他'; c.isNew = isNew;
+      list.push(c);
+    });
+  });
+  POOL[cat] = list;
+});
+
+function ordered(cat, mode){
+  var a = POOL[cat].slice();
+  if(mode === 'theme'){
+    var ord = THEME[cat].order;
+    a.sort(function(x, y){
+      var d = ord.indexOf(x.theme) - ord.indexOf(y.theme);
+      if(d) return d;
+      if(x.year !== y.year) return x.year < y.year ? 1 : -1;
+      return x.orig - y.orig;
+    });
+  }
+  return a;
+}
+
+/* ---------- 保存：解答は問題IDごと（並び順を変えても共有） ---------- */
+var KEY = 'ares-c1-drill104';
+var canStore = false, store = {ans:{}};
+try{ localStorage.setItem(KEY+'-t','1'); localStorage.removeItem(KEY+'-t'); canStore = true; }catch(e){}
+if(canStore){ try{ var raw = localStorage.getItem(KEY); if(raw){ store = JSON.parse(raw) || {ans:{}}; if(!store.ans) store.ans = {}; } }catch(e){ store = {ans:{}}; } }
+function save(){ if(!canStore) return; try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
+
+/* ---------- ユーティリティ ---------- */
+function el(tag, cls, txt){ var e = document.createElement(tag); if(cls) e.className = cls; if(txt != null) e.textContent = txt; return e; }
+function $(id){ return document.getElementById(id); }
+function isRight(q, p){ if(q.void) return true; if(q.accept) return q.accept.indexOf(p) >= 0; return q.ans === p; }
+function tally(list){
+  var d = 0, ok = 0;
+  list.forEach(function(q){ var p = store.ans[q.id]; if(p){ d++; if(isRight(q, p)) ok++; } });
+  return {done: d, ok: ok, total: list.length};
+}
+function wrongOf(list){ return list.filter(function(q){ var p = store.ans[q.id]; return p && !isRight(q, p); }); }
+function label(q){ return q.year + '年度 ' + (q.isNew ? '104' : '旧103') + ' 問' + q.orig; }
+
+/* ---------- ホーム ---------- */
+function renderHome(){
+  var box = $('catList'); box.innerHTML = '';
+  Object.keys(POOL).forEach(function(cat){
+    var all = POOL[cat], t = tally(all), wr = wrongOf(all);
+    var card = el('section','cat');
+    var hd = el('div','cat-head');
+    hd.appendChild(el('b', null, '104 ' + cat));
+    hd.appendChild(el('span','cnt', all.length + '問'));
+    var pr = el('div','cat-prog'); var tr = el('div','tr'); var fi = el('i'); fi.style.width = (t.done / t.total * 100) + '%'; tr.appendChild(fi); pr.appendChild(tr);
+    pr.appendChild(el('span', null, '解答 ' + t.done + '/' + t.total + (t.done ? '　正答率 ' + Math.round(t.ok / t.done * 100) + '%' : '')));
+    hd.appendChild(pr);
+    card.appendChild(hd);
+
+    // テーマ別の正答状況
+    var th = el('div','themes');
+    THEME[cat].order.forEach(function(name){
+      var qs = all.filter(function(q){ return q.theme === name; });
+      if(!qs.length) return;
+      var tt = tally(qs);
+      var s = el('span', tt.done && tt.ok / tt.done < 0.6 ? 'weak' : null, name + ' ' + (tt.done ? tt.ok + '/' + tt.done : '—') + '（' + qs.length + '）');
+      th.appendChild(s);
+    });
+    card.appendChild(th);
+
+    var acts = el('div','cat-acts');
+    var b1 = el('button','pri','テーマ順で解く'); b1.addEventListener('click', function(){ openSet(cat, 'theme'); }); acts.appendChild(b1);
+    var b2 = el('button', null, '年度順で解く'); b2.addEventListener('click', function(){ openSet(cat, 'year'); }); acts.appendChild(b2);
+    var b3 = el('button','rt','間違えた問題だけ（' + wr.length + '）'); b3.disabled = !wr.length;
+    b3.addEventListener('click', function(){ openRetry(cat); }); acts.appendChild(b3);
+    var b4 = el('button', null, '記録を消す'); b4.disabled = !t.done;
+    b4.addEventListener('click', function(){
+      if(!confirm('104 ' + cat + 'の解答記録をすべて消します。よろしいですか？')) return;
+      all.forEach(function(q){ delete store.ans[q.id]; }); save(); renderHome();
+    }); acts.appendChild(b4);
+    card.appendChild(acts);
+    box.appendChild(card);
+  });
+}
+
+/* ---------- セット ---------- */
+var cur = null;  // {cat, mode, list, i, title}
+
+function show(v){ $('vHome').hidden = v !== 'home'; $('vExam').hidden = v !== 'exam'; window.scrollTo(0,0); }
+
+function openSet(cat, mode){
+  var list = ordered(cat, mode);
+  var first = list.findIndex(function(q){ return !store.ans[q.id]; });
+  cur = {cat: cat, mode: mode, list: list, i: first < 0 ? 0 : first,
+         title: '104 ' + cat, sub: mode === 'theme' ? 'テーマ順・' + list.length + '問' : '年度順・' + list.length + '問'};
+  show('exam'); renderQuestion();
+}
+function openRetry(cat){
+  var list = wrongOf(ordered(cat, 'theme'));
+  if(!list.length) return;
+  list.forEach(function(q){ delete store.ans[q.id]; }); save();
+  cur = {cat: cat, mode: 'retry', list: list, i: 0, title: '104 ' + cat + ' 解き直し', sub: '前回間違えた' + list.length + '問'};
+  show('exam'); renderQuestion();
+}
+function goHome(){ cur = null; save(); renderHome(); show('home'); }
+
+/* ---------- 問題 ---------- */
+function renderQuestion(){
+  $('result').hidden = true; $('qArea').hidden = false; $('nav').hidden = false;
+  var q = cur.list[cur.i], pick = store.ans[q.id] || 0, judged = !!pick;
+  $('setName').textContent = cur.title; $('setSub').textContent = cur.sub;
+
+  var box = $('qBox'); box.innerHTML = '';
+  var meta = el('div','q-meta');
+  meta.appendChild(el('span','q-no', (cur.i + 1) + ' / ' + cur.list.length));
+  meta.appendChild(el('span','q-sub', label(q)));
+  var tp = el('span','q-topic', '出題項目：' + q.topic + '　');
+  tp.appendChild(el('span','theme-tag', q.theme));
+  meta.appendChild(tp);
+  box.appendChild(meta);
+  if(!q.isNew && cur.cat === '税務') box.appendChild(el('p','oldnote','2023年度以前の出題。出題当時の税制にもとづく'));
+
+  if(q.stem) box.appendChild(el('p','stem', q.stem));
+  if(q.table) box.appendChild(qtable(q.table));
+  if(q.figQ) box.appendChild(figure(q.figQ, label(q) + '（原文）'));
+
+  if(q.mode === 'branches'){
+    var ul = el('ul','br');
+    q.branches.forEach(function(b){
+      var li = el('li'); li.appendChild(el('span','mk', b.mk));
+      var tx = el('span'); if(judged) tx.appendChild(verdict(b.ok)); tx.appendChild(document.createTextNode(b.text));
+      li.appendChild(tx); if(judged) li.appendChild(why(b)); ul.appendChild(li);
+    });
+    box.appendChild(ul);
+  }
+  if(!q.figQ || q.mode !== 'single'){
+    var ol = el('ul','ch');
+    q.choices.forEach(function(c){
+      var li = el('li', q.mode === 'numbered' ? 'num' : null);
+      li.appendChild(el('span','mk', String(c.no)));
+      var tx = el('span'), b = q.mode === 'numbered' ? findBranch(q, c.no) : null;
+      if(judged && b) tx.appendChild(verdict(b.ok));
+      tx.appendChild(document.createTextNode(c.text));
+      li.appendChild(tx); if(judged && b) li.appendChild(why(b)); ol.appendChild(li);
+    });
+    box.appendChild(ol);
+  }
+
+  var ov = $('ovals'); ov.innerHTML = '';
+  [1,2,3,4].forEach(function(n){
+    var b = el('button','oval', String(n)); b.setAttribute('aria-label', n + '番で解答');
+    if(judged){
+      b.disabled = true;
+      var correct = q.void ? false : (q.accept ? q.accept.indexOf(n) >= 0 : q.ans === n);
+      if(n === pick){ b.classList.add('pick'); b.classList.add(isRight(q, pick) ? 'right' : 'wrong'); }
+      if(correct) b.classList.add('right');
+      if(n !== pick && !correct) b.classList.add('dim');
+    } else b.addEventListener('click', function(){ answer(n); });
+    ov.appendChild(b);
+  });
+  $('marksHint').textContent = judged ? '採点済み・取り消すと解き直せます' : '番号をタップすると採点します';
+  renderRes(q, pick);
+
+  $('btnPrev').disabled = cur.i === 0;
+  $('btnNext').textContent = cur.i === cur.list.length - 1 ? '結果' : '次へ';
+  var t = tally(cur.list);
+  $('track').style.width = (t.done / t.total * 100) + '%';
+  $('score').innerHTML = '<small>正答</small>' + t.ok + '/' + t.done;
+}
+
+function findBranch(q, no){ var h = null; (q.branches||[]).forEach(function(b){ if(String(b.mk).normalize('NFKC') === String(no)) h = b; }); return h; }
+function verdict(ok){ return el('span','verdict ' + (ok ? 'o' : 'x'), ok ? '○' : '×'); }
+function why(b){
+  var w = el('div','why');
+  if(b.exp) w.appendChild(document.createTextNode(b.exp));
+  if(b.sup) w.appendChild(el('span','sup', b.sup));
+  if(!b.exp && !b.sup) w.appendChild(document.createTextNode(b.ok ? 'この記述は正しい。' : 'この記述は誤り。'));
+  return w;
+}
+function figure(src, cap){
+  var a = el('a','fig'); a.href = src; a.target = '_blank'; a.rel = 'noopener';
+  var im = document.createElement('img'); im.src = src; im.alt = cap; im.loading = 'lazy'; im.decoding = 'async';
+  a.appendChild(im); return a;
+}
+function renderRes(q, pick){
+  var r = $('res'); r.innerHTML = ''; if(!pick) return;
+  var ok = isRight(q, pick), box = el('div','res ' + (ok ? 'ok' : 'ng'));
+  var hd = el('div','res-head');
+  hd.appendChild(el('span','big', ok ? '○ 正解' : '× 不正解'));
+  hd.appendChild(el('span','ans', q.void ? '全解答が正答扱い' : '正答 ' + (q.accept ? q.accept.join('・') : q.ans) + '　あなたの解答 ' + pick));
+  box.appendChild(hd);
+  if(q.corr){ var c = el('p','corr'); c.appendChild(el('b', null, '協会の訂正・注記　')); c.appendChild(document.createTextNode(q.corr)); box.appendChild(c); }
+  if(q.mode === 'single'){
+    var ex = el('div','exp'); if(q.exp) ex.appendChild(document.createTextNode(q.exp)); if(q.sup) ex.appendChild(el('span','sup', q.sup)); box.appendChild(ex);
+    if(q.figE) box.appendChild(figure(q.figE, label(q) + 'の解説（原文）'));
+  }
+  var u = el('div','undo'), lk = el('button','link','解答を取り消す');
+  lk.addEventListener('click', function(){ delete store.ans[q.id]; save(); renderQuestion(); });
+  u.appendChild(lk); box.appendChild(u);
+  r.appendChild(box);
+}
+function answer(n){
+  var q = cur.list[cur.i]; if(store.ans[q.id]) return;
+  store.ans[q.id] = n; save(); renderQuestion();
+  var r = $('res');
+  if(r.firstChild && r.getBoundingClientRect().top > window.innerHeight * 0.7){
+    $('marks').scrollIntoView({block:'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+  }
+}
+function move(d){
+  var to = cur.i + d; if(to < 0) return;
+  if(to >= cur.list.length){ renderResult(); return; }
+  cur.i = to; renderQuestion(); window.scrollTo(0,0);
+}
+
+/* ---------- 一覧 ---------- */
+function openSheet(){
+  var g = $('grid'); g.innerHTML = '';
+  var t = tally(cur.list);
+  $('sheetSum').textContent = '解答 ' + t.done + ' / ' + t.total + '　正答 ' + t.ok + (t.done ? '（' + Math.round(t.ok / t.done * 100) + '%）' : '');
+  var last = null;
+  cur.list.forEach(function(q, i){
+    if(cur.mode !== 'year' && q.theme !== last){ g.appendChild(el('div','grp', q.theme)); last = q.theme; }
+    var p = store.ans[q.id] || 0;
+    var row = el('button','row' + (i === cur.i ? ' cur' : ''));
+    row.setAttribute('aria-label', label(q) + (p ? '、' + (isRight(q,p) ? '正解' : '不正解') : '、未解答'));
+    row.appendChild(el('span','rl', q.year.slice(2) + '年 問' + q.orig));
+    [1,2,3,4].forEach(function(n){
+      var d = el('span','dot', String(n));
+      if(p === n){ d.classList.add('p'); d.classList.add(isRight(q,p) ? 'r' : 'w'); }
+      else if(p && !q.void && (q.accept ? q.accept.indexOf(n) >= 0 : q.ans === n)) d.classList.add('c');
+      row.appendChild(d);
+    });
+    row.appendChild(el('span','rs' + (p ? (isRight(q,p) ? ' o' : ' x') : ''), p ? (isRight(q,p) ? '○' : '×') : ''));
+    row.addEventListener('click', function(){ cur.i = i; closeSheet(); renderQuestion(); window.scrollTo(0,0); });
+    g.appendChild(row);
+  });
+  $('sheetWrap').hidden = false; $('btnSheetClose').focus();
+}
+function closeSheet(){ $('sheetWrap').hidden = true; }
+
+/* ---------- 結果 ---------- */
+function renderResult(){
+  closeSheet();
+  $('qArea').hidden = true; $('nav').hidden = true;
+  var r = $('result'); r.hidden = false; r.innerHTML = '';
+  var list = cur.list, t = tally(list);
+  r.appendChild(el('h2', null, cur.title + 'の結果'));
+  r.appendChild(el('p','when', cur.sub + '　解答 ' + t.done + ' / ' + t.total));
+  var sc = el('div','score'); sc.appendChild(el('b', null, String(t.ok))); sc.appendChild(el('span', null, '/ ' + t.total)); r.appendChild(sc);
+  var rate = t.done ? Math.round(t.ok / t.done * 100) : 0;
+  r.appendChild(el('p','score-note ' + (rate >= 70 ? 'pass' : 'fail'), '正答率 ' + rate + '%'));
+
+  r.appendChild(el('h3', null, 'テーマ別'));
+  var tb = el('table','tbl');
+  var hd = el('tr'); ['テーマ','正答','正答率',''].forEach(function(h){ hd.appendChild(el('th', null, h)); }); tb.appendChild(hd);
+  THEME[cur.cat].order.forEach(function(name){
+    var qs = list.filter(function(q){ return q.theme === name; }); if(!qs.length) return;
+    var tt = tally(qs), pr = tt.done ? Math.round(tt.ok / tt.done * 100) : null;
+    var row = el('tr');
+    row.appendChild(el('td', null, name));
+    row.appendChild(el('td','n', tt.ok + ' / ' + qs.length));
+    row.appendChild(el('td','n' + (pr == null ? '' : pr >= 70 ? ' ok' : ' ng'), pr == null ? '—' : pr + '%'));
+    var m = el('td'), bar = el('div','meter'), fi = el('i'); fi.style.width = (tt.ok / qs.length * 100) + '%'; bar.appendChild(fi);
+    var u = el('u'); u.style.left = '70%'; bar.appendChild(u); m.appendChild(bar); row.appendChild(m);
+    tb.appendChild(row);
+  });
+  r.appendChild(tb);
+
+  var wr = wrongOf(list);
+  r.appendChild(el('h3', null, '間違えた問題（' + wr.length + '）'));
+  var w = el('div','wrongs');
+  wr.forEach(function(q){
+    var b = el('button', null, q.year.slice(2) + '年 問' + q.orig);
+    b.title = q.theme + '：' + q.topic;
+    b.addEventListener('click', function(){ cur.i = list.indexOf(q); renderQuestion(); window.scrollTo(0,0); });
+    w.appendChild(b);
+  });
+  if(!wr.length) w.appendChild(el('span','when','なし'));
+  r.appendChild(w);
+
+  var acts = el('div','acts');
+  if(wr.length){ var b0 = el('button', null, '間違えた問題だけ解き直す'); b0.addEventListener('click', function(){ openRetry(cur.cat); }); acts.appendChild(b0); }
+  var b1 = el('button', null, '最初から見直す'); b1.addEventListener('click', function(){ cur.i = 0; renderQuestion(); window.scrollTo(0,0); }); acts.appendChild(b1);
+  var b2 = el('button', null, '一覧に戻る'); b2.addEventListener('click', goHome); acts.appendChild(b2);
+  r.appendChild(acts);
+  window.scrollTo(0,0);
+}
+
+/* ---------- イベント ---------- */
+$('btnHome').addEventListener('click', goHome);
+$('btnPrev').addEventListener('click', function(){ move(-1); });
+$('btnNext').addEventListener('click', function(){ move(1); });
+$('btnSheet').addEventListener('click', openSheet);
+$('btnSheetClose').addEventListener('click', closeSheet);
+$('sheetWrap').addEventListener('click', function(e){ if(e.target === this) closeSheet(); });
+$('btnFinish').addEventListener('click', renderResult);
+document.addEventListener('keydown', function(e){
+  if(!$('sheetWrap').hidden){ if(e.key === 'Escape') closeSheet(); return; }
+  if(!cur || $('qArea').hidden) return;
+  if(['1','2','3','4'].indexOf(e.key) >= 0) answer(parseInt(e.key, 10));
+  else if(e.key === 'ArrowRight') move(1);
+  else if(e.key === 'ArrowLeft') move(-1);
+});
+window.addEventListener('pagehide', save);
+
+if(!canStore) $('warnStore').hidden = false;
+renderHome();
+if('serviceWorker' in navigator && location.protocol !== 'file:'){ navigator.serviceWorker.register('./sw.js').catch(function(){}); }
+})();
+</script>
+</body>
+</html>
